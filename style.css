@@ -1,0 +1,29 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.login {
+    border: 1px solid black;
+    width: 600px;
+    height: 300px;
+    margin: auto;
+    
+}
+
+.login form {
+    width: 200px;
+    margin: auto;
+}
+
+.login h2 {
+    text-align: center;
+    padding: 28px;
+}
+
+#submit {
+    width: 165px;
+    padding: 2px;
+    margin: 6px 0;
+}
