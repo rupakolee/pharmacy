@@ -27,3 +27,18 @@
     padding: 2px;
     margin: 6px 0;
 }
+
+nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
+
+nav ul li {
+    padding: 0 8px;
+}
