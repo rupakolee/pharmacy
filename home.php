@@ -12,41 +12,27 @@
         <!-- creating nav menu  -->
         <nav>
             <img src="#" alt="logo">
-            <ul>
-                <a href="">
-
-                    <li>Home</li>
-                </a>
-                <a href="">
-
-                    <li>Transactions</li>
-                </a>
-                <a href="">
-
-                    <li>Stocks</li>
-                </a>
-                <a href="">
-
-                    <li>contact</li>
-                </a>
-            </ul>
+           
             <div class="user-info">
                 <span>Welcome, <span id="user-num"></span></span>
-                <button id="logout-btn" onclick="window.location.href='login.php'">Logout</button>
+                <button id="logout-btn" onclick="window.location.href='login/login.php'">Logout</button>
             </div>
         </nav>
 
         <!-- interface -->
         <div class="main">
 
-            <!-- billing -->
-            <div class="billing">
-                <h3>Billing</h3>
-                <form action="" method="post">
-                    <input type="text">
-                    <input type="submit" value="Submit">
-                </form>
-            </div>
+           <div class="menu">
+                <ul>
+                    <li>Dashboard</li>
+                    <li>Purchase</li>
+                    <li>Sales</li>
+                    <li>Medicines</li>
+                    <li>Category</li>
+                    <li>Customers</li>
+                    <li>Vendors</li>
+                </ul>
+           </div>
 
             <!-- mails and chats -->
             <div class="inbox">
