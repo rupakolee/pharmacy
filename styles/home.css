@@ -60,12 +60,12 @@ a {
     display: none;
     list-style: none;
     background-color: #fff;
-    color: #000;
 }
 
 #menu-list li {
     border-bottom: 1px solid gray;
     padding: 4px;
+    color: #000;
 }
 
 .main {
