@@ -14,6 +14,19 @@
                 $message = "Entry added successfully!";
             }
         }
+
+        // display records
+
+        $sql = "select * from medicine";
+        $result = mysqli_query($conn, $sql);
+
+        if($result) {
+            $error = 0;
+            $records = mysqli_fetch_assoc($result);
+        }
+        else {
+            $error = 1;
+        }
     }
 ?>
 
@@ -33,7 +46,11 @@
                 <label for="name">Medicine:</label>
                 <input type="text" name="name" id="name">
                 <label for="category">Category</label>
-                <input type="text" name="category" id="category"><br>
+                <select name="category" id="category">
+                    <option value=" "> </option>
+                    <option value="Tablet">Tablet</option>
+                    <option value="Syrup">Syrup</option>
+                </select><br>
                 <label for="price">Price:</label>
                 <input type="number" name="price" id="price">
                 <label for="date">Date:</label>
@@ -45,11 +62,23 @@
         <div class="purchase-list">
         <table>
             <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
+                <th>S.N.</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Date</th>
             </tr>
+            <?php if($error=='0'): ?>
+            <?php foreach($records as $record): ?>
+                <tr>
+                    <td><?= $record['id']; ?></td>
+                    <td><?= $record['name']; ?></td>
+                    <td><?= $record['category']; ?></td>
+                    <td><?= $record['price']; ?></td>
+                    <td><?= $record['date']; ?></td>
+                </tr>
+                    <?php endforeach; ?>
+                    <?php endif; ?>
         </table>
         </div>
     </div>

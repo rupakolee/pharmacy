@@ -48,12 +48,12 @@ if ($result == false) {
             <button id="menu-btn"><img src="../images/menu.png" alt="menu" style="width: 36px;"></button>
             <ul id="menu-list">
                 <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Purchase</a></li>
-                <li><a href="#">Sales</a></li>
+                <li><a href="purchase.php">Purchase</a></li>
+                <li><a href="sales.php">Sales</a></li>
                 <li><a href="#">Medicines</a></li>
                 <li><a href="#">Category</a></li>
                 <li><a href="#">Customers</a></li>
-                <li><a href="#">Vendors</a></li>
+                <li><a href="vendor.php">Vendors</a></li>
             </ul>
         </div>
 
