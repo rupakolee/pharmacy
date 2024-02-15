@@ -1,15 +1,18 @@
 <?php
     include '../includes/database.php';
-
+    
+    $error = 0;
+    $records = [];
     if($_SERVER['REQUEST_METHOD']=="POST") {
         $name = $_POST['name'];
         $category = $_POST['category'];
+        $quantity = $_POST['quantity'];
         $price = $_POST['price'];
         $date = $_POST['date'];
         if(isset($_POST['submit'])) {
-            $sql = "INSERT INTO medicine (name, category, price, date) VALUES (?,?,?,?)";
-            $stmt = mysqli_prepare($conn, $sql);
-            mysqli_stmt_bind_param($stmt, "ssss", $name, $category, $price, $date);
+            $sql = "INSERT INTO medicine (name, category, quantity, price, date) VALUES (?,?,?,?,?)";
+            $stmt = mysqli_prepare($conn, $sql); 
+            mysqli_stmt_bind_param($stmt, "sssss", $name, $category, $quantity, $price, $date);
             if(mysqli_stmt_execute($stmt)){
                 $message = "Entry added successfully!";
             }
@@ -22,7 +25,7 @@
 
         if($result) {
             $error = 0;
-            $records = mysqli_fetch_assoc($result);
+            $records = mysqli_fetch_all($result, MYSQLI_ASSOC);
         }
         else {
             $error = 1;
@@ -43,7 +46,7 @@
             <h2>Purchases</h2>
             <form action="" method="post">
                 <h3>Add items</h3>
-                <label for="name">Medicine:</label>
+                <label for="name">Medicine Name:</label>
                 <input type="text" name="name" id="name">
                 <label for="category">Category</label>
                 <select name="category" id="category">
@@ -51,9 +54,11 @@
                     <option value="Tablet">Tablet</option>
                     <option value="Syrup">Syrup</option>
                 </select><br>
+                <label for="quantity">Quantity:</label>
+                <input type="number" name="quantity" id="quantity">
                 <label for="price">Price:</label>
                 <input type="number" name="price" id="price">
-                <label for="date">Date:</label>
+                <label for="date">Expiry Date:</label>
                 <input type="date" name="date" id="date"><br>
                 <input type="submit" value="Submit" name="submit">
             </form>
@@ -65,14 +70,16 @@
                 <th>S.N.</th>
                 <th>Name</th>
                 <th>Category</th>
+                <th>Quantity</th>
                 <th>Price</th>
-                <th>Date</th>
+                <th>Date of Expiration</th>
             </tr>
             <?php if($error=='0'): ?>
             <?php foreach($records as $record): ?>
                 <tr>
                     <td><?= $record['id']; ?></td>
                     <td><?= $record['name']; ?></td>
+                    <td><?= $record['quantity']; ?></td>
                     <td><?= $record['category']; ?></td>
                     <td><?= $record['price']; ?></td>
                     <td><?= $record['date']; ?></td>
@@ -82,5 +89,11 @@
         </table>
         </div>
     </div>
+    <!-- <script>
+        let form = document.querySelector('form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+        })
+    </script> -->
 </body>
 </html>

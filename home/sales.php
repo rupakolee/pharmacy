@@ -10,10 +10,11 @@
         <h2>Sales</h2>
         <table>
             <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
+                <th>S.N.</th>
+                <th>Medicine Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Date</th>
             </tr>
         </table>
     </div>

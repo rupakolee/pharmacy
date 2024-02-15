@@ -50,7 +50,7 @@ if ($result == false) {
                 <li><a href="#">Dashboard</a></li>
                 <li><a href="purchase.php">Purchase</a></li>
                 <li><a href="sales.php">Sales</a></li>
-                <li><a href="#">Medicines</a></li>
+                <li><a href="inventory.php">Medicines</a></li>
                 <li><a href="#">Category</a></li>
                 <li><a href="#">Customers</a></li>
                 <li><a href="vendor.php">Vendors</a></li>
