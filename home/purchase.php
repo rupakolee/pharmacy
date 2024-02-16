@@ -17,6 +17,7 @@
                 $message = "Entry added successfully!";
             }
         }
+    }
 
         // display records
 
@@ -30,7 +31,6 @@
         else {
             $error = 1;
         }
-    }
 ?>
 
 <!DOCTYPE html>
