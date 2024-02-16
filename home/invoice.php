@@ -41,6 +41,8 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
             <input type="number" name="quantity" id="quantity">
             <label for="rate">Rate:</label>
             <input type="number" name="rate" id="rate">
+            <label for="total">Total:</label>
+            <input type="number" name="total" id="total">
             <label for="date">Date:</label>
             <input type="date" name="date" id="date">
             <input type="submit" name="submit" id="submit">
@@ -48,6 +50,21 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
         </form>
 
     </div>
+    <script>
+       
+        let total = document.getElementById('total');
+        let qty = document.getElementById('quantity');
+        let rate = document.getElementById('rate');
+
+        rate.addEventListener('input', function type() {
+            let qtyVal = qty.value;
+            let rateVal = rate.value;
+
+            total.value = qtyVal*rateVal;
+        });
+
+       
+    </script>
 </body>
 
 </html>

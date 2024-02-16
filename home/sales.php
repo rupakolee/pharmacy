@@ -30,7 +30,7 @@ if($result) {
                 <?php if(!empty($records)): ?>
                 <?php foreach($records as $record): ?>
                 <td><?= $record['id']; ?></td>
-                <td><?= $record['name']; ?></td>
+                <td><?= $record['medicine_name']; ?></td>
                 <td><?= $record['quantity']; ?></td>
                 <td><?= $record['rate']; ?></td>
                 <td><?= $record['total']; ?></td>
