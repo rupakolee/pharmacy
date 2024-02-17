@@ -56,8 +56,10 @@
                 </select><br>
                 <label for="quantity">Quantity:</label>
                 <input type="number" name="quantity" id="quantity">
-                <label for="price">Price:</label>
-                <input type="number" name="price" id="price">
+                <label for="rate">Rate:</label>
+                <input type="number" name="price" id="rate">
+                <label for="vendor">Vendor</label>
+                <input type="text" name="vendor" id="vendor">
                 <label for="date">Expiry Date:</label>
                 <input type="date" name="date" id="date"><br>
                 <input type="submit" value="Submit" name="submit">
@@ -71,7 +73,8 @@
                 <th>Name</th>
                 <th>Category</th>
                 <th>Quantity</th>
-                <th>Price</th>
+                <th>Rate</th>
+                <th>Vendor</th>
                 <th>Date of Expiration</th>
             </tr>
             <?php if($error=='0'): ?>
@@ -82,6 +85,7 @@
                     <td><?= $record['quantity']; ?></td>
                     <td><?= $record['category']; ?></td>
                     <td><?= $record['price']; ?></td>
+                    <td>#</td>
                     <td><?= $record['date']; ?></td>
                 </tr>
                     <?php endforeach; ?>

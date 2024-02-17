@@ -17,6 +17,15 @@
             <input type="text" name="contact" id="contact"><br>
             <input type="submit" name="submit">
         </form>
+
+        <table>
+            <tr>
+                <th>S.N.</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Contact</th>
+            </tr>
+        </table>
     </div>
 </body>
 </html>

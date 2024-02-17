@@ -1,8 +1,23 @@
 <?php
 include "../includes/database.php";
 if($_SERVER['REQUEST_METHOD']=="POST") {
-    
+    $name = $_POST["name"];
+    $dob = $_POST["dob"];
+    $sex = $_POST["sex"];
+    $address = $_POST["address"];
+    $contact = $_POST["contact"];
+    if(isset($_POST['submit'])) {
+        $sql = "insert into customer (name, dob, sex, address, contact) values (?,?,?,?,?)";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 'sssss', $name, $dob, $sex, $address, $contact);  
+        mysqli_stmt_execute($stmt);
+    }
 }
+$sql = "select * from customer";
+$result = mysqli_query($conn, $sql);
+    if($result) {
+        $records = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -40,9 +55,9 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
         <input type="radio" name="sex" value="M">M
         <input type="radio" name="sex" value="F">F<br>
         <label for="address">Address</label><br>
-        <input type="text" name="address"><br>
-        <label for="phone">Contact</label>
-        <input type="text" name=phone><br>
+        <input type="text" name="address" id="address"><br>
+        <label for="contact">Contact</label>
+        <input type="text" name="contact" id="contact"><br>
         <input type="submit" name="submit" value="Submit"><br>
     </form>
 
@@ -52,16 +67,22 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
         <tr>
             <th>S.N.</th>
             <th>Name</th>
+            <th>DoB</th>
+            <th>Sex</th>
             <th>Address</th>
             <th>Contact</th>
-            <th>Medicines</th>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <?php if(!empty($records)): ?>
+            <?php foreach($records as $record): ?>
+            <td><?= $record['id']; ?></td>
+            <td><?= $record['name']; ?></td>
+            <td><?= $record['dob']; ?></td>
+            <td><?= $record['sex']; ?></td>
+            <td><?= $record['address']; ?></td>
+            <td><?= $record['contact']; ?></td>
+            <?php endforeach; ?>
+            <?php endif; ?>
         </tr>
     </table>
 
