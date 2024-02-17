@@ -15,6 +15,12 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
         mysqli_stmt_execute($stmt);
     }
 }
+
+    $sql = "SELECT * FROM invoice";
+    $result = mysqli_query($conn, $sql);
+    if($result) {
+        $records = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
 ?>
 
 
@@ -48,6 +54,32 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
             <input type="submit" name="submit" id="submit">
 
         </form>
+
+        <h3>Invoice History</h3>
+        <table>
+            <tr>
+                <th>S.N.</th>
+                <th>Customer Name</th>
+                <th>Medicine</th>
+                <th>Quantity</th>
+                <th>Rate</th>
+                <th>Total</th>
+                <th>Date</th>
+            </tr>
+            <tr>
+                <?php if(!empty($records)): ?>
+                <?php foreach($records as $record): ?>
+                <td><?= $record['id']; ?></td>
+                <td><?= $record['customer_name']; ?></td>
+                <td><?= $record['medicine_name']; ?></td>
+                <td><?= $record['quantity']; ?></td>
+                <td><?= $record['rate']; ?></td>
+                <td><?= $record['total']; ?></td>
+                <td><?= $record['date']; ?></td>
+                <?php endforeach; ?>
+                <?php endif; ?>
+            </tr>
+        </table>
 
     </div>
     <script>
