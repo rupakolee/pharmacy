@@ -1,3 +1,10 @@
+<?php
+include "../includes/database.php";
+if($_SERVER['REQUEST_METHOD']=="POST") {
+    
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +33,12 @@
 
     <form action="" method="post">
         <label for="name">Name</label><br>
-        <input type="text" name="name"><br>
+        <input type="text" name="name" id="name"><br>
+        <label for="dob">Date of Birth</label><br>
+        <input type="date" name="dob" id="dob"><br>
+        <span>Sex</span><br>
+        <input type="radio" name="sex" value="M">M
+        <input type="radio" name="sex" value="F">F<br>
         <label for="address">Address</label><br>
         <input type="text" name="address"><br>
         <label for="phone">Contact</label>
@@ -34,6 +46,24 @@
         <input type="submit" name="submit" value="Submit"><br>
     </form>
 
+    <!-- customers list -->
+
+    <table>
+        <tr>
+            <th>S.N.</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Contact</th>
+            <th>Medicines</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
 
 </body>
 </html>
