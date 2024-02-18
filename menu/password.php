@@ -52,6 +52,7 @@ if(isset($_POST['button'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="../styles/login.css">
 </head>
 <body>
 
@@ -79,7 +80,7 @@ if(isset($_POST['button'])) {
             <span style="color: red;"><?= $errors ?></span><br><?php endif; ?>
            
             <button type="submit" id="change-btn" name="button">Change password</button><br>
-            <span><a href="login.php">Back to Login!</a></span><br>
+            <span><a href="../home/home.php">Back to Home!</a></span><br>
         </form>
     </div>
 

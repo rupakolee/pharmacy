@@ -36,9 +36,9 @@
     <div class="user-info">
         <button id="user-btn"><img src="../images/user.png" alt=""></button>
         <ul class="user-panel">
-            <li><a href="profile.php">My information</a></li>
-            <li><a href="settings.php">Settings</a></li>
-            <li><a href="password.php">Change Password</a></li>
+            <li><a href="../menu/profile.php">My information</a></li>
+            <li><a href="../menu/settings.php">Settings</a></li>
+            <li><a href="../menu/password.php">Change Password</a></li>
             <li>Log out<button id="logout-btn" onclick="window.location.href='../login/login.php'"><img src="../images/logout.png" alt="logout"></button></li>
         </ul>
     </div>
