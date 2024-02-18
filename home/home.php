@@ -26,7 +26,7 @@ if ($result == false) {
         <!-- creating nav menu  -->
         
         <nav id="navbar">
-            <img src="../images/logo.png" alt="logo" style="width: 80px;">
+            <a href="home.php"><img src="../images/logo.png" alt="logo" style="width: 80px;"></a>
 
             <div class="user-info">
                 <span>Welcome, <span id="user" style="font-style: italic; font-weight: 700;"><?= $details['fullName']; ?></span></span>
