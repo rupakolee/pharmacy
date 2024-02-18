@@ -32,9 +32,9 @@ if ($result == false) {
                 <span>Welcome, <span id="user" style="font-style: italic; font-weight: 700;"><?= $details['fullName']; ?></span></span>
                 <button id="user-btn"><img src="../images/user.png" alt=""></button>
                 <ul class="user-panel">
-                    <li>My information</li>
-                    <li>Settings</li>
-                    <li>Change Password</li>
+                <li><a href="profile.php">My information</a></li>
+                <li><a href="settings.php">Settings</a></li>
+                <li><a href="password.php">Change Password</a></li>
                     <li>Log out<button id="logout-btn" onclick="window.location.href='../login/login.php'"><img src="../images/logout.png" alt="logout"></button></li>
                 </ul>
             </div>
@@ -47,7 +47,7 @@ if ($result == false) {
         <div class="menu">
             <button id="menu-btn"><img src="../images/menu.png" alt="menu" style="width: 36px;"></button>
             <ul id="menu-list">
-                <li><a href="#">Dashboard</a></li>
+                <li><a href="home.php">Dashboard</a></li>
                 <li><a href="purchase.php">Purchase</a></li>
                 <li><a href="invoice.php">Invoice</a></li>
                 <li><a href="sales.php">Sales</a></li>
