@@ -1,6 +1,6 @@
-<?
+<?php
+include '../includes/database.php';
 $records = select($conn, 'register');
-
 ?>
 
 <!DOCTYPE html>
