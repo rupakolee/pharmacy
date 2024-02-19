@@ -3,23 +3,29 @@
 let menuList = document.getElementById('menu-list');
 const menuBtn = document.getElementById('menu-btn');
 
-menuBtn.addEventListener('click', toggleMenu(menuList));
+menuBtn.addEventListener('click', function toggleMenu() {
+    if(menuList.style.display === "none") {
+        menuList.style.display = "block";
+    }
+    else {
+        menuList.style.display = "none";
+    }
+    console.log('event fired');
+});
 
 // user-panel display/hide
 
 let userBtn = document.getElementById('user-btn');
 let userPanel = document.querySelector('.user-panel');
 
-userBtn.addEventListener('click', toggleMenu(userPanel));
-
-// function defn
-
-function toggleMenu(menu) {
-    if(menu.style.display === "none") {
-        menu.style.display = "block";
+userBtn.addEventListener('click', function toggleMenu() {
+    if(userPanel.style.display === "none") {
+        userPanel.style.display = "block";
     }
     else {
-        menu.style.display = "none";
+        userPanel.style.display = "none";
     }
-}
+    console.log('event fired');
+});
+
    

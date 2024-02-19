@@ -7,6 +7,14 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
     $rate = $_POST['rate'];
     $total = $quantity*$rate;
     $date = $_POST['date'];
+
+    // Insert the invoice only if the medicine is available in the medicine table 
+    // check the quantity
+
+    if(1){
+
+    }
+
     $sql = "insert into invoice (customer_name, medicine_name, quantity, rate, total, date) 
     values (?,?,?,?,?,?)";
     if(isset($_POST['submit'])) {
@@ -14,6 +22,8 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
         mysqli_stmt_bind_param($stmt, 'ssssss', $customer, $medicine, $quantity, $rate, $total, $date);
         mysqli_stmt_execute($stmt);
     }
+
+    $sql = "delete * from medicine where name=".$_GET['name'];
 }
 
     $sql = "SELECT * FROM invoice";
@@ -21,8 +31,9 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
     if($result) {
         $records = mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
-?>
 
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
