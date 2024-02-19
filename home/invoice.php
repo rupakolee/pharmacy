@@ -2,7 +2,7 @@
 include "../includes/database.php";
 if($_SERVER['REQUEST_METHOD']=="POST") {
     $customer = $_POST['customer'];
-    $medicine = $_POST['medicine'];
+    $medicineName = $_POST['medicine'];
     $quantity = $_POST['quantity'];
     $rate = $_POST['rate'];
     $total = $quantity*$rate;
@@ -15,23 +15,30 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
 
     }
 
-    $sql = "insert into invoice (customer_name, medicine_name, quantity, rate, total, date) 
-    values (?,?,?,?,?,?)";
+// deleting medicine entry from the medicine table after issuing an invoice
+
+$medicines = select($conn, 'medicine');
+$sql = "delete from medicine where name = '$medicineName'";
+
+foreach ($medicines as $medicine) {
+    if(str_contains($medicine['name'], $medicineName)) {
+        mysqli_query($conn, $sql);
+        $sql = "insert into invoice (customer_name, medicine_name, quantity, rate, total, date) 
+        values (?,?,?,?,?,?)";
     if(isset($_POST['submit'])) {
         $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, 'ssssss', $customer, $medicine, $quantity, $rate, $total, $date);
+        mysqli_stmt_bind_param($stmt, 'ssssss', $customer, $medicineName, $quantity, $rate, $total, $date);
         mysqli_stmt_execute($stmt);
     }
-
-    $sql = "delete * from medicine where name=".$_GET['name'];
+    }
+    else {
+        echo "NO medicine found";
+    }
 }
 
-    $sql = "SELECT * FROM invoice";
-    $result = mysqli_query($conn, $sql);
-    if($result) {
-        $records = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    }
+}
 
+$records = select($conn, 'invoice');
 
 ?>
 
@@ -49,38 +56,7 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
 <body>
 <div class="container">
 
-<!-- creating nav menu  -->
-
-<nav id="navbar">
-<a href="home.php"><img src="../images/logo.png" alt="logo" style="width: 80px;"></a>
-
-    <div class="user-info">
-        <button id="user-btn"><img src="../images/user.png" alt=""></button>
-        <ul class="user-panel">
-            <li><a href="../menu/profile.php">My information</a></li>
-            <li><a href="../menu/settings.php">Settings</a></li>
-            <li><a href="../menu/password.php">Change Password</a></li>
-            <li>Log out<button id="logout-btn" onclick="window.location.href='../login/login.php'"><img src="../images/logout.png" alt="logout"></button></li>
-        </ul>
-    </div>
-</nav>
-
-<!-- interface -->
-
-<!-- left navigation panel -->
-
-<div class="menu">
-    <button id="menu-btn"><img src="../images/menu.png" alt="menu" style="width: 36px;"></button>
-    <ul id="menu-list">
-        <li><a href="home.php">Dashboard</a></li>
-        <li><a href="purchase.php">Purchase</a></li>
-        <li><a href="invoice.php">Invoice</a></li>
-        <li><a href="sales.php">Sales</a></li>
-        <li><a href="inventory.php">Medicines</a></li>
-        <li><a href="customers.php">Customers</a></li>
-        <li><a href="vendor.php">Vendors</a></li>
-    </ul>
-</div>
+<?php include '../includes/menu.php'; ?>
 
     <div class="wrapper">
         <h2>Create new invoice</h2>
@@ -114,9 +90,9 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
                 <th>Total</th>
                 <th>Date</th>
             </tr>
-            <tr>
-                <?php if(!empty($records)): ?>
+            <?php if(!empty($records)): ?>
                 <?php foreach($records as $record): ?>
+                    <tr>
                 <td><?= $record['id']; ?></td>
                 <td><?= $record['customer_name']; ?></td>
                 <td><?= $record['medicine_name']; ?></td>
@@ -124,9 +100,9 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
                 <td><?= $record['rate']; ?></td>
                 <td><?= $record['total']; ?></td>
                 <td><?= $record['date']; ?></td>
+                    </tr>
                 <?php endforeach; ?>
                 <?php endif; ?>
-            </tr>
         </table>
 
     </div>

@@ -1,3 +1,18 @@
+<?php
+include '../includes/database.php';
+if($_SERVER['REQUEST_METHOD']==="POST") {
+    $name = $_POST['name'];
+    $address = $_POST['address'];
+    $contact = $_POST['contact'];
+    $sql = "insert into vendor (name, address, contact) values (?,?,?)";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, 'sss', $name, $address, $contact);
+    mysqli_stmt_execute($stmt);
+}
+
+$records = select($conn, 'vendor');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,58 +25,37 @@
 <body>
 <div class="container">
 
-<!-- creating nav menu  -->
-
-<nav id="navbar">
-<a href="home.php"><img src="../images/logo.png" alt="logo" style="width: 80px;"></a>
-
-
-    <div class="user-info">
-        <button id="user-btn"><img src="../images/user.png" alt=""></button>
-        <ul class="user-panel">
-                <li><a href="../menu/profile.php">My information</a></li>
-                <li><a href="../menu/settings.php">Settings</a></li>
-                <li><a href="../menu/password.php">Change Password</a></li>
-            <li>Log out<button id="logout-btn" onclick="window.location.href='../login/login.php'"><img src="../images/logout.png" alt="logout"></button></li>
-        </ul>
-    </div>
-</nav>
-
-<!-- interface -->
-
-<!-- left navigation panel -->
-
-<div class="menu">
-    <button id="menu-btn"><img src="../images/menu.png" alt="menu" style="width: 36px;"></button>
-    <ul id="menu-list">
-        <li><a href="home.php">Dashboard</a></li>
-        <li><a href="purchase.php">Purchase</a></li>
-        <li><a href="invoice.php">Invoice</a></li>
-        <li><a href="sales.php">Sales</a></li>
-        <li><a href="inventory.php">Medicines</a></li>
-        <li><a href="customers.php">Customers</a></li>
-        <li><a href="vendor.php">Vendors</a></li>
-    </ul>
-</div>
+<?php include '../includes/menu.php'; ?>
 
     <div class="wrapper">
         <h2>Vendor</h2>
         <form action="" method="post">
             <label for="name">Name</label>
-            <input type="text" name="name" id="name"><br>
+            <input type="text" name="name" id="name">
             <label for="address">Address</label>
-            <input type="text" name="address" id="address"><br>
+            <input type="text" name="address" id="address">
             <label for="contact">Contact</label>
-            <input type="text" name="contact" id="contact"><br>
+            <input type="text" name="contact" id="contact">
             <input type="submit" name="submit" value="Submit">
         </form>
 
+        <h2>Vendors list:</h2>
         <table>
             <tr>
                 <th>S.N.</th>
                 <th>Name</th>
                 <th>Address</th>
                 <th>Contact</th>
+            </tr>
+            <tr>
+                <?php if(!empty($records)): ?>
+                <?php foreach($records as $record): ?>
+                    <td><?= $record['id']; ?></td>
+                    <td><?= $record['name']; ?></td>
+                    <td><?= $record['address']; ?></td>
+                    <td><?= $record['contact']; ?></td>
+                <?php endforeach; ?>
+                <?php endif; ?>
             </tr>
         </table>
     </div>

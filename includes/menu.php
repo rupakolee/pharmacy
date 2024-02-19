@@ -1,35 +1,9 @@
-<?php
-include "../includes/database.php";
-$sql = "SELECT * FROM register";
-$result = mysqli_query($conn, $sql);
-
-if ($result == false) {
-    mysqli_connect_error();
-} else {
-    $details = mysqli_fetch_assoc($result);
-}
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="../styles/home.css">
-</head>
-
-<body>
-    <div class="container">
-
   <!-- creating nav menu  -->
         
   <nav id="navbar">
             <a href="home.php"><img src="../images/logo.png" alt="logo" style="width: 80px;"></a>
 
             <div class="user-info">
-                <span>Welcome, <span id="user" style="font-style: italic; font-weight: 700;"><?= $details['fullName']; ?></span></span>
                 <button id="user-btn"><img src="../images/user.png" alt=""></button>
                 <ul class="user-panel">
                 <li><a href="../menu/profile.php">My information</a></li>
@@ -56,24 +30,3 @@ if ($result == false) {
                 <li><a href="vendor.php">Vendors</a></li>
             </ul>
         </div>
-        <div class="main">
-
-            <!-- dashboard -->
-
-            <div class="dashboard">
-                <h3>Total sales</h3>
-            </div>
-
-            <!-- mails and notifications -->
-            <div class="inbox">
-
-            </div>
-        </div>
-
-    </div>
-
-    <script src="../scripts/home.js"></script>
-
-</body>
-
-</html>
