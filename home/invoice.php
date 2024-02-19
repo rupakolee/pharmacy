@@ -18,24 +18,32 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
 // deleting medicine entry from the medicine table after issuing an invoice
 
 $medicines = select($conn, 'medicine');
-$sql = "delete from medicine where name = '$medicineName'";
 
+if(isset($_POST['submit'])) {
 foreach ($medicines as $medicine) {
     if(str_contains($medicine['name'], $medicineName)) {
-        mysqli_query($conn, $sql);
-        $sql = "insert into invoice (customer_name, medicine_name, quantity, rate, total, date) 
-        values (?,?,?,?,?,?)";
-    if(isset($_POST['submit'])) {
-        $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, 'ssssss', $customer, $medicineName, $quantity, $rate, $total, $date);
-        mysqli_stmt_execute($stmt);
-    }
+        if($medicine['quantity']>=$quantity) {
+            $sql = "insert into invoice (customer_name, medicine_name, quantity, rate, total, date) 
+            values (?,?,?,?,?,?)";
+            $stmt = mysqli_prepare($conn, $sql);
+            mysqli_stmt_bind_param($stmt, 'ssssss', $customer, $medicineName, $quantity, $rate, $total, $date);
+            mysqli_stmt_execute($stmt);
+
+            $remQuan = $medicine['quantity']-$quantity;
+            $sql = "update medicine set quantity = '$remQuan' where name = '$medicineName'";
+            mysqli_query($conn, $sql);
+
+            if($medicine['quantity']==0) {
+                $sql = "delete from medicine where name = '$medicineName'";
+                mysqli_query($conn, $sql);
+            }
+        }
     }
     else {
-        echo "NO medicine found";
+        $message = "No medicine found";
     }
 }
-
+}
 }
 
 $records = select($conn, 'invoice');
