@@ -3,26 +3,27 @@ include "../includes/database.php";
 $errors = "";
 $error = '';         // flag
 if ($_SERVER['REQUEST_METHOD']=="POST") {
-$userId = $_POST['userId'];
-$newPass = $_POST['newPass'];
+    $oldPass = $_POST['oldPass'];
+    $newPass = $_POST['newPass'];
 
-// $sql = "SELECT * FROM register where email = $userId";
-// $result = mysqli_query($conn, $sql);
+$sql = "SELECT * FROM register";
+$result = mysqli_query($conn, $sql);
 
-// if($result == false) {
-//     $errors = "User not found";
-//     $error = 1;
-// }
-// else {
-//     $details = mysqli_fetch_assoc($result);
-// }
+if($result == false) {
+    $errors = "User not found";
+    $error = 1;
+}
+else {
+    $details = mysqli_fetch_assoc($result);
+}
 
 if(isset($_POST['button'])) {
-    if(empty($userId)) {
-        $errors = "Please enter your userId";
+   
+    if($oldPass != $details['pass']) {
+        $errors = "Wrong old password";
         $error = 2;
     }
-    else if(empty($_POST['oldPass']) || empty($newPass)) {
+   else if(empty($_POST['oldPass']) || empty($newPass)) {
         $errors = "Cannot be empty";
         $error = 3;
     }
@@ -36,7 +37,7 @@ if(isset($_POST['button'])) {
     }
     
     if(empty($errors)) {
-        $sql = "UPDATE register set pass = $newPass where email = '$userId'";
+        $sql = "UPDATE register set pass = $newPass";
         $result = mysqli_query($conn, $sql);
         if($result) {
             $message = "Password changed successfully";
@@ -57,10 +58,9 @@ if(isset($_POST['button'])) {
 <body>
 
     <div class="login">
-        <h2>Forgot your password?</h2>  
+        <h2>Change your password</h2>  
         <form action="#" method="post">
-            <label for="user-id">Enter your User-Id</label><br>
-            <input type="text" id="user-id" name="userId"><br>
+           
             <?php if($error == 2): ?>
             <span style="color: red;"><?= $errors ?></span><br><?php endif; ?>
 
@@ -80,6 +80,10 @@ if(isset($_POST['button'])) {
             <span style="color: red;"><?= $errors ?></span><br><?php endif; ?>
            
             <button type="submit" id="change-btn" name="button">Change password</button><br>
+            <span style="color: green;"><?php if(!$error) {
+                echo $message.'!';
+            }
+            ?></span><br>
             <span><a href="../home/home.php">Back to Home!</a></span><br>
         </form>
     </div>

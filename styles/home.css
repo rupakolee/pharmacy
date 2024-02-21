@@ -95,3 +95,7 @@ a {
     position: absolute;
     left: 80px;
 }
+
+.menu #menu-btn {
+    background: none;
+}
