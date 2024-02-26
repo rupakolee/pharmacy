@@ -18,17 +18,19 @@ $records = select($conn, 'vendor');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../styles/home.css">
+    <title>Vendor</title>
+    <link rel="stylesheet" href="../styles/others.css">
 
 </head>
 <body>
 <div class="container">
+<?php include '../includes/nav.php'; ?>
 
+<div class="main">
 <?php include '../includes/menu.php'; ?>
-
-    <div class="wrapper">
-        <h2>Vendor</h2>
+    <div class="content-wrapper">
+        <div class="entries">
+        <h2 style="text-align: center;">Vendor</h2>
         <form action="" method="post">
             <label for="name">Name</label>
             <input type="text" name="name" id="name">
@@ -38,7 +40,9 @@ $records = select($conn, 'vendor');
             <input type="text" name="contact" id="contact">
             <input type="submit" name="submit" value="Submit">
         </form>
+        </div>
 
+        <div class="records">
         <h2>Vendors list:</h2>
         <table>
             <tr>
@@ -58,8 +62,9 @@ $records = select($conn, 'vendor');
                 <?php endif; ?>
             </tr>
         </table>
+        </div>
     </div>
-
+    </div>
     <script src="../scripts/home.js"></script>
 
 </body>

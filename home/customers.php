@@ -22,19 +22,20 @@ $records = select($conn, 'customer');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../styles/home.css">
+    <title>Customers</title>
+    <link rel="stylesheet" href="../styles/others.css">
 
 </head>
 <body>
 
 
 <div class="container">
-
-<?php include '../includes/menu.php'; ?>
-
-<!-- searching existing customer's record -->
-
+    <?php include '../includes/nav.php'; ?>
+    <div class="main">
+        <?php include '../includes/menu.php'; ?>
+        
+        <!-- searching existing customer's record
+        
 <form action="" method="get">
     <input type="text" name="search" id="search" placeholder="Enter the name">
     <input type="button" name="searchBtn" value="button">
@@ -44,12 +45,14 @@ $records = select($conn, 'customer');
     if(isset($_GET['searchBtn'])) {
         
     }
-
-
-?>
+    
+    
+    ?> -->
 
 <!-- adding a new customer to the database -->
-
+<div class="content-wrapper">
+<div class="entries">
+    <h2>Add a new Customer</h2>
     <form action="" method="post">
         <label for="name">Name</label><br>
         <input type="text" name="name" id="name"><br>
@@ -64,9 +67,9 @@ $records = select($conn, 'customer');
         <input type="text" name="contact" id="contact"><br>
         <input type="submit" name="submit" value="Submit"><br>
     </form>
-
+</div>
     <!-- customers list -->
-
+    <div class="records">
     <table>
         <tr>
             <th>S.N.</th>
@@ -78,19 +81,20 @@ $records = select($conn, 'customer');
         </tr>
         <tr>
             <?php if(!empty($records)): ?>
-            <?php foreach($records as $record): ?>
-            <td><?= $record['id']; ?></td>
-            <td><?= $record['name']; ?></td>
-            <td><?= $record['dob']; ?></td>
-            <td><?= $record['sex']; ?></td>
-            <td><?= $record['address']; ?></td>
-            <td><?= $record['contact']; ?></td>
-            <?php endforeach; ?>
-            <?php endif; ?>
-        </tr>
-    </table>
-
-    <script src="../scripts/home.js"></script>
-
+                <?php foreach($records as $record): ?>
+                    <td><?= $record['id']; ?></td>
+                    <td><?= $record['name']; ?></td>
+                    <td><?= $record['dob']; ?></td>
+                    <td><?= $record['sex']; ?></td>
+                    <td><?= $record['address']; ?></td>
+                    <td><?= $record['contact']; ?></td>
+                    <?php endforeach; ?>
+                    <?php endif; ?>
+                </tr>
+            </table>
+            </div>
+            </div>
+        </div>
+        <script src="../scripts/home.js"></script>
 </body>
 </html>

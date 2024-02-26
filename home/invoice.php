@@ -57,36 +57,38 @@ $records = select($conn, 'invoice');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice</title>
-    <link rel="stylesheet" href="../styles/home.css">
+    <link rel="stylesheet" href="../styles/others.css">
 
 </head>
 
 <body>
 <div class="container">
 
-<?php include '../includes/menu.php'; ?>
+<?php include '../includes/nav.php'; ?>
+<div class="main">
+        <?php include '../includes/menu.php'; ?>
+        <div class="content-wrapper">
+            <div class="entries"> 
+                <form action="" method="POST">
+                    <h2>Create new invoice</h2>
+                    
+                    <label for="customer">Customer Name:</label>
+                    <input type="text" name="customer" id="customer">
+                    <label for="medicine">Medicine:</label>
+                    <input type="text" name="medicine" id="medicine">
+                    <label for="quantity">Qty:</label>
+                    <input type="number" name="quantity" id="quantity">
+                    <label for="rate">Rate:</label>
+                    <input type="number" name="rate" id="rate">
+                    <label for="total">Total:</label>
+                    <input type="number" name="total" id="total">
+                    <label for="date">Date:</label>
+                    <input type="date" name="date" id="date">
+                    <input type="submit" name="submit" id="submit" value="Submit">        
+                </form>
+            </div>
 
-    <div class="wrapper">
-        <h2>Create new invoice</h2>
-
-        <form action="" method="POST">
-
-            <label for="customer">Customer Name:</label>
-            <input type="text" name="customer" id="customer">
-            <label for="medicine">Medicine:</label>
-            <input type="text" name="medicine" id="medicine">
-            <label for="quantity">Qty:</label>
-            <input type="number" name="quantity" id="quantity">
-            <label for="rate">Rate:</label>
-            <input type="number" name="rate" id="rate">
-            <label for="total">Total:</label>
-            <input type="number" name="total" id="total">
-            <label for="date">Date:</label>
-            <input type="date" name="date" id="date">
-            <input type="submit" name="submit" id="submit" value="Submit">
-
-        </form>
-
+    <div class="records">
         <h3>Invoice History</h3>
         <table>
             <tr>
@@ -112,7 +114,9 @@ $records = select($conn, 'invoice');
                 <?php endforeach; ?>
                 <?php endif; ?>
         </table>
-
+        </div>
+        </div>
+    </div>
     </div>
     <script>
        

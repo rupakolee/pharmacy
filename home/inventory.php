@@ -8,18 +8,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../styles/home.css">
+    <title>Inventory</title>
+    <link rel="stylesheet" href="../styles/others.css">
 
 </head>
 <body>
 
 <div class="container">
 
-<?php include '../includes/menu.php'; ?>
-
-<div class="wrapper">
-        <h2>Inventory</h2>
+<?php include '../includes/nav.php'; ?>
+<div class="main">
+    <?php include '../includes/menu.php'; ?>
+    <div class="content-wrapper">
+        <div class="records">
+        <h2 style="text-align: center;">Inventory</h2>
         <table>
             <tr>
                 <th>S.N.</th>
@@ -31,11 +33,11 @@
                 <th>Status</th>
             </tr>
             <?php if(!empty($records)): ?>
-            <?php foreach($records as $record): ?>
-                <tr>
-                    <td><?= $record['id']; ?></td>
-                    <td><?= $record['name']; ?></td>
-                    <td><?= $record['category']; ?></td>
+                <?php foreach($records as $record): ?>
+                    <tr>
+                        <td><?= $record['id']; ?></td>
+                        <td><?= $record['name']; ?></td>
+                        <td><?= $record['category']; ?></td>
                     <td><?= $record['quantity']; ?></td>
                     <td><?= $record['price']; ?></td>
                     <td><?= $record['date']; ?></td>
@@ -50,12 +52,13 @@
                     } ?>
                     <td><?= $status; ?></td>
                 </tr>
-                    <?php endforeach; ?>
-                    <?php endif; ?>
+                <?php endforeach; ?>
+                <?php endif; ?>
         </table>
+        </div>
     </div>
-
-
+</div>
+</div>
     <script src="../scripts/home.js"></script>
 
 </body>

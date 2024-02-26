@@ -10,7 +10,6 @@ menuBtn.addEventListener('click', function toggleMenu() {
     else {
         menuList.style.display = "none";
     }
-    console.log('event fired');
 });
 
 // user-panel display/hide
@@ -25,7 +24,6 @@ userBtn.addEventListener('click', function toggleMenu() {
     else {
         userPanel.style.display = "none";
     }
-    console.log('event fired');
 });
 
    

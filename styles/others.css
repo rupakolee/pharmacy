@@ -103,11 +103,27 @@ a {
 
 .main {
     background: #fff;
+    color: #000;
     display: flex;
 }
 
+.entries {
+    display: grid;
+    grid-template-rows: auto auto;
+    gap: 2px;
+}
+
+.content-wrapper {
+    display: grid;
+    grid-template-rows: auto auto;
+    gap: 10px;
+}
+
+.menu {
+    background-color: #fff;
+}
+
 .dashboard {
-   
     color: #000;
 }
 

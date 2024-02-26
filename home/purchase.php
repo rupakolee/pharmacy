@@ -28,19 +28,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../styles/home.css">
+    <title>Purchase</title>
+    <link rel="stylesheet" href="../styles/others.css">
 </head>
 <body>
 
 <div class="container">
 
-<?php include '../includes/menu.php'; ?>
-
-    <div class="wrapper">
-        <div class="purchase">
-            <h2>Purchases</h2>
+    <?php include '../includes/nav.php'; ?>
+    <div class="main">
+        <?php include '../includes/menu.php'; ?>
+        <div class="content-wrapper">
+        <div class="entries">
             <form action="" method="post">
+                <h2 style="text-align: center;">Purchases</h2>
                 <h3>Add items</h3>
                 <label for="name">Medicine Name:</label>
                 <input type="text" name="name" id="name">
@@ -62,7 +63,7 @@
             </form>
         </div>
 
-        <div class="purchase-list">
+        <div class="records">
         <table>
             <tr>
                 <th>S.N.</th>
@@ -87,6 +88,7 @@
                     <?php endforeach; ?>
                     <?php endif; ?>
         </table>
+        </div>
         </div>
     </div>
     <!-- <script>

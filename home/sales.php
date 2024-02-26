@@ -9,18 +9,20 @@ $records = select($conn, 'invoice');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../styles/home.css">
+    <title>Sales</title>
+    <link rel="stylesheet" href="../styles/others.css">
 
 </head>
 <body>
 
 <div class="container">
 
-<?php include '../includes/menu.php'; ?>
-
-    <div class="wrapper">
-        <h2>Sales</h2>
+<?php include '../includes/nav.php'; ?>
+<div class="main">
+    <?php include '../includes/menu.php'; ?>
+    <div class="content-wrapper">
+        <div class="records">
+        <h2 style="text-align: center;">Sales</h2>
         <table>
             <tr>
                 <th>S.N.</th>
@@ -33,9 +35,9 @@ $records = select($conn, 'invoice');
             <?php if(!empty($records)): ?>
                 <?php foreach($records as $record): ?>
                     <tr>
-                <td><?= $record['id']; ?></td>
-                <td><?= $record['medicine_name']; ?></td>
-                <td><?= $record['quantity']; ?></td>
+                        <td><?= $record['id']; ?></td>
+                        <td><?= $record['medicine_name']; ?></td>
+                        <td><?= $record['quantity']; ?></td>
                 <td><?= $record['rate']; ?></td>
                 <td><?= $record['total']; ?></td>
                 <td><?= $record['date']; ?></td>
@@ -43,9 +45,10 @@ $records = select($conn, 'invoice');
                 <?php endforeach; ?>
                 <?php endif; ?>
         </table>
+        </div>
     </div>
-
+</div>
     <script src="../scripts/home.js"></script>
-
+    
 </body>
 </html>
