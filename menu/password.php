@@ -2,6 +2,7 @@
 include "../includes/database.php";
 $errors = "";
 $error = '';         // flag
+$message='';
 if ($_SERVER['REQUEST_METHOD']=="POST") {
     $oldPass = $_POST['oldPass'];
     $newPass = $_POST['newPass'];
@@ -40,7 +41,7 @@ if(isset($_POST['button'])) {
         $sql = "UPDATE register set pass = $newPass";
         $result = mysqli_query($conn, $sql);
         if($result) {
-            $message = "Password changed successfully";
+            $message = "Password changed successfully!";
         }
     }
 }
@@ -81,7 +82,7 @@ if(isset($_POST['button'])) {
            
             <button type="submit" id="change-btn" name="button">Change password</button><br>
             <span style="color: green;"><?php if(!$error) {
-                echo $message.'!';
+                echo $message;
             }
             ?></span><br>
             <span><a href="../home/home.php">Back to Home!</a></span><br>

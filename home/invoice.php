@@ -58,12 +58,10 @@ $records = select($conn, 'invoice');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice</title>
     <link rel="stylesheet" href="../styles/others.css">
-
 </head>
 
 <body>
 <div class="container">
-
 <?php include '../includes/nav.php'; ?>
 <div class="main">
         <?php include '../includes/menu.php'; ?>
@@ -118,22 +116,7 @@ $records = select($conn, 'invoice');
         </div>
     </div>
     </div>
-    <script>
-       
-        let total = document.getElementById('total');
-        let qty = document.getElementById('quantity');
-        let rate = document.getElementById('rate');
-
-        rate.addEventListener('input', function type() {
-            let qtyVal = qty.value;
-            let rateVal = rate.value;
-
-            total.value = qtyVal*rateVal;
-        });
-
-       
-    </script>
-
+<script src="../scripts/invoice.js"></script>
 <script src="../scripts/home.js"></script>
 
 </body>
