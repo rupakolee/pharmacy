@@ -82,7 +82,7 @@
                     <td><?= $record['quantity']; ?></td>
                     <td><?= $record['price']; ?></td>
                     <td>#</td>
-                    <td><?= $record['date']; ?></td>
+                    <td><?= $record['expiry']; ?></td>
                 </tr>
                     <?php endforeach; ?>
                     <?php endif; ?>

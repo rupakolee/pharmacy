@@ -39,6 +39,15 @@
                     <td><?= $record['quantity']; ?></td>
                     <td><?= $record['price']; ?></td>
                     <td><?= $record['date']; ?></td>
+                    <?php if($record['expiry']<$record['date']) {
+                        $status = "Expired";
+                    }
+                    else {
+                        $one = date_create($record['expiry']);
+                        $two = date_create($record['date']);
+                        $diff = date_diff($one, $two);
+                        $status = $diff->format("%a days to go");
+                    } ?>
                     <td><?= $status; ?></td>
                 </tr>
                     <?php endforeach; ?>
