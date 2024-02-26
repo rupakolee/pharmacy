@@ -73,6 +73,11 @@ a {
     color: #000;
 }
 
+#menu-btn {
+    cursor: pointer;
+    border: none;
+}
+
 .user-panel {
     list-style: none;
     display: none;
