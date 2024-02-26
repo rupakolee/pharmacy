@@ -61,11 +61,12 @@ a {
     display: none;
     list-style: none;
     background-color: #fff;
+    height: 100%;
 }
 
 #menu-list li {
     border-bottom: 1px solid gray;
-    padding: 4px;
+    padding: 15px 10px;
 }
 
 #menu-list li a {
