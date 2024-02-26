@@ -10,7 +10,7 @@
         $price = $_POST['price'];
         $date = $_POST['date'];
         if(isset($_POST['submit'])) {
-            $sql = "INSERT INTO medicine (name, category, quantity, price, date) VALUES (?,?,?,?,?)";
+            $sql = "INSERT INTO medicine (name, category, quantity, price, expiry, date) VALUES (?,?,?,?,?, CURRENT_DATE())";
             $stmt = mysqli_prepare($conn, $sql); 
             mysqli_stmt_bind_param($stmt, "sssss", $name, $category, $quantity, $price, $date);
             if(mysqli_stmt_execute($stmt)){

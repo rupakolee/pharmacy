@@ -38,7 +38,7 @@
                     <td><?= $record['category']; ?></td>
                     <td><?= $record['quantity']; ?></td>
                     <td><?= $record['price']; ?></td>
-                    <td>N/A</td>
+                    <td><?= $record['date']; ?></td>
                     <td><?= $status; ?></td>
                 </tr>
                     <?php endforeach; ?>
