@@ -143,3 +143,22 @@ a {
     position: absolute;
     left: 800px;
 }
+
+.table {
+    margin: 12px 0;
+    width: 100vw;
+    border-collapse: collapse;
+    
+}
+
+.table th {
+    padding: 12px 0;
+    text-align: left;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.table td, .table th {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
