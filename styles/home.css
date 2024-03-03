@@ -95,10 +95,13 @@ a {
 }
 
 .menu #menu-btn {
-    background: none;
-    border: none;
-    margin: 10px 20px;
-    cursor: pointer;
+    border: 2px solid black;
+}
+
+.menu #menu-btn .line {
+    height: 5px;
+    width: 10px;
+    background-color: var(--primary-color);
 }
 
 .main {

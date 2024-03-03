@@ -49,7 +49,11 @@ if ($result == false) {
         <div class="main">
             
             <div class="menu">
-                <button id="menu-btn"><img src="../images/menu.png" alt="menu" style="width: 36px;"></button>
+                <div id="menu-btn">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
+                </div>
                 <ul id="menu-list">
                     <li><a href="home.php">Dashboard</a></li>
                     <li><a href="purchase.php">Purchase</a></li>

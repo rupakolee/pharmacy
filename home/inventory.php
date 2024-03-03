@@ -22,7 +22,7 @@
     <div class="content-wrapper">
         <div class="records">
         <h2 style="text-align: center;">Inventory</h2>
-        <table>
+        <table class="table">
             <tr>
                 <th>S.N.</th>
                 <th>Name</th>
