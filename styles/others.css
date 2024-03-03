@@ -91,20 +91,26 @@ a {
 
 .menu .menu-box {
     border: 2px solid black;
-    border-radius: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 42px;
+    display: inline-block;
+    margin: 6px 10px;
 }
 
 .menu .menu-box:hover {
     background-color: var(--primary-color);
-    color: #fff;
+    transition: 0.5s;
 }
 
 .menu .menu-box .line {
-    height: 4px;
-    width: 15px;
+    height: 3px;
+    width: 26px;
     background-color: var(--primary-color);
     border-radius: 10px;
     margin: 7px;
+    text-align: center;
+    transition: 0.7s;
 }
 
 .main {
