@@ -114,7 +114,7 @@ $records = select($conn, 'invoice');
     </div>
     </div>
 <script src="../scripts/invoice.js"></script>
-<script src="../scripts/home.js"></script>
+<script src="../scripts/menu.js"></script>
 
 </body>
 

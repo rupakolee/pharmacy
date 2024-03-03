@@ -89,11 +89,22 @@ a {
     color: #000;
 }
 
-.menu #menu-btn {
-    background: none;
-    border: none;
-    margin: 10px 20px;
-    cursor: pointer;
+.menu .menu-box {
+    border: 2px solid black;
+    border-radius: 50px;
+}
+
+.menu .menu-box:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.menu .menu-box .line {
+    height: 4px;
+    width: 15px;
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    margin: 7px;
 }
 
 .main {

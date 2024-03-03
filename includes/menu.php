@@ -3,7 +3,11 @@
         <!-- left navigation panel -->
 
         <div class="menu">
-            <button id="menu-btn"><img src="../images/menu.png" alt="menu" style="width: 36px;"></button>
+        <div class="menu-box">
+                    <div class="line line1"></div>
+                    <div class="line line2"></div>
+                    <div class="line line3"></div>
+                </div>
             <ul id="menu-list">
                 <li><a href="home.php">Dashboard</a></li>
                 <li><a href="purchase.php">Purchase</a></li>

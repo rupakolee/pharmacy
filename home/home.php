@@ -49,10 +49,10 @@ if ($result == false) {
         <div class="main">
             
             <div class="menu">
-                <div id="menu-btn">
-                    <span class="line"></span>
-                    <span class="line"></span>
-                    <span class="line"></span>
+                <div class="menu-box">
+                    <div class="line line1"></div>
+                    <div class="line line2"></div>
+                    <div class="line line3"></div>
                 </div>
                 <ul id="menu-list">
                     <li><a href="home.php">Dashboard</a></li>
@@ -85,7 +85,7 @@ if ($result == false) {
 
     </div>
 
-    <script src="../scripts/home.js"></script>
+    <script src="../scripts/menu.js"></script>
 
 </body>
 

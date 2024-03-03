@@ -1,9 +1,9 @@
 // left menu display/hide
 
 let menuList = document.getElementById('menu-list');
-const menuBtn = document.getElementById('menu-btn');
+const menuBox = document.querySelector('.menu-box');
 
-menuBtn.addEventListener('click', function toggleMenu() {
+menuBox.addEventListener('click', function toggleMenu() {
     if(menuList.style.display === "none") {
         menuList.style.display = "block";
     }

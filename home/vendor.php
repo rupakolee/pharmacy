@@ -65,7 +65,7 @@ $records = select($conn, 'vendor');
         </div>
     </div>
     </div>
-    <script src="../scripts/home.js"></script>
+    <script src="../scripts/menu.js"></script>
 
 </body>
 </html>
