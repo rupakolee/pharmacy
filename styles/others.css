@@ -99,7 +99,7 @@ a {
 }
 
 .menu .menu-box:hover {
-    background-color: var(--primary-color);
+    background-color: gray;
     transition: 0.5s;
 }
 
