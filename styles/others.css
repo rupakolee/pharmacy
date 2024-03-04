@@ -99,7 +99,7 @@ a {
 }
 
 .menu .menu-box:hover {
-    background-color: gray;
+    background-color: rgb(217, 217, 217);
     transition: 0.5s;
 }
 
@@ -109,7 +109,6 @@ a {
     background-color: var(--primary-color);
     border-radius: 10px;
     margin: 7px;
-    text-align: center;
     transition: 0.7s;
 }
 
@@ -129,43 +128,17 @@ a {
     display: grid;
     grid-template-rows: auto auto;
     gap: 10px;
+   
 }
 
 .menu {
     background-color: #fff;
 }
 
-.dashboard {
-    color: #000;
-}
-
-.dashboard .grid {
-    border: 1px solid black;
-    display: grid;
-    grid-template-columns: 200px auto;
-    gap: 10px;
-}
-
-.dashboard .grid .box {
-    width: 180px;
-    height: 100px;
-    border: 1px solid grey;
-    background-color: rgb(212, 212, 212);
-    margin: 10px;
-}
-
-.dashboard .grid .sales-panel {
-    border: 1px solid gray;
-    width: 100%;
-    position: absolute;
-    left: 800px;
-}
-
 .table {
     margin: 12px 0;
-    width: 100vw;
+    width: 100%;
     border-collapse: collapse;
-    
 }
 
 .table th {
