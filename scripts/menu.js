@@ -28,7 +28,7 @@ let line1 = document.querySelector('.line1');
 let line2 = document.querySelector('.line2');
 let line3 = document.querySelector('.line3');
 menuBox.addEventListener('mouseover', () => {
-    menuLines.style.backgroundColor = "white";
+    menuLines.style.backgroundColor = '#fff';
 })
 
 // user-panel display/hide

@@ -14,15 +14,24 @@ body {
     overflow: hidden;
 }
 
+/* grid container for nav and body */
 .container {
     color: #fff;
+    display: grid;
+    grid-template-rows: 80px auto;
 }
 
+/* flex nav for logo and user panel */
 nav {
     margin: 8px 48px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+h2 {
+    margin: 16px 0;
+    text-align: center;
 }
 
 a {
@@ -56,23 +65,6 @@ a {
     width: 14px;
 }
 
-#menu-list {
-    float: left;
-    display: none;
-    list-style: none;
-    background-color: #fff;
-    height: 100%;
-}
-
-#menu-list li {
-    border-bottom: 1px solid gray;
-    padding: 15px 10px;
-}
-
-#menu-list li a {
-    color: #000;
-}
-
 .user-panel {
     list-style: none;
     display: none;
@@ -89,11 +81,23 @@ a {
     color: #000;
 }
 
+.main {
+    background: #fff;
+    color: #000;
+    display: flex
+}
+
+.menu {
+    background-color: #fff;
+    display: flex;
+}
+
 .menu .menu-box {
     border: 2px solid black;
     border-radius: 50%;
     cursor: pointer;
     width: 42px;
+    height: 42px;
     display: inline-block;
     margin: 6px 10px;
 }
@@ -112,27 +116,43 @@ a {
     transition: 0.7s;
 }
 
-.main {
-    background: #fff;
+#menu-list {
+    float: left;
+    display: none;
+    width: 100px;
+    list-style: none;
+    background-color: #fff;
     color: #000;
-    display: flex;
 }
 
-.entries {
-    display: grid;
-    grid-template-rows: auto auto;
-    gap: 2px;
+#menu-list li {
+    border-bottom: 1px solid gray;
+    cursor: pointer;
+    padding: 15px 10px;
+}
+
+#menu-list li a {
+    color: #000;
+}
+
+#menu-list li:hover {
+    color: #fff;
+    background-color: var(--primary-color);
+    transition: 0.4s;
 }
 
 .content-wrapper {
     display: grid;
     grid-template-rows: auto auto;
     gap: 10px;
-   
+    width: 100%;
 }
 
-.menu {
-    background-color: #fff;
+.entries {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin: 20px 0;
 }
 
 .table {

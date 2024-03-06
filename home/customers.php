@@ -52,25 +52,25 @@ $records = select($conn, 'customer');
 <!-- adding a new customer to the database -->
 <div class="content-wrapper">
 <div class="entries">
-    <h2>Add a new Customer</h2>
     <form action="" method="post">
-        <label for="name">Name</label><br>
-        <input type="text" name="name" id="name"><br>
-        <label for="dob">Date of Birth</label><br>
-        <input type="date" name="dob" id="dob"><br>
-        <span>Sex</span><br>
+        <h2>Add a new Customer</h2>
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name">
+        <label for="dob">Date of Birth</label>
+        <input type="date" name="dob" id="dob">
+        <span>Sex</span>
         <input type="radio" name="sex" value="M">M
-        <input type="radio" name="sex" value="F">F<br>
-        <label for="address">Address</label><br>
-        <input type="text" name="address" id="address"><br>
+        <input type="radio" name="sex" value="F">F
+        <label for="address">Address</label>
+        <input type="text" name="address" id="address">
         <label for="contact">Contact</label>
-        <input type="text" name="contact" id="contact"><br>
-        <input type="submit" name="submit" value="Submit"><br>
+        <input type="text" name="contact" id="contact">
+        <input type="submit" name="submit" value="Submit">
     </form>
 </div>
     <!-- customers list -->
     <div class="records">
-    <table>
+    <table class="table">
         <tr>
             <th>S.N.</th>
             <th>Name</th>

@@ -46,7 +46,7 @@
                     }
                     else {
                         $one = date_create($record['expiry']);
-                        $two = date_create($record['date']);
+                        $two = date_create(date("Y-m-d"));
                         $diff = date_diff($one, $two);  
                         $status = $diff->format("%a days to go");
                     } ?>

@@ -67,7 +67,7 @@ $records = select($conn, 'invoice');
         <div class="content-wrapper">
             <div class="entries"> 
                 <form action="" method="POST">
-                    <h2>Create new invoice</h2>
+                    <h2 style="text-align: center;">Create new invoice</h2>
                     
                     <label for="customer">Customer Name:</label>
                     <input type="text" name="customer" id="customer">

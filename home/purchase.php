@@ -40,7 +40,7 @@
         <?php include '../includes/menu.php'; ?>
         <div class="content-wrapper">
         <div class="entries">
-            <form action="" method="post">
+            <form action="" method="post" class="form">
                 <h2 style="text-align: center;">Purchases</h2>
                 <h3>Add items</h3>
                 <label for="name">Medicine Name:</label>

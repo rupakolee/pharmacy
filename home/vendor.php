@@ -30,8 +30,8 @@ $records = select($conn, 'vendor');
 <?php include '../includes/menu.php'; ?>
     <div class="content-wrapper">
         <div class="entries">
-        <h2 style="text-align: center;">Vendor</h2>
-        <form action="" method="post">
+            <form action="" method="post">
+            <h2 style="text-align: center;">Vendor</h2>
             <label for="name">Name</label>
             <input type="text" name="name" id="name">
             <label for="address">Address</label>
