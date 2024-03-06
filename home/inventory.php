@@ -53,7 +53,7 @@ $status = '';
                                         $status = $diff->format("%a days to go");
                                     } ?>
                                     <td><?= $status; ?></td>
-                                    <td><a href="../includes/edit.php?id=<?= $record['id']; ?>"><img src="../images/edit-icon.png" alt="edit" style="width: 15px;" class="action-btn"></a><a href="../includes/delete.php?= $record['id']; ?>"><img src="../images/delete-icon.png" alt="delete" style="width: 14px;" class="action-btn"></a></td>
+                                    <td><a href="../includes/edit.php?id=<?= $record['id']; ?>"><img src="../images/edit-icon.png" alt="edit" style="width: 15px;" class="action-btn"></a><a href="../includes/delete.php?id= <?= $record['id']; ?>"><img src="../images/delete-icon.png" alt="delete" style="width: 14px;" class="action-btn"></a></td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php endif; ?>
