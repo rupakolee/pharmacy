@@ -172,3 +172,7 @@ a {
     padding: 8px;
     border: 1px solid #ddd;
 }
+
+.action-btn {
+    margin: 0 5px;
+}
