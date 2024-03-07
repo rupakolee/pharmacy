@@ -1,8 +1,8 @@
   <!-- creating nav -->
         
   <nav id="navbar">
-            <a href="home.php"><img src="../images/logo.png" alt="logo" style="width: 80px;"></a>
-
+            <a href="home.php"><img src="../images/logo.png" alt="logo" style="width: 60px;"></a>
+            
             <div class="user-info">
                 <button id="user-btn"><img src="../images/user.png" alt=""></button>
                 <ul class="user-panel">

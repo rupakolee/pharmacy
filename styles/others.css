@@ -92,33 +92,8 @@ a {
     display: flex;
 }
 
-.menu .menu-box {
-    border: 2px solid black;
-    border-radius: 50%;
-    cursor: pointer;
-    width: 42px;
-    height: 42px;
-    display: inline-block;
-    margin: 6px 10px;
-}
-
-.menu .menu-box:hover {
-    background-color: rgb(217, 217, 217);
-    transition: 0.5s;
-}
-
-.menu .menu-box .line {
-    height: 3px;
-    width: 26px;
-    background-color: var(--primary-color);
-    border-radius: 10px;
-    margin: 7px;
-    transition: 0.7s;
-}
-
 #menu-list {
     float: left;
-    display: none;
     width: 100px;
     list-style: none;
     background-color: #fff;
