@@ -17,7 +17,7 @@ if ($result == false) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="../styles/home.css">
+    <link rel="stylesheet" href="../styles/style.css">
 </head>
 
 <body>
@@ -26,7 +26,7 @@ if ($result == false) {
   <!-- creating nav menu  -->
         
   <nav id="navbar">
-            <a href="home.php"><img src="../images/logo.png" alt="logo" style="width: 76px;"></a>
+            <a href="home.php"><img src="../images/logo.png" alt="logo" style="width: 60px;"></a>
 
             <div class="user-info">
                 <span>Welcome, <span id="user" style="font-style: italic; font-weight: 700;"><?= $details['fullName']; ?></span></span>

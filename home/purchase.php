@@ -29,7 +29,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Purchase</title>
-    <link rel="stylesheet" href="../styles/others.css">
+    <link rel="stylesheet" href="../styles/style.css">
 </head>
 <body>
 
