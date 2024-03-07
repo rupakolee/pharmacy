@@ -52,11 +52,12 @@ if ($result == false) {
 
             <div class="dashboard">
                 <h2>Dashboard</h2>
-                <div class="grid">
+                <div class="grid"><div class="linear-box">
                     <div class="box">Total Customer</div>
                     <div class="box">Medicines Expired</div>
                     <div class="box">Total Invoice</div>
                     <div class="box">No. of Vendors</div>
+                </div>
                     <div class="sales-panel">Total Sales</div>
                 </div>
                 

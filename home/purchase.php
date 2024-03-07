@@ -54,7 +54,7 @@
                 <label for="quantity">Quantity:</label>
                 <input type="number" name="quantity" id="quantity">
                 <label for="rate">Rate:</label>
-                <input type="number" name="price" id="rate">
+                <input type="number" name="price" id="rate"><br>
                 <label for="vendor">Vendor</label>
                 <input type="text" name="vendor" id="vendor">
                 <label for="date">Expiry Date:</label>
