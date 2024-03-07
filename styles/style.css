@@ -141,8 +141,13 @@ a {
     margin: 20px 0;
 }
 
-.entries form input {
-    margin: 0 10px;
+.entries form {
+    display: flex;
+    margin: 5px;
+}
+
+.entries form select, input {
+    margin: 0 5px;
 }
 
 .entries h2 {

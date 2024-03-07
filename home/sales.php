@@ -21,8 +21,8 @@ $records = select($conn, 'invoice');
 <div class="main">
     <?php include '../includes/menu.php'; ?>
     <div class="content-wrapper">
-        <div class="records sales">
         <h2 style="text-align: center;">Sales</h2>
+        <div class="records sales">
         <table class="table">
             <tr>
                 <th>S.N.</th>
@@ -33,9 +33,9 @@ $records = select($conn, 'invoice');
                 <th>Date</th>
             </tr>
             <?php if(!empty($records)): ?>
-                <?php foreach($records as $record): ?>
+                <?php foreach($records as $key => $record): ?>
                     <tr>
-                        <td><?= $record['id']; ?></td>
+                        <td><?= $key+1; ?></td>
                         <td><?= $record['medicine_name']; ?></td>
                         <td><?= $record['quantity']; ?></td>
                 <td><?= $record['rate']; ?></td>

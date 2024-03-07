@@ -66,8 +66,8 @@ $records = select($conn, 'invoice');
         <?php include '../includes/menu.php'; ?>
         <div class="content-wrapper">
             <div class="entries"> 
+                <h2 style="text-align: center;">Create new invoice</h2>
                 <form action="" method="POST">
-                    <h2 style="text-align: center;">Create new invoice</h2>
                     
                     <label for="customer">Customer Name:</label>
                     <input type="text" name="customer" id="customer">
@@ -96,9 +96,9 @@ $records = select($conn, 'invoice');
                 <th>Date</th>
             </tr>
             <?php if(!empty($records)): ?>
-                <?php foreach($records as $record): ?>
+                <?php foreach($records as $key => $record): ?>
                     <tr>
-                <td><?= $record['id']; ?></td>
+                <td><?= $key+1; ?></td>
                 <td><?= $record['customer_name']; ?></td>
                 <td><?= $record['medicine_name']; ?></td>
                 <td><?= $record['quantity']; ?></td>

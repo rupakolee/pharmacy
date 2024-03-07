@@ -52,8 +52,8 @@ $records = select($conn, 'customer');
 <!-- adding a new customer to the database -->
 <div class="content-wrapper">
 <div class="entries">
+    <h2>Add a new Customer</h2>
     <form action="" method="post">
-        <h2>Add a new Customer</h2>
         <label for="name">Name</label>
         <input type="text" name="name" id="name">
         <label for="dob">Date of Birth</label>
@@ -81,8 +81,8 @@ $records = select($conn, 'customer');
         </tr>
         <tr>
             <?php if(!empty($records)): ?>
-                <?php foreach($records as $record): ?>
-                    <td><?= $record['id']; ?></td>
+                <?php foreach($records as $key => $record): ?>
+                    <td><?= $key+1; ?></td>
                     <td><?= $record['name']; ?></td>
                     <td><?= $record['dob']; ?></td>
                     <td><?= $record['sex']; ?></td>

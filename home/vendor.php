@@ -30,8 +30,8 @@ $records = select($conn, 'vendor');
 <?php include '../includes/menu.php'; ?>
     <div class="content-wrapper">
         <div class="entries">
-            <form action="" method="post">
             <h2 style="text-align: center;">Vendor</h2>
+            <form action="" method="post">
             <label for="name">Name</label>
             <input type="text" name="name" id="name">
             <label for="address">Address</label>
@@ -53,8 +53,8 @@ $records = select($conn, 'vendor');
             </tr>
             <tr>
                 <?php if(!empty($records)): ?>
-                <?php foreach($records as $record): ?>
-                    <td><?= $record['id']; ?></td>
+                <?php foreach($records as $key => $record): ?>
+                    <td><?= $key+1; ?></td>
                     <td><?= $record['name']; ?></td>
                     <td><?= $record['address']; ?></td>
                     <td><?= $record['contact']; ?></td>

@@ -40,9 +40,9 @@
         <?php include '../includes/menu.php'; ?>
         <div class="content-wrapper">
         <div class="entries">
+            <h2 style="text-align: center;">Purchases</h2>
+            <h3>Add items</h3>
             <form action="" method="post" class="form">
-                <h2 style="text-align: center;">Purchases</h2>
-                <h3>Add items</h3>
                 <label for="name">Medicine Name:</label>
                 <input type="text" name="name" id="name">
                 <label for="category">Category</label>
@@ -54,7 +54,7 @@
                 <label for="quantity">Quantity:</label>
                 <input type="number" name="quantity" id="quantity">
                 <label for="rate">Rate:</label>
-                <input type="number" name="price" id="rate"><br>
+                <input type="number" name="price" id="rate">
                 <label for="vendor">Vendor</label>
                 <input type="text" name="vendor" id="vendor">
                 <label for="date">Expiry Date:</label>
@@ -75,9 +75,9 @@
                 <th>Date of Expiration</th>
             </tr>
             <?php if(!empty($records)): ?>
-            <?php foreach($records as $record): ?>
+            <?php foreach($records as $key => $record): ?>
                 <tr>
-                    <td><?= $record['id']; ?></td>
+                    <td><?= $key+1; ?></td>
                     <td><?= $record['name']; ?></td>
                     <td><?= $record['category']; ?></td>
                     <td><?= $record['quantity']; ?></td>
