@@ -22,8 +22,8 @@ $status = '';
         <div class="main">
             <?php include '../includes/menu.php'; ?>
             <div class="content-wrapper">
-                <h2 style="text-align: center;">Inventory</h2>
-                <div class="records">
+            <div class="records">
+                    <h2>Inventory</h2>
                     <table class="table">
                         <tr>
                             <th>S.N.</th>
@@ -58,7 +58,7 @@ $status = '';
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </table>
-                </div>
+            </div>
             </div>
         </div>
     </div>

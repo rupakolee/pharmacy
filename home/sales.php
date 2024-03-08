@@ -1,6 +1,6 @@
 <?php
 include "../includes/database.php";
-$records = select($conn, 'invoice');
+$records = descSelect($conn, 'invoice', 'date');
 
 ?>
 
@@ -21,8 +21,8 @@ $records = select($conn, 'invoice');
 <div class="main">
     <?php include '../includes/menu.php'; ?>
     <div class="content-wrapper">
-        <h2 style="text-align: center;">Sales</h2>
         <div class="records sales">
+        <h2>Sales</h2>
         <table class="table">
             <tr>
                 <th>S.N.</th>

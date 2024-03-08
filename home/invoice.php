@@ -45,7 +45,7 @@ foreach ($medicines as $medicine) {
 }
 }
 
-$records = select($conn, 'invoice');
+$records = descSelect($conn, 'invoice', 'date');
 
 ?>
 
@@ -66,7 +66,8 @@ $records = select($conn, 'invoice');
         <?php include '../includes/menu.php'; ?>
         <div class="content-wrapper">
             <div class="entries"> 
-                <h2 style="text-align: center;">Create new invoice</h2>
+                <h2>Invoice</h2>
+                <h3>Create new invoice:</h3>
                 <form action="" method="POST">
                     
                     <label for="customer">Customer Name:</label>

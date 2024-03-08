@@ -19,7 +19,7 @@
         }
     }
 
-    $records = select($conn, 'medicine');
+    $records = descSelect($conn, 'medicine', 'id');
 
 ?>
 
@@ -40,7 +40,7 @@
         <?php include '../includes/menu.php'; ?>
         <div class="content-wrapper">
         <div class="entries">
-            <h2 style="text-align: center;">Purchases</h2>
+            <h2>Purchases</h2>
             <h3>Add items</h3>
             <form action="" method="post" class="form">
                 <label for="name">Medicine Name:</label>
@@ -64,6 +64,7 @@
         </div>
 
         <div class="records">
+            <h3>Recent Purchase:</h3>
         <table class="table">
             <tr>
                 <th>S.N.</th>
