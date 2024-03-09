@@ -9,13 +9,23 @@
     --secondary-color: rgba(106, 205, 177, 0.821);
 }
 
+body {
+    background: url("../images/login-bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 .login {
     width: 600px;
-    height: auto;
-    margin: auto;
-    background-position: center;
-    background-size: cover;
-    background-repeat: none;
+    height: 100vh;
+    background-color: #fff;
+}
+
+.login img {
+    width: 80px;
+    position: relative;
+    top: 20px;
+    left: 270px;
 }
 
 .login form {

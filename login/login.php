@@ -51,6 +51,7 @@ if(isset($_POST['button'])) {
 <body>
 
     <div class="login">
+        <img src="../images/logo.png" alt="">
         <h2>Pharmaceuticals Management Portal</h2>
         <form action="#" method="post">
             <label for="user-id">Enter your userId</label><br>
