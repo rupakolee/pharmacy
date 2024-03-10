@@ -16,17 +16,11 @@ body {
 }
 
 .login {
-    width: 600px;
+    width: 50%;
     height: 100vh;
     background-color: #fff;
-    margin-top: 40px;
-}
-
-.login img {
-    width: 80px;
-    position: relative;
-    top: 20px;
-    left: 270px;
+    display: flex;
+    align-items: center;
 }
 
 .login form {
@@ -36,16 +30,18 @@ body {
 
 .login h2 {
     text-align: center;
-    padding: 28px;
+    padding: 4px 0 30px 0;
     color: var(--primary-color);
 }
 
 #login-btn, #register-btn, #change-btn {
     width: 220px;
+    font-size: 20px;
+    font-weight: 700;
     padding: 2px;
     margin: 8px 0;
     cursor: pointer;
-    color: #fff;
+    color: #ffffff;
     background-color: var(--secondary-color);
     padding: 6px;
     border-radius: 10px;
@@ -58,15 +54,21 @@ body {
     transition: 0.7s;
 }
 
-label {
-    font-family: Arial, Helvetica, sans-serif;
+.wrapper {
+    width: 100%;
+}
+
+.wrapper img {
+    display: block;
+    margin: auto;
+    width: 120px;
 }
 
 input {
-    width: 220px;
+    width: 240px;
     padding: 6px;
     border-radius: 6px;
-    margin: 10px 0px;
+    margin: 5px 0px;
     border: 1px solid rgb(214, 214, 214); 
 }
 

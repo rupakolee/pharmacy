@@ -68,36 +68,30 @@
 
 <body>
 
-    <div class="login">
+    <div class="login"><div class="wrapper">
         <h2>Pharmaceuticals Management Portal</h2>
         <form action="" method="post">
-            <label for="name">Full Name</label><br>
-            <input type="text" name="name" id="name"><br>
+            <input type="text" name="name" id="name" placeholder="Full Name"><br>
             <?php if($error == 1 || $error == 2): ?>
             <span style="color: red;"><?= $errors ?></span><br><?php endif; ?>
 
-            <label for="pharmacy-name">Pharmacy Name</label><br>
-            <input type="text" id="pharmacy-name" name="pharmacyName"><br>
+            <input type="text" id="pharmacy-name" name="pharmacyName" placeholder="Pharmacy Name"><br>
             <?php if($error == 3): ?>
             <span style="color: red;"><?= $errors ?></span><br><?php endif; ?>
 
-            <label for="passcode">Passcode</label><br>
-            <input type="password" id="passcode" name="passcode"><br>
+            <input type="password" id="passcode" name="passcode" placeholder="Password"><br>
             <?php if($error == 4): ?>
             <span style="color: red;"><?= $errors ?></span><br><?php endif; ?>
 
-            <label for="retype">Retype Passcode</label><br>
-            <input type="password" id="retype" name="retype"><br>
+            <input type="password" id="retype" name="retype" placeholder="Retype your password"><br>
             <?php if($error == 5): ?>
             <span style="color: red;"><?= $errors ?></span><br><?php endif; ?>
 
-            <label for="email">Email</label><br>
-            <input type="text" id="email" name="email"><br>
+            <input type="text" id="email" name="email" placeholder="Email"><br>
             <?php if($error == 6): ?>
             <span style="color: red;"><?= $errors ?></span><br><?php endif; ?>
 
-            <label for="phone">Phone</label><br>
-            <input type="text" id="phone" name="phone"><br>
+            <input type="text" id="phone" name="phone" placeholder="Phone"><br>
             <?php if($error == 7): ?>
             <span style="color: red;"><?= $errors ?></span><br><?php endif; ?>
 
@@ -105,7 +99,7 @@
             <span><?php if(empty($errors)): ?><?= $success; ?><?php endif; ?></span>
             <span>Have an account? <a href="login.php">Login!</a></span><br>
         </form>
-
+        </div>
     </div>
     <script src="/scripts/register.js"></script>
  

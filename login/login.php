@@ -51,15 +51,14 @@ if(isset($_POST['button'])) {
 <body>
 
     <div class="login">
+        <div class="wrapper">
         <img src="../images/logo.png" alt="">
         <h2>Pharmaceuticals Management Portal</h2>
         <form action="#" method="post">
-            <label for="user-id">Enter your userId</label><br>
-            <input type="text" id="user-id" name="userId"><br>
+            <input type="text" id="email" name="userId" placeholder="Email"><br>
             <?php if($error == 2): ?>
             <span style="color: red;"><?= $errors ?></span><br><?php endif; ?>
-            <label for="password">Enter passcode or Pin</label><br>
-            <input type="password" id="passcode" name="passcode"><br>
+            <input type="password" id="password" name="passcode" placeholder="Password"><br>
             <?php if($error == 3): ?>
             <span style="color: red;"><?= $errors ?></span>
             <?php endif; ?>
@@ -72,6 +71,7 @@ if(isset($_POST['button'])) {
             <button type="submit" id="login-btn" name="button">Login</button>
             <span><a href="register.php">Register now!</a></span><br>
         </form>
+        </div>
     </div>
     <script src="/scripts/login.js"></script>
 

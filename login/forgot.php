@@ -57,6 +57,7 @@ if(isset($_POST['button'])) {
 <body>
 
     <div class="login">
+        <div class="wrapper">
         <h2>Forgot your password?</h2>  
         <form action="#" method="post">
             <label for="user-id">Enter your User-Id</label><br>
@@ -82,6 +83,7 @@ if(isset($_POST['button'])) {
             <button type="submit" id="change-btn" name="button">Change password</button><br>
             <span><a href="login.php">Back to Login!</a></span><br>
         </form>
+        </div>
     </div>
 
     <script src="/scripts/login.js"></script>
