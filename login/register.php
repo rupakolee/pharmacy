@@ -95,7 +95,7 @@
             <?php if($error == 7): ?>
             <span style="color: red;"><?= $errors ?></span><br><?php endif; ?>
 
-            <button type="button" id="register-btn" name="button" onclick="window.location.href='payment.php'">Next</button><br> 
+            <button type="button" id="register-btn" name="button" onclick="window.location.href='subscription.php'">Next</button><br> 
             <span><?php if(empty($errors)): ?><?= $success; ?><?php endif; ?></span>
             <span>Have an account? <a href="login.php">Login!</a></span><br>
         </form>

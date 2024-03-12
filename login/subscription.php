@@ -55,22 +55,14 @@ if(isset($_POST['button'])) {
         <img src="../images/logo.png" alt="">
         <h2>Pharmaceuticals Management Portal</h2>
         <form action="#" method="post">
-            <input type="text" id="email" name="userId" placeholder="Email"><br>
-            <?php if($error == 2): ?>
-            <span style="color: red;"><?= $errors ?></span><br><?php endif; ?>
-            <input type="password" id="password" name="passcode" placeholder="Password"><br>
-            <?php if($error == 3): ?>
-            <span style="color: red;"><?= $errors ?></span>
-            <?php endif; ?>
-            <?php if(!empty($message)): ?>
-            <span id="error" style="color:red";><?= $message ?></span>
-            <?php endif; ?>
-            <?php if($error == 1): ?>
-            <span style="color: red;"><?= $errors ?></span><br><?php endif; ?><br>
-            <span><a href="forgot.php">Forgot your password?</a></span><br>
-            <button type="submit" id="login-btn" name="button">Login</button>
-            <span><a href="register.php">Register now!</a></span><br>
-            <a href="subscription.php"><h4>Renew your subscription!</h4></a>
+                <select name="payment" id="payment">
+                    <option value="subscription">Pick a subscription plan</option>
+                    <option value="one">One Month -Rs300</option>
+                    <option value="three">Three Months -Rs800</option>
+                    <option value="six">Six Months -Rs1400</option>
+                </select>
+            <button type="button" id="pay-btn" name="button">Pay</button>
+            <button type="button" id="home-btn" name="button" onclick="window.location.href='login.php'">Back to Login</button>
         </form>
         </div>
     </div>
@@ -78,3 +70,4 @@ if(isset($_POST['button'])) {
 
 </body>
 </html>
+    
