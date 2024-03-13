@@ -30,7 +30,7 @@ body {
 
 .login h2 {
     text-align: center;
-    padding: 4px 0 30px 0;
+    padding: 4px 0 24px 0;
     color: var(--primary-color);
 }
 
@@ -76,12 +76,13 @@ body {
 
 .wrapper {
     width: 100%;
+    height: 90%;
 }
 
 .wrapper img {
     display: block;
     margin: auto;
-    width: 120px;
+    width: 100px;
 }
 
 input, select {
@@ -122,8 +123,15 @@ input[type=button] {
     color: #fff;
 }
 
+h3 {
+    text-align: center;
+    padding-bottom: 8px;
+    color: rgb(244 127 52);
+}
+
 h4 {
     text-align: center;
     font-size: 16px;
     padding-top: 8px;
+    color: purple;
 }

@@ -1,5 +1,8 @@
 <?php
 include "../includes/database.php";
+session_start();
+$_SESSION['table'] = 'customer';
+$_SESSION['location'] = '../home/customers';
 if($_SERVER['REQUEST_METHOD']=="POST") {
     $name = $_POST["name"];
     $dob = $_POST["dob"];
@@ -81,6 +84,7 @@ $records = select($conn, 'customer');
             <th>Sex</th>
             <th>Address</th>
             <th>Contact</th>
+            <th>Action</th>
         </tr>
         <?php if(!empty($records)): ?>
             <?php foreach($records as $key => $record): ?>
@@ -91,6 +95,8 @@ $records = select($conn, 'customer');
                     <td><?= $record['sex']; ?></td>
                     <td><?= $record['address']; ?></td>
                     <td><?= $record['contact']; ?></td>
+                    <td><a href="../includes/edit.php?id=<?= $record['id']; ?>"><img src="../images/edit-icon.png" alt="edit" style="width: 15px;" class="action-btn"></a>
+                    <a href="../includes/delete.php?id= <?= $record['id']; ?>"><img src="../images/delete-icon.png" alt="delete" style="width: 14px;" class="action-btn"></a></td>
                 </tr>
                     <?php endforeach; ?>
                     <?php endif; ?>

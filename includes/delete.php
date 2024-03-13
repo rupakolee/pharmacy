@@ -1,19 +1,36 @@
 <?php
+session_start();
     include "database.php";
     if($_SERVER['REQUEST_METHOD']=="POST") {
         $yes = $_POST['yes'];
         $cancel = $_POST['cancel'];
 
-        $sql = "delete from medicine where id = ".$_GET['id'];
-        if (isset($yes)) {
-            $result=mysqli_query($conn, $sql);
-            if ($result==false) {
-                echo mysqli_error($conn);
-            }
-            else{
-                header("Location: ../home/inventory.php");
+        // $sql = "delete from medicine where id = ".$_GET['id'];
+        // if (isset($yes)) {
+        //     $result=mysqli_query($conn, $sql);
+        //     if ($result==false) {
+        //         echo mysqli_error($conn);
+        //     }
+        //     else{
+        //         header("Location: ../home/inventory.php");
+        //     }
+        // }
+
+        function deleteEntry($conn, $table, $location) {
+            $yes = $_POST['yes'];
+            $sql = "delete from $table where id = ".$_GET['id'];
+            if (isset($yes)) {
+                $result = mysqli_query($conn, $sql);
+                if ($result==false) {
+                    echo mysqli_error($conn);
+                }
+                else{
+                    header("Location: ../home/{$location}.php");
+                }
             }
         }
+
+        deleteEntry($conn, $_SESSION['table'], $_SESSION['location']);
 
     }
 ?>

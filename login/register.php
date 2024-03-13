@@ -68,7 +68,9 @@
 
 <body>
 
-    <div class="login"><div class="wrapper">
+    <div class="login">
+        <div class="wrapper">
+        <img src="../images/logo.png" alt="">
         <h2>Pharmaceuticals Management Portal</h2>
         <form action="" method="post">
             <input type="text" name="name" id="name" placeholder="Full Name"><br>
