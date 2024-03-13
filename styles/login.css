@@ -54,7 +54,7 @@ body {
     transition: 0.7s;
 }
 
-#home-btn {
+#home-btn, #cancel-btn {
     width: 220px;
     font-size: 18px;
     font-weight: 700;
@@ -69,7 +69,7 @@ body {
     transition: 0.7s;
 }
 
-#home-btn:hover {
+#home-btn:hover, #cancel-btn:hover {
     background-color: tomato;
     transition: 0.7s;
 }
