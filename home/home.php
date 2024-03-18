@@ -52,13 +52,25 @@ if ($result == false) {
 
             <div class="dashboard">
                 <h2>Dashboard</h2>
-                <div class="grid"><div class="linear-box">
-                    <div class="box">Total Customer</div>
-                    <div class="box">Medicines Expired</div>
-                    <div class="box">Total Invoice</div>
-                    <div class="box">No. of Vendors</div>
-                </div>
-                    <div class="sales-panel">Total Sales</div>
+                <div class="grid">
+                    <div class="linear-box">
+                        <div class="box">Total Customer</div>
+                        <div class="box">Medicines Expired</div>
+                        <div class="box">Total Invoice</div>
+                        <div class="box">No. of Vendors</div>
+                        <div class="box">Total medicine</div>
+                        <div class="box">Out of stock</div>
+                    </div><hr>
+                    <div class="tabs">
+                        <div class="tab-boxes">Create new Invoice</div>
+                        <div class="tab-boxes">Add Medicines</div>
+                        <div class="tab-boxes">Add Customer</div>
+                        <div class="tab-boxes">Add Vendor</div>
+                    </div><hr>
+                    <div class="report-panel">
+                        <div class="graph">this is graph</div>
+                        <div class="sales-table">Today's Report</div>
+                    </div>
                 </div>
                 
                 <!-- mails and notifications -->
@@ -71,6 +83,13 @@ if ($result == false) {
     </div>
 
     <script src="../scripts/menu.js"></script>
+    <script>
+        let boxes = document.querySelectorAll('.tab-boxes');
+        boxes[0].style.backgroundColor = "#37b1aa";
+        boxes[1].style.backgroundColor = "#7e57cf";
+        boxes[2].style.backgroundColor = "#fac76e";
+        boxes[3].style.backgroundColor = "#f1958f";
+    </script>
 
 </body>
 

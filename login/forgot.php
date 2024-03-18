@@ -16,8 +16,7 @@ include "../includes/database.php";
         <div class="wrapper">
         <img src="../images/logo.png" alt="">
         <h2>Pharmaceuticals Management Portal</h2>
-        <h3>Forgot your password?</h3>  
-        <form action="#" method="post">
+        <form action="verification.php" method="post">
             <input type="text" id="email" name="email" placeholder="Enter your email"><br>           
             <button type="submit" id="change-btn" name="button">Send Code!</button><br>
             <?php 
