@@ -60,6 +60,20 @@ if ($result == false) {
                         <div class="box">No. of Vendors</div>
                         <div class="box">Total medicine</div>
                         <div class="box">Out of stock</div>
+                    </div>
+                        <div class="sales-table">
+                            <p>Today's Report</p>
+                            <table class="table">
+                                <tr>
+                                    <th>Total Sales</th>
+                                    <td>23</td>
+                                </tr>
+                                <tr>
+                                    <th>Total Purchase</th>
+                                    <td>43</td>
+                                </tr>
+                            </table>
+                        </div>
                     </div><hr>
                     <div class="tabs">
                         <div class="tab-boxes">Create new Invoice</div>
@@ -67,10 +81,6 @@ if ($result == false) {
                         <div class="tab-boxes">Add Customer</div>
                         <div class="tab-boxes">Add Vendor</div>
                     </div><hr>
-                    <div class="report-panel">
-                        <div class="graph">this is graph</div>
-                        <div class="sales-table">Today's Report</div>
-                    </div>
                 </div>
                 
                 <!-- mails and notifications -->
@@ -79,8 +89,6 @@ if ($result == false) {
                 </div>
             </div>
         </div>
-
-    </div>
 
     <script src="../scripts/menu.js"></script>
     <script>

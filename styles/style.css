@@ -107,13 +107,21 @@ a {
 }
 
 .dashboard .grid {
-    display: grid;
-    grid-template-rows: auto auto auto;
+    display: flex;
+    width: 100%;
 }
 
 .linear-box {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.box {
+    width: 180px;
+    height: 100px;
+    background-color: rgb(237, 237, 237);
+    margin: 10px 60px;
+    text-align: center;
 }
 
 .tabs {
@@ -129,22 +137,9 @@ a {
     text-align: center;
 }
 
-.dashboard .grid .box {
-    width: 180px;
-    height: 100px;
-    background-color: rgb(237, 237, 237);
-    margin: 10px;
-    text-align: center;
-}
-
-.report-panel {
-    display: grid;
-    grid-template-columns: auto auto;
-    margin-top: 20px;
-}
-
-.sales-table, .graph {
-    border: 1px solid black;
+.sales-table {
+    border-left: 1px solid black;
+    width: 100%;
 }
 
 .content-wrapper { 
