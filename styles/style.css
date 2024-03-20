@@ -137,9 +137,14 @@ a {
     text-align: center;
 }
 
-.sales-table {
+.sales-chart {
     border-left: 1px solid black;
-    width: 100%;
+    position: relative;
+    right: -125px;
+}
+
+.sales-chart h3 {
+    text-align: center;
 }
 
 .content-wrapper { 

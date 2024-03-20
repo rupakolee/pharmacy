@@ -61,18 +61,12 @@ if ($result == false) {
                         <div class="box">Total medicine</div>
                         <div class="box">Out of stock</div>
                     </div>
-                        <div class="sales-table">
-                            <p>Today's Report</p>
-                            <table class="table">
-                                <tr>
-                                    <th>Total Sales</th>
-                                    <td>23</td>
-                                </tr>
-                                <tr>
-                                    <th>Total Purchase</th>
-                                    <td>43</td>
-                                </tr>
-                            </table>
+                        <div class="sales-chart">
+                            <h3>Today's Report</h3>
+                            <div class="chart-container">
+                                <canvas class="my-chart"></canvas>
+                            </div>
+                            
                         </div>
                     </div><hr>
                     <div class="tabs">
@@ -89,8 +83,10 @@ if ($result == false) {
                 </div>
             </div>
         </div>
-
+        
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../scripts/menu.js"></script>
+    <script src="../scripts/chart.js"></script>
     <script>
         let boxes = document.querySelectorAll('.tab-boxes');
         boxes[0].style.backgroundColor = "#37b1aa";
