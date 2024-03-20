@@ -70,10 +70,10 @@ if ($result == false) {
                         </div>
                     </div><hr>
                     <div class="tabs">
-                        <div class="tab-boxes">Create new Invoice</div>
-                        <div class="tab-boxes">Add Medicines</div>
-                        <div class="tab-boxes">Add Customer</div>
-                        <div class="tab-boxes">Add Vendor</div>
+                        <a href="invoice.php"><div class="tab-boxes"><img src="../images/add-invoice.png" alt="">Create new Invoice</div></a>
+                        <a href="purchase.php"><div class="tab-boxes"><img src="../images/add-medicine.png" alt="">Add Medicines</div></a>
+                        <a href="customers.php"><div class="tab-boxes"><img src="../images/add-customer.png" alt="">Add Customer</div></a>
+                        <a href="supplier.php"><div class="tab-boxes"><img src="../images/add-supplier.png" alt="">Add Vendor</div></a>
                     </div><hr>
                 </div>
                 
@@ -83,16 +83,47 @@ if ($result == false) {
                 </div>
             </div>
         </div>
+
+        <?php
+            $count1 = "SELECT * from medicine";
+            $count2 = "SELECT * from invoice";
+            $count3 = "SELECT * from vendor";
+
+            $purchaseCount =mysqli_num_rows(mysqli_query($conn, $count1));
+            $salesCount =mysqli_num_rows(mysqli_query($conn, $count2));
+            $supplierCount =mysqli_num_rows(mysqli_query($conn, $count3));
+        ?>
         
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../scripts/menu.js"></script>
-    <script src="../scripts/chart.js"></script>
+    <!-- <script src="../scripts/chart.js"></script> -->
     <script>
         let boxes = document.querySelectorAll('.tab-boxes');
         boxes[0].style.backgroundColor = "#37b1aa";
         boxes[1].style.backgroundColor = "#7e57cf";
         boxes[2].style.backgroundColor = "#fac76e";
         boxes[3].style.backgroundColor = "#f1958f";
+
+        const myChart = document.querySelector('.my-chart');
+const chartData = {
+    labels: ["Purchases", "Sales", "Suppliers"],
+    data: [<?= $purchaseCount; ?>, <?= $salesCount; ?>, <?= $supplierCount; ?>],
+};
+
+
+new Chart(myChart, {
+    type: "doughnut",
+    data: {
+        labels: chartData.labels,
+        datasets: [
+            {
+                label: "Count",
+                data: chartData.data,
+            }
+        ]
+    }
+});
+
     </script>
 
 </body>
