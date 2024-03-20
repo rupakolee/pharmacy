@@ -47,7 +47,7 @@ $records = select($conn, 'vendor');
         </div>
 
         <div class="records">
-        <h2>Vendors list:</h2>
+        <h3>Vendors list:</h3>
         <table class="table">
             <tr>
                 <th>S.N.</th>

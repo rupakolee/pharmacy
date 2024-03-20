@@ -75,7 +75,7 @@ $records = select($conn, 'customer');
 
     <!-- customers list -->
     <div class="records">
-        <h2>Customers list:</h2>
+        <h3>Customers list:</h3>
     <table class="table">
         <tr>
             <th>S.N.</th>

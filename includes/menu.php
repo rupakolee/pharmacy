@@ -6,6 +6,6 @@
                 <a href="sales.php"><li>Sales</li></a>
                 <a href="inventory.php"><li>Medicines</li></a>
                 <a href="customers.php"><li>Customers</li></a>
-                <a href="vendor.php"><li>Vendors</li></a>
+                <a href="supplier.php"><li>Vendors</li></a>
                 </ul>
             </div>

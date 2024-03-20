@@ -8,6 +8,28 @@ if ($result == false) {
 } else {
     $details = mysqli_fetch_assoc($result);
 }
+
+
+$count1 = "SELECT SUM(total) from medicine where date = CURRENT_DATE()";
+$count2 = "SELECT SUM(total) from invoice where date = CURRENT_DATE()";
+     
+$purchaseCount = mysqli_fetch_array(mysqli_query($conn, $count1));
+$salesCount = mysqli_fetch_array(mysqli_query($conn, $count2));
+
+$customerCountQuery = "SELECT COUNT(id) from customer";
+$customerCount = mysqli_fetch_array(mysqli_query($conn, $customerCountQuery));
+
+$expmedCountQuery = "SELECT COUNT(id) from medicine where expiry < date";
+$expmedCount = mysqli_fetch_array(mysqli_query($conn, $expmedCountQuery));
+
+$invoiceCountQuery = "SELECT COUNT(id) from invoice";
+$invoiceCount = mysqli_fetch_array(mysqli_query($conn, $invoiceCountQuery));
+
+$supplierCountQuery = "SELECT COUNT(id) from vendor";
+$supplierCount = mysqli_fetch_array(mysqli_query($conn, $supplierCountQuery));
+
+$medCountQuery = "SELECT COUNT(id) from medicine";
+$medCount = mysqli_fetch_array(mysqli_query($conn, $medCountQuery));
 ?>
 
 <!DOCTYPE html>
@@ -54,17 +76,21 @@ if ($result == false) {
                 <h2>Dashboard</h2>
                 <div class="grid">
                     <div class="linear-box">
-                        <div class="box">Total Customer</div>
-                        <div class="box">Medicines Expired</div>
-                        <div class="box">Total Invoice</div>
-                        <div class="box">No. of Vendors</div>
-                        <div class="box">Total medicine</div>
-                        <div class="box">Out of stock</div>
+                        <div class="box">Total Customer<br><br><?= $customerCount[0]; ?></div>
+                        <div class="box">Medicines Expired<br><br><?= $expmedCount[0]; ?></div>
+                        <div class="box">Total Invoice<br><br><?= $invoiceCount[0]; ?></div>
+                        <div class="box">No. of Suppliers<br><br><?= $supplierCount[0]; ?></div>
+                        <div class="box">Total medicine<br><br><?= $medCount[0]; ?></div>
+                        <div class="box">Out of stock<br><br><?= "NaN" ?></div>
                     </div>
                         <div class="sales-chart">
                             <h3>Today's Report</h3>
                             <div class="chart-container">
+                                <?php if(empty($purchaseCount) && empty($salesCount)): ?>
+                                  <?= "<h3 style='text-align: center;'>No records found!</h3>"; ?>
+                                  <?php else: ?>
                                 <canvas class="my-chart"></canvas>
+                                <?php endif; ?>
                             </div>
                             
                         </div>
@@ -73,7 +99,7 @@ if ($result == false) {
                         <a href="invoice.php"><div class="tab-boxes"><img src="../images/add-invoice.png" alt="">Create new Invoice</div></a>
                         <a href="purchase.php"><div class="tab-boxes"><img src="../images/add-medicine.png" alt="">Add Medicines</div></a>
                         <a href="customers.php"><div class="tab-boxes"><img src="../images/add-customer.png" alt="">Add Customer</div></a>
-                        <a href="supplier.php"><div class="tab-boxes"><img src="../images/add-supplier.png" alt="">Add Vendor</div></a>
+                        <a href="supplier.php"><div class="tab-boxes"><img src="../images/add-supplier.png" alt="">Add Supplier</div></a>
                     </div><hr>
                 </div>
                 
@@ -83,16 +109,6 @@ if ($result == false) {
                 </div>
             </div>
         </div>
-
-        <?php
-            $count1 = "SELECT * from medicine";
-            $count2 = "SELECT * from invoice";
-            $count3 = "SELECT * from vendor";
-
-            $purchaseCount =mysqli_num_rows(mysqli_query($conn, $count1));
-            $salesCount =mysqli_num_rows(mysqli_query($conn, $count2));
-            $supplierCount =mysqli_num_rows(mysqli_query($conn, $count3));
-        ?>
         
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../scripts/menu.js"></script>
@@ -104,12 +120,16 @@ if ($result == false) {
         boxes[2].style.backgroundColor = "#fac76e";
         boxes[3].style.backgroundColor = "#f1958f";
 
+        <?php if(!empty($salesCount) || !empty($purchaseCount)): ?>
+          
         const myChart = document.querySelector('.my-chart');
-const chartData = {
-    labels: ["Purchases", "Sales", "Suppliers"],
-    data: [<?= $purchaseCount; ?>, <?= $salesCount; ?>, <?= $supplierCount; ?>],
-};
+        const chartData = {
+            labels: ["Purchases", "Sales"],
+            data: [<?= $purchaseCount[0]; ?>, <?= $salesCount[0]; ?>],
+        };
 
+        <?php endif; ?>
+        
 
 new Chart(myChart, {
     type: "doughnut",
@@ -117,7 +137,7 @@ new Chart(myChart, {
         labels: chartData.labels,
         datasets: [
             {
-                label: "Count",
+                label: "Amount",
                 data: chartData.data,
             }
         ]
