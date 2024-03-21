@@ -171,8 +171,12 @@ a {
 }
 
 .entries form {
-    display: flex;
     margin: 10px 5px;
+}
+
+.input-fields {
+    display: grid;
+    grid-template-columns: auto auto auto;
 }
 
 .entries form select, input {

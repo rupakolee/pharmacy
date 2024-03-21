@@ -58,18 +58,30 @@ $records = select($conn, 'customer');
     <h2>Customers</h2>
     <h3>Add a new customer:</h3>
     <form action="" method="post">
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name">
-        <label for="dob">Date of Birth</label>
-        <input type="date" name="dob" id="dob">
-        <span>Sex</span>
-        <input type="radio" name="sex" value="M">M
-        <input type="radio" name="sex" value="F">F
-        <label for="address">Address</label>
-        <input type="text" name="address" id="address">
-        <label for="contact">Contact</label>
-        <input type="text" name="contact" id="contact">
-        <input type="submit" name="submit" value="Submit">
+        <div class="input-fields">
+            <div class="inputs">
+                <label for="name">Name</label><br>
+                <input type="text" name="name" id="name">
+            </div>
+            <div class="inputs">
+                <label for="dob">Date of Birth</label><br>
+                <input type="date" name="dob" id="dob">
+            </div>
+            <div class="inputs">
+                <span>Sex:</span><br>
+                <input type="radio" name="sex" value="M">M<br>
+                <input type="radio" name="sex" value="F">F
+            </div>
+            <div class="inputs">
+                <label for="address">Address</label><br>
+                <input type="text" name="address" id="address">
+            </div>
+            <div class="inputs">
+                <label for="contact">Contact</label><br>
+                <input type="text" name="contact" id="contact">
+            </div>
+        </div>
+            <input type="submit" name="submit" value="Submit">
     </form>
 </div><hr>
 

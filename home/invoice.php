@@ -69,17 +69,28 @@ $records = descSelect($conn, 'invoice', 'date');
                 <h2>Invoice</h2>
                 <h3>Create new invoice:</h3>
                 <form action="" method="POST">
-                    
-                    <label for="customer">Customer Name:</label>
-                    <input type="text" name="customer" id="customer">
-                    <label for="medicine">Medicine:</label>
-                    <input type="text" name="medicine" id="medicine">
-                    <label for="quantity">Qty:</label>
-                    <input type="number" name="quantity" id="quantity">
-                    <label for="rate">Rate:</label>
-                    <input type="number" name="rate" id="rate">
-                    <label for="total">Total:</label>
-                    <input type="number" name="total" id="total">
+                    <div class="input-fields">
+                        <div class="inputs">
+                            <label for="customer">Customer Name:</label><br>
+                            <input type="text" name="customer" id="customer">
+                        </div>
+                        <div class="inputs">
+                            <label for="medicine">Medicine:</label><br>
+                            <input type="text" name="medicine" id="medicine">
+                        </div>
+                        <div class="inputs">
+                            <label for="quantity">Qty:</label><br>
+                            <input type="number" name="quantity" id="quantity">
+                        </div>
+                        <div class="inputs">
+                            <label for="rate">Rate:</label><br>
+                            <input type="number" name="rate" id="rate">
+                        </div>
+                        <div class="inputs">
+                            <label for="total">Total:</label><br>
+                            <input type="number" name="total" id="total">
+                        </div>
+                    </div>
                     <input type="submit" name="submit" id="submit" value="Submit">        
                 </form>
             </div><hr>

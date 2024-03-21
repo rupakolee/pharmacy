@@ -36,12 +36,20 @@ $records = select($conn, 'vendor');
             <h2>Vendor</h2>
             <h3>Add a new vendor:</h3>
             <form action="" method="post">
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name">
-            <label for="address">Address</label>
-            <input type="text" name="address" id="address">
-            <label for="contact">Contact</label>
-            <input type="text" name="contact" id="contact">
+                <div class="input-fields">
+                <div class="inputs">
+                    <label for="name">Name</label><br>
+                    <input type="text" name="name" id="name">
+                </div>
+                <div class="inputs">
+                    <label for="address">Address</label><br>
+                    <input type="text" name="address" id="address">
+                </div>
+                <div class="inputs">
+                    <label for="contact">Contact</label><br>
+                    <input type="text" name="contact" id="contact">
+                </div>
+                </div>
             <input type="submit" name="submit" value="Submit">
         </form>
         </div>

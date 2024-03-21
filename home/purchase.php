@@ -21,7 +21,7 @@
     }
 
     $records = descSelect($conn, 'medicine', 'id');
-
+    $suppliers = select($conn, "vendor");
 ?>
 
 <!DOCTYPE html>
@@ -44,22 +44,45 @@
             <h2>Purchases</h2>
             <h3>Add items</h3>
             <form action="" method="post" class="form">
-                <label for="name">Medicine Name:</label>
-                <input type="text" name="name" id="name">
-                <label for="category">Category</label>
-                <select name="category" id="category">
-                    <option value=" "> </option>
-                    <option value="Tablet">Tablet</option>
-                    <option value="Syrup">Syrup</option>
-                </select>
-                <label for="quantity">Quantity:</label>
-                <input type="number" name="quantity" id="quantity">
-                <label for="rate">Rate:</label>
-                <input type="number" name="price" id="rate">
-                <label for="vendor">Vendor</label>
-                <input type="text" name="vendor" id="vendor">
-                <label for="date">Expiry Date:</label>
-                <input type="date" name="date" id="date">
+                <div class="input-fields">
+                    <div class="inputs">
+                        <label for="name">Medicine Name:</label><br>
+                        <input type="text" name="name" id="name"><br>
+                    </div>
+                    <div class="inputs">
+                        <label for="category">Category</label><br>
+                        <select name="category" id="category">
+                            <option value=" "> </option>
+                            <option value="Tablet">Tablet</option>
+                            <option value="Syrup">Syrup</option>
+                        </select><br>
+                    </div>
+                    <div class="inputs">
+                        <label for="quantity">Quantity:</label><br>
+                        <input type="number" name="quantity" id="quantity"><br>
+                    </div>
+                </div>
+                <div class="input-fields">
+                    <div class="inputs">
+                        <label for="rate">Rate:</label><br>
+                        <input type="number" name="price" id="rate"><br>
+                    </div>
+                    <div class="inputs">
+                        <label for="vendor">Supplier</label><br>
+                        <select name="vendor" id="vendor">
+                            <option value=" "> </option>
+                            <?php if(!empty($suppliers)): ?>
+                                <?php foreach($suppliers as $supplier): ?>
+                                    <option value="<?= $supplier['name']; ?>"><?= $supplier['name']; ?></option>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </select><br>
+                    </div>
+                    <div class="inputs">
+                        <label for="date">Expiry Date:</label><br>
+                        <input type="date" name="date" id="date">
+                    </div>
+            </div>
                 <input type="submit" value="Submit" name="submit">
             </form>
         </div><hr>
