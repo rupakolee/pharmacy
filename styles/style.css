@@ -150,7 +150,7 @@ a {
 
 .sales-chart {
     position: relative;
-    right: -50px;
+    right: -100px;
 }
 
 .sales-chart h3 {
@@ -176,7 +176,7 @@ a {
 }
 
 .entries form select, input {
-    margin: 0 5px;
+    margin: 0 14px 4px 4px;
 }
 
 .entries h2 {

@@ -71,7 +71,7 @@ $records = select($conn, 'customer');
         <input type="text" name="contact" id="contact">
         <input type="submit" name="submit" value="Submit">
     </form>
-</div>
+</div><hr>
 
     <!-- customers list -->
     <div class="records">

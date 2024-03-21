@@ -82,7 +82,7 @@ $records = descSelect($conn, 'invoice', 'date');
                     <input type="number" name="total" id="total">
                     <input type="submit" name="submit" id="submit" value="Submit">        
                 </form>
-            </div>
+            </div><hr>
 
     <div class="records">
         <h3>Invoice History</h3>

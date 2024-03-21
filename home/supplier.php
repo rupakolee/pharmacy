@@ -45,6 +45,7 @@ $records = select($conn, 'vendor');
             <input type="submit" name="submit" value="Submit">
         </form>
         </div>
+        <hr>
 
         <div class="records">
         <h3>Vendors list:</h3>

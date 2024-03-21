@@ -86,7 +86,7 @@ $medCount = mysqli_fetch_array(mysqli_query($conn, $medCountQuery));
                         <div class="sales-chart">
                             <h3>Today's Report</h3>
                             <div class="chart-container">
-                                <?php if(empty($purchaseCount) && empty($salesCount)): ?>
+                                <?php if(empty($purchaseCount[0]) && empty($salesCount[0])): ?>
                                   <?= "<h3 style='text-align: center;'>No records found!</h3>"; ?>
                                   <?php else: ?>
                                 <canvas class="my-chart"></canvas>

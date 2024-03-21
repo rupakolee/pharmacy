@@ -62,7 +62,7 @@
                 <input type="date" name="date" id="date">
                 <input type="submit" value="Submit" name="submit">
             </form>
-        </div>
+        </div><hr>
 
         <div class="records">
             <h3>Recent Purchase:</h3>
