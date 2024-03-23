@@ -1,7 +1,14 @@
 <?php
 include "../includes/database.php";
+$error=0;
 if($_SERVER['REQUEST_METHOD']=="POST") {
-    $customer = $_POST['customer'];
+    if(is_numeric($_POST['customer'])) {
+        $error = 1;
+        $errMsg = "Invalid Name";
+    }
+    else {
+        $customer = $_POST['customer'];
+    }
     $medicineName = $_POST['medicine'];
     $quantity = $_POST['quantity'];
     $rate = $_POST['rate'];
@@ -72,23 +79,27 @@ $records = descSelect($conn, 'invoice', 'date');
                     <div class="input-fields">
                         <div class="inputs">
                             <label for="customer">Customer Name:</label><br>
-                            <input type="text" name="customer" id="customer">
+                            <?php if($error==1) {
+                                echo "<span>{$errMsg}</span><br>";
+                            }
+                            ?>
+                            <input type="text" name="customer" id="customer" required>
                         </div>
                         <div class="inputs">
                             <label for="medicine">Medicine:</label><br>
-                            <input type="text" name="medicine" id="medicine">
+                            <input type="text" name="medicine" id="medicine" required>
                         </div>
                         <div class="inputs">
                             <label for="quantity">Qty:</label><br>
-                            <input type="number" name="quantity" id="quantity">
+                            <input type="number" name="quantity" id="quantity" required>
                         </div>
                         <div class="inputs">
                             <label for="rate">Rate:</label><br>
-                            <input type="number" name="rate" id="rate">
+                            <input type="number" name="rate" id="rate" required>
                         </div>
                         <div class="inputs">
                             <label for="total">Total:</label><br>
-                            <input type="number" name="total" id="total">
+                            <input type="number" name="total" id="total" required>
                         </div>
                     </div>
                     <input type="submit" name="submit" id="submit" value="Submit">        

@@ -5,7 +5,7 @@ $status = '';
 
 session_start();
 $_SESSION['table'] = 'medicine';
-$_SESSION['location'] = '../home/inventory';
+$_SESSION['location'] = 'inventory';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,13 +15,10 @@ $_SESSION['location'] = '../home/inventory';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory</title>
     <link rel="stylesheet" href="../styles/style.css">
-
 </head>
 
 <body>
-
     <div class="container">
-
         <?php include '../includes/nav.php'; ?>
         <div class="main">
             <?php include '../includes/menu.php'; ?>
@@ -57,8 +54,7 @@ $_SESSION['location'] = '../home/inventory';
                                         $status = $diff->format("%a days to go");
                                     } ?>
                                     <td><?= $status; ?></td>
-                                    <td><a href="../includes/edit.php?id=<?= $record['id']; ?>"><img src="../images/edit-icon.png" alt="edit" style="width: 15px;" class="action-btn"></a>
-                                    <a href="../includes/delete.php?id= <?= $record['id']; ?>"><img src="../images/delete-icon.png" alt="delete" style="width: 14px;" class="action-btn"></a></td>
+                                    <td><a href="../includes/delete.php?id= <?= $record['id']; ?>"><img src="../images/delete-icon.png" alt="delete" style="width: 14px;" class="action-btn"></a></td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php endif; ?>

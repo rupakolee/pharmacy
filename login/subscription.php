@@ -61,7 +61,7 @@ if(isset($_POST['button'])) {
                     <option value="three">Three Months -Rs800</option>
                     <option value="six">Six Months -Rs1400</option>
                 </select>
-            <button type="button" id="pay-btn" name="button">Pay</button>
+            <button type="button" id="pay-btn" name="button" onclick="window.location.href='payment.php'">Pay</button>
             <button type="button" id="home-btn" name="button" onclick="window.location.href='login.php'">Back to Login</button>
         </form>
         </div>

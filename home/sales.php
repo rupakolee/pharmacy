@@ -1,7 +1,9 @@
 <?php
 include "../includes/database.php";
 $records = descSelect($conn, 'invoice', 'date');
-
+session_start();
+$_SESSION['table'] = 'invoice';
+$_SESSION['location'] = 'sales';
 ?>
 
 <!DOCTYPE html>
@@ -11,12 +13,10 @@ $records = descSelect($conn, 'invoice', 'date');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sales</title>
     <link rel="stylesheet" href="../styles/style.css">
-
 </head>
 <body>
 
 <div class="container">
-
 <?php include '../includes/nav.php'; ?>
 <div class="main">
     <?php include '../includes/menu.php'; ?>
@@ -31,6 +31,7 @@ $records = descSelect($conn, 'invoice', 'date');
                 <th>Rate</th>
                 <th>Total</th>
                 <th>Date</th>
+                <th>Action</th>
             </tr>
             <?php if(!empty($records)): ?>
                 <?php foreach($records as $key => $record): ?>
@@ -41,6 +42,7 @@ $records = descSelect($conn, 'invoice', 'date');
                 <td><?= $record['rate']; ?></td>
                 <td><?= $record['total']; ?></td>
                 <td><?= $record['date']; ?></td>
+                <td><a href="../includes/delete.php?id= <?= $record['id']; ?>"><img src="../images/delete-icon.png" alt="delete" style="width: 14px;" class="action-btn"></a></td>
                     </tr>
                 <?php endforeach; ?>
                 <?php endif; ?>

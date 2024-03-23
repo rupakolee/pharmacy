@@ -6,18 +6,36 @@
     if($_SERVER['REQUEST_METHOD']=="POST") {
         $name = $_POST['name'];
         $category = $_POST['category'];
+        $vendor = $_POST['vendor'];
         $quantity = $_POST['quantity'];
         $price = $_POST['price'];
         $date = $_POST['date'];
         $total = $quantity*$price;
-        if(isset($_POST['submit'])) {
-            $sql = "INSERT INTO medicine (name, category, quantity, price, total, expiry, date) VALUES (?,?,?,?,?,?, CURRENT_DATE())";
-            $stmt = mysqli_prepare($conn, $sql); 
-            mysqli_stmt_bind_param($stmt, "ssssss", $name, $category, $quantity, $price, $total, $date);
-            if(mysqli_stmt_execute($stmt)){
-                $message = "Entry added successfully!";
-            }
+
+        if($category == " ") {
+            $error = 1;
+            $errMsg = "Select a category";
         }
+        if($vendor == " ") {
+            $error = 2;
+            $errMsg = "Select a Supplier";
+        }
+        if($price<1) {
+            $error = 3;
+            $errMsg = "Price must be greater than 0";
+        }
+        if($quantity<1) {
+            $error = 4;
+            $errMsg = "Quantity must be greater than 0";
+        }
+        // if(isset($_POST['submit'])) {
+        //     $sql = "INSERT INTO medicine (name, category, quantity, price, total, expiry, date) VALUES (?,?,?,?,?,?, CURRENT_DATE())";
+        //     $stmt = mysqli_prepare($conn, $sql); 
+        //     mysqli_stmt_bind_param($stmt, "ssssss", $name, $category, $quantity, $price, $total, $date);
+        //     if(mysqli_stmt_execute($stmt)){
+        //         $message = "Entry added successfully!";
+        //     }
+        // }
     }
 
     $records = descSelect($conn, 'medicine', 'id');
@@ -47,11 +65,14 @@
                 <div class="input-fields">
                     <div class="inputs">
                         <label for="name">Medicine Name:</label><br>
-                        <input type="text" name="name" id="name"><br>
+                        <input type="text" name="name" id="name" required><br>
                     </div>
                     <div class="inputs">
                         <label for="category">Category</label><br>
-                        <select name="category" id="category">
+                        <?php if($error == 1) {
+                            echo "<span>{$errMsg}</span>";
+                        } ?>
+                        <select name="category" id="category" required>
                             <option value=" "> </option>
                             <option value="Tablet">Tablet</option>
                             <option value="Syrup">Syrup</option>
@@ -59,17 +80,26 @@
                     </div>
                     <div class="inputs">
                         <label for="quantity">Quantity:</label><br>
-                        <input type="number" name="quantity" id="quantity"><br>
+                        <?php if($error == 4) {
+                            echo "<span>{$errMsg}</span><br>";
+                        } ?>
+                        <input type="number" name="quantity" id="quantity" required><br>
                     </div>
                 </div>
                 <div class="input-fields">
                     <div class="inputs">
                         <label for="rate">Rate:</label><br>
-                        <input type="number" name="price" id="rate"><br>
+                        <?php if($error == 3) {
+                            echo "<span>{$errMsg}</span><br>";
+                        } ?>
+                        <input type="number" name="price" id="rate" required><br>
                     </div>
                     <div class="inputs">
                         <label for="vendor">Supplier</label><br>
-                        <select name="vendor" id="vendor">
+                        <?php if($error == 2) {
+                            echo "<span>{$errMsg}</span>";
+                        } ?>
+                        <select name="vendor" id="vendor" required>
                             <option value=" "> </option>
                             <?php if(!empty($suppliers)): ?>
                                 <?php foreach($suppliers as $supplier): ?>
@@ -80,7 +110,7 @@
                     </div>
                     <div class="inputs">
                         <label for="date">Expiry Date:</label><br>
-                        <input type="date" name="date" id="date">
+                        <input type="date" name="date" id="date" required>
                     </div>
             </div>
                 <input type="submit" value="Submit" name="submit">
@@ -96,7 +126,6 @@
                 <th>Category</th>
                 <th>Quantity</th>
                 <th>Rate</th>
-                <th>Vendor</th>
                 <th>Date of Expiration</th>
             </tr>
             <?php if(!empty($records)): ?>
@@ -107,7 +136,6 @@
                     <td><?= $record['category']; ?></td>
                     <td><?= $record['quantity']; ?></td>
                     <td><?= $record['price']; ?></td>
-                    <td>#</td>
                     <td><?= $record['expiry']; ?></td>
                 </tr>
                     <?php endforeach; ?>

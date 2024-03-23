@@ -183,6 +183,10 @@ a {
     margin: 0 14px 4px 4px;
 }
 
+.entries form select {
+    width: 100px;
+}
+
 .entries h2 {
     display: block;
     padding: 8px 20px;

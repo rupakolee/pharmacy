@@ -4,7 +4,7 @@ session_start();
     if($_SERVER['REQUEST_METHOD']=="POST") {
         $yes = $_POST['yes'];
         $cancel = $_POST['cancel'];
-
+        
         // $sql = "delete from medicine where id = ".$_GET['id'];
         // if (isset($yes)) {
         //     $result=mysqli_query($conn, $sql);
@@ -18,21 +18,25 @@ session_start();
 
         function deleteEntry($conn, $table, $location) {
             $yes = $_POST['yes'];
+            $cancel = $_POST['cancel'];
+
             $sql = "delete from $table where id = ".$_GET['id'];
             if (isset($yes)) {
                 $result = mysqli_query($conn, $sql);
-                if ($result==false) {
+                if($result==false) {
                     echo mysqli_error($conn);
                 }
-                else{
+                else {
                     header("Location: ../home/{$location}.php");
                 }
             }
+           if(isset($cancel)) {
+                header("Location: ../home/{$location}.php");
+            }
         }
-
         deleteEntry($conn, $_SESSION['table'], $_SESSION['location']);
-
     }
+
 ?>
 
 <!DOCTYPE html>
