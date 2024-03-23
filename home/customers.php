@@ -3,17 +3,33 @@ include "../includes/database.php";
 session_start();
 $_SESSION['table'] = 'customer';
 $_SESSION['location'] = 'customers';
+$error = 0;
+$errMsg='';
 if($_SERVER['REQUEST_METHOD']=="POST") {
     $name = $_POST["name"];
     $dob = $_POST["dob"];
-    $sex = $_POST["sex"];
+    if(isset($_POST['sex'])) {
+        $sex = $_POST["sex"];
+    }
     $address = $_POST["address"];
     $contact = $_POST["contact"];
+
+    if(is_numeric($name)) {
+        $error = 1;
+        $errMsg = "Invalid Name";
+    }
+    if(!is_numeric($contact)||strlen($contact)!=10) {
+        $error = 2;
+        $errMsg = "Invalid contact";
+    }
+   
     if(isset($_POST['submit'])) {
-        $sql = "insert into customer (name, dob, sex, address, contact) values (?,?,?,?,?)";
-        $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, 'sssss', $name, $dob, $sex, $address, $contact);  
-        mysqli_stmt_execute($stmt);
+        if($error == 0) {
+            $sql = "insert into customer (name, dob, sex, address, contact) values (?,?,?,?,?)";
+            $stmt = mysqli_prepare($conn, $sql);
+            mysqli_stmt_bind_param($stmt, 'sssss', $name, $dob, $sex, $address, $contact);  
+            mysqli_stmt_execute($stmt);
+        }
     }
 }
 $records = select($conn, 'customer');
@@ -60,24 +76,32 @@ $records = select($conn, 'customer');
         <div class="input-fields">
             <div class="inputs">
                 <label for="name">Name</label><br>
-                <input type="text" name="name" id="name">
+                <?php if($error==1) {
+                    echo "<span>{$errMsg}</span><br>";
+                }
+                ?>
+                <input type="text" name="name" id="name" required>
             </div>
             <div class="inputs">
                 <label for="dob">Date of Birth</label><br>
-                <input type="date" name="dob" id="dob">
+                <input type="date" name="dob" id="dob" required>
             </div>
             <div class="inputs">
                 <span>Sex:</span><br>
-                <input type="radio" name="sex" value="M">M<br>
-                <input type="radio" name="sex" value="F">F
+                <input type="radio" name="sex" value="M" required>M<br>
+                <input type="radio" name="sex" value="F" required>F
             </div>
             <div class="inputs">
                 <label for="address">Address</label><br>
-                <input type="text" name="address" id="address">
+                <input type="text" name="address" id="address" required>
             </div>
             <div class="inputs">
                 <label for="contact">Contact</label><br>
-                <input type="text" name="contact" id="contact">
+                <?php if($error==2) {
+                    echo "<span>{$errMsg}</span><br>";
+                }
+                ?>
+                <input type="text" name="contact" id="contact" required>
             </div>
         </div>
             <input type="submit" name="submit" value="Submit">

@@ -3,14 +3,27 @@ include '../includes/database.php';
 session_start();
 $_SESSION['table'] = 'vendor';
 $_SESSION['location'] = '../home/vendor';
+$error = 0;
+$errMsg='';
 if($_SERVER['REQUEST_METHOD']==="POST") {
     $name = $_POST['name'];
     $address = $_POST['address'];
     $contact = $_POST['contact'];
-    $sql = "insert into vendor (name, address, contact) values (?,?,?)";
-    $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, 'sss', $name, $address, $contact);
-    mysqli_stmt_execute($stmt);
+
+    if(is_numeric($name)) {
+        $error = 1;
+        $errMsg = "Invalid Name";
+    }
+    if(!is_numeric($contact)||strlen($contact)!=10) {
+        $error = 2;
+        $errMsg = "Invalid contact";
+    }
+    if($error==0) {
+        $sql = "insert into vendor (name, address, contact) values (?,?,?)";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 'sss', $name, $address, $contact);
+        mysqli_stmt_execute($stmt);
+    }
 }
 
 $records = select($conn, 'vendor');
@@ -33,21 +46,29 @@ $records = select($conn, 'vendor');
 <?php include '../includes/menu.php'; ?>
     <div class="content-wrapper">
         <div class="entries">
-            <h2>Vendor</h2>
-            <h3>Add a new vendor:</h3>
+            <h2>Supplier</h2>
+            <h3>Add a new supplier:</h3>
             <form action="" method="post">
                 <div class="input-fields">
                 <div class="inputs">
                     <label for="name">Name</label><br>
-                    <input type="text" name="name" id="name">
+                    <?php if($error==1) {
+                            echo "<span>{$errMsg}</span><br>";
+                          }
+                    ?>
+                    <input type="text" name="name" id="name" required>
                 </div>
                 <div class="inputs">
                     <label for="address">Address</label><br>
-                    <input type="text" name="address" id="address">
+                    <input type="text" name="address" id="address" required>
                 </div>
                 <div class="inputs">
                     <label for="contact">Contact</label><br>
-                    <input type="text" name="contact" id="contact">
+                    <?php if($error==2) {
+                            echo "<span>{$errMsg}</span><br>";
+                          }
+                    ?>
+                    <input type="text" name="contact" id="contact" required>
                 </div>
                 </div>
             <input type="submit" name="submit" value="Submit">
@@ -72,7 +93,7 @@ $records = select($conn, 'vendor');
                     <td><?= $record['name']; ?></td>
                     <td><?= $record['address']; ?></td>
                     <td><?= $record['contact']; ?></td>
-                    <td><a href="../includes/edit.php?id=<?= $record['id']; ?>"><img src="../images/edit-icon.png" alt="edit" style="width: 15px;" class="action-btn"></a><a href="../includes/delete.php?id= <?= $record['id']; ?>"><img src="../images/delete-icon.png" alt="delete" style="width: 14px;" class="action-btn"></a></td>
+                    <td><a href="../includes/delete.php?id= <?= $record['id']; ?>"><img src="../images/delete-icon.png" alt="delete" style="width: 14px;" class="action-btn"></a></td>
                 </tr>
                 <?php endforeach; ?>
                 <?php endif; ?>
