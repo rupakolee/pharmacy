@@ -68,15 +68,11 @@
                         <input type="text" name="name" id="name" required><br>
                     </div>
                     <div class="inputs">
-                        <label for="category">Category</label><br>
-                        <?php if($error == 1) {
-                            echo "<span>{$errMsg}</span>";
+                        <label for="rate">Rate:</label><br>
+                        <?php if($error == 3) {
+                            echo "<span>{$errMsg}</span><br>";
                         } ?>
-                        <select name="category" id="category" required>
-                            <option value=" "> </option>
-                            <option value="Tablet">Tablet</option>
-                            <option value="Syrup">Syrup</option>
-                        </select><br>
+                        <input type="number" name="price" id="rate" required><br>
                     </div>
                     <div class="inputs">
                         <label for="quantity">Quantity:</label><br>
@@ -87,14 +83,19 @@
                     </div>
                 </div>
                 <div class="input-fields">
+                    
                     <div class="inputs">
-                        <label for="rate">Rate:</label><br>
-                        <?php if($error == 3) {
-                            echo "<span>{$errMsg}</span><br>";
+                        <label for="category">Category</label><br>
+                        <?php if($error == 1) {
+                            echo "<span>{$errMsg}</span>";
                         } ?>
-                        <input type="number" name="price" id="rate" required><br>
+                        <select name="category" id="category" required>
+                            <option value=" "> </option>
+                            <option value="Tablet">Tablet</option>
+                            <option value="Syrup">Syrup</option>
+                        </select><br>
                     </div>
-                    <div class="inputs">
+                    <div class="inputs alter">
                         <label for="vendor">Supplier</label><br>
                         <?php if($error == 2) {
                             echo "<span>{$errMsg}</span>";
@@ -108,7 +109,7 @@
                             <?php endif; ?>
                         </select><br>
                     </div>
-                    <div class="inputs">
+                    <div class="inputs alter">
                         <label for="date">Expiry Date:</label><br>
                         <input type="date" name="date" id="date" required>
                     </div>

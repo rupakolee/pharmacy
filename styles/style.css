@@ -179,12 +179,40 @@ a {
     grid-template-columns: auto auto auto;
 }
 
-.entries form select, input {
+.entries form input[type=text],input[type=submit], input[type=date],input[type=number] {
     margin: 0 14px 4px 4px;
+    width:170px;
 }
 
 .entries form select {
-    width: 100px;
+    width: 174px;
+}
+
+.alter {
+    position: relative;
+    left: 14px;
+}
+
+.radio {
+    width: 10px;
+    margin: 0;
+}
+
+input[type=submit] {
+    background-color: var(--primary-color);
+    color:#fff;
+    padding: 6px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+input[type=submit]:hover {
+    background-color: #fff;
+    color: var(--primary-color);
+    outline: 1px solid var(--primary-color);
+    transition: 0.5s;
 }
 
 .entries h2 {

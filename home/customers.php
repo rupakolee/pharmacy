@@ -88,7 +88,7 @@ $records = select($conn, 'customer');
             </div>
             <div class="inputs">
                 <span>Sex:</span><br>
-                <input type="radio" name="sex" value="M" required>M<br>
+                <input type="radio" name="sex" value="M" required>M
                 <input type="radio" name="sex" value="F" required>F
             </div>
             <div class="inputs">
