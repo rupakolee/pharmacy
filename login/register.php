@@ -31,6 +31,10 @@
         //         $error = 7;
         //         $errors = "Cannot be empty!";
         //     }
+        //     else if(empty($_POST['address'])) {
+        //         $error = 8;
+        //         $errors = "Cannot be empty!";
+        //     }
 
         //     if(empty($errors)) {
         //         $fullName = $_POST['name'];
@@ -38,16 +42,19 @@
         //         $pass = $_POST['passcode'];
         //         $email = $_POST['email'];
         //         $phone = $_POST['phone'];
+        //         $city = $_POST['city'];
+        //         $address = $_POST['address'];
+        //         $fullAddress = $city.", ".$address;
                 
         //         include "../includes/database.php";
-        //         $sql = "INSERT INTO register (fullName, pharmacyName, pass, email, phone) VALUES (?,?,?,?,?)";
+        //         $sql = "INSERT INTO register (fullName, pharmacyName, pass, email, phone, address) VALUES (?,?,?,?,?,?)";
         //         $stmt = mysqli_prepare($conn, $sql);
                 
         //         if($stmt==false) {
         //             echo mysqli_error($conn);
         //         }
         //         else {
-        //             mysqli_stmt_bind_param($stmt, "sssss", $fullName, $pharmacyName, $pass, $email, $phone);
+        //             mysqli_stmt_bind_param($stmt, "sssss", $fullName, $pharmacyName, $pass, $email, $phone, $fullAddress);
         //             if(mysqli_stmt_execute($stmt)){
         //                 $success = "Contact added successfully!";
         //             }
@@ -95,6 +102,14 @@
 
             <input type="text" id="phone" name="phone" placeholder="Phone"><br>
             <?php if($error == 7): ?>
+            <span style="color: red;"><?= $errors ?></span><br><?php endif; ?>
+
+            <input type="text" id="city" name="city" placeholder="City/Town"><br>
+            <?php if($error == 8): ?>
+            <span style="color: red;"><?= $errors ?></span><br><?php endif; ?>
+
+            <input type="text" id="address" name="address" placeholder="Street address"><br>
+            <?php if($error == 9): ?>
             <span style="color: red;"><?= $errors ?></span><br><?php endif; ?>
 
             <button type="button" id="register-btn" name="button" onclick="window.location.href='subscription.php'">Next</button><br> 
