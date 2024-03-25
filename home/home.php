@@ -9,6 +9,10 @@ if ($result == false) {
     $details = mysqli_fetch_assoc($result);
 }
 
+session_start();
+$_SESSION['pharmacyName'] = $details['pharmacyName'];
+$_SESSION['phone'] = $details['phone'];
+$_SESSION['address'] = $details['address'];
 
 $count1 = "SELECT SUM(total) from medicine where date = CURRENT_DATE()";
 $count2 = "SELECT SUM(total) from invoice where date = CURRENT_DATE()";
