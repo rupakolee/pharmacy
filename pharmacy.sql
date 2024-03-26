@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 24, 2024 at 09:36 AM
+-- Generation Time: Mar 26, 2024 at 05:24 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,20 @@ SET time_zone = "+00:00";
 --
 -- Database: `pharmacy`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `billing`
+--
+
+CREATE TABLE `billing` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `rate` int(11) NOT NULL,
+  `total` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -51,6 +65,7 @@ INSERT INTO `customer` (`id`, `dob`, `sex`, `name`, `address`, `contact`) VALUES
 
 CREATE TABLE `invoice` (
   `id` int(11) NOT NULL,
+  `invoice_no` varchar(8) NOT NULL,
   `customer_name` varchar(128) NOT NULL,
   `medicine_name` varchar(128) NOT NULL,
   `quantity` int(11) NOT NULL,
@@ -63,11 +78,11 @@ CREATE TABLE `invoice` (
 -- Dumping data for table `invoice`
 --
 
-INSERT INTO `invoice` (`id`, `customer_name`, `medicine_name`, `quantity`, `rate`, `total`, `date`) VALUES
-(1, 'Rupak', 'Paracetamol', 12, 100, 1200, '2024-02-16'),
-(33, 'Bipin', 'Ascoril-D', 10, 120, 1200, '2024-02-19'),
-(35, 'Nishan', 'Petanfast', 10, 10, 100, '2024-02-19'),
-(37, 'Te', 'Telma H', 10, 10, 100, '2024-02-29');
+INSERT INTO `invoice` (`id`, `invoice_no`, `customer_name`, `medicine_name`, `quantity`, `rate`, `total`, `date`) VALUES
+(1, '123', 'Rupak', 'Paracetamol', 12, 100, 1200, '2024-02-16'),
+(33, '124', 'Bipin', 'Ascoril-D', 10, 120, 1200, '2024-02-19'),
+(35, '125', 'Nishan', 'Petanfast', 10, 10, 100, '2024-02-19'),
+(37, '126', 'Te', 'Telma H', 10, 10, 100, '2024-02-29');
 
 -- --------------------------------------------------------
 
@@ -91,8 +106,8 @@ CREATE TABLE `medicine` (
 --
 
 INSERT INTO `medicine` (`id`, `name`, `category`, `quantity`, `price`, `total`, `expiry`, `date`) VALUES
-(31, 'Pentafast', 'Tablet', 10, 10, 0, '2024-03-22', '2024-03-08'),
-(32, 'Paracetamol', 'Tablet', 10, 25, 250, '2024-03-30', '2024-03-20');
+(1, 'vicks', 'tablet', 100, 10, 1000, '2024-03-29', '2024-03-25'),
+(34, 'paracetamol', 'Tablet', 100, 10, 1000, '2024-03-30', '2024-03-25');
 
 -- --------------------------------------------------------
 
@@ -107,6 +122,7 @@ CREATE TABLE `register` (
   `pass` varchar(128) NOT NULL,
   `email` varchar(128) NOT NULL,
   `phone` varchar(128) NOT NULL,
+  `address` varchar(52) NOT NULL,
   `date` date DEFAULT NULL,
   `status` varchar(50) NOT NULL DEFAULT 'active',
   `token` varchar(64) NOT NULL,
@@ -118,8 +134,8 @@ CREATE TABLE `register` (
 -- Dumping data for table `register`
 --
 
-INSERT INTO `register` (`id`, `fullName`, `pharmacyName`, `pass`, `email`, `phone`, `date`, `status`, `token`, `token_expiry`, `verification_code`) VALUES
-(3, 'Rupak Olee', 'Rupak\'s P', '1111', 'rupak@gmail.com', '9878987678', NULL, 'active', '5bdb13fa243f0d4362aeef9cb4f3b3a47efc5d032ff0e3afaa032ca0cb551da4', '2024-03-14 09:52:29', 0);
+INSERT INTO `register` (`id`, `fullName`, `pharmacyName`, `pass`, `email`, `phone`, `address`, `date`, `status`, `token`, `token_expiry`, `verification_code`) VALUES
+(3, 'Rupak Olee', 'Rupak\'s Pharmacy', '1111', 'rupak@gmail.com', '9878987678', 'Basundhara, Kathmandu', '2024-03-14', 'active', '5bdb13fa243f0d4362aeef9cb4f3b3a47efc5d032ff0e3afaa032ca0cb551da4', '2024-03-14 09:52:29', 0);
 
 -- --------------------------------------------------------
 
@@ -147,6 +163,12 @@ INSERT INTO `vendor` (`id`, `name`, `address`, `contact`) VALUES
 --
 
 --
+-- Indexes for table `billing`
+--
+ALTER TABLE `billing`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
@@ -156,7 +178,8 @@ ALTER TABLE `customer`
 -- Indexes for table `invoice`
 --
 ALTER TABLE `invoice`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `invoice_no` (`invoice_no`);
 
 --
 -- Indexes for table `medicine`
@@ -182,6 +205,12 @@ ALTER TABLE `vendor`
 --
 
 --
+-- AUTO_INCREMENT for table `billing`
+--
+ALTER TABLE `billing`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
@@ -197,7 +226,7 @@ ALTER TABLE `invoice`
 -- AUTO_INCREMENT for table `medicine`
 --
 ALTER TABLE `medicine`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `register`
