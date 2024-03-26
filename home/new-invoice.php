@@ -57,6 +57,9 @@ if(isset($_POST['submit'])) {
     header("Location: invoice.php");
 }
 
+if(isset($_POST['cancel']))
+    header("Location: invoice.php");
+   
 }
 
 

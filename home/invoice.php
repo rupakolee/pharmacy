@@ -110,7 +110,7 @@ $records = groupBy($conn, 'invoice', 'invoice_no');
                 <td><?= $key+1; ?></td>
                 <td><?= $record['customer_name']; ?></td>
                 <td><?= $record['date']; ?></td>
-                <td><a href="bill.php?id=<?= $record['invoice_no']; ?>"><img src="../images/info.png" alt="info" style="width: 24px; display: block; margin: auto;"></a></td>
+                <td><a href="bill.php?invoice_no=<?= $record['invoice_no']; ?>"><img src="../images/info.png" alt="info" style="width: 24px; display: block; margin: auto;"></a></td>
                     </tr>
                 <?php endforeach; ?>
                 <?php endif; ?>

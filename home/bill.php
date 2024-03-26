@@ -9,6 +9,10 @@ $query = "SELECT * FROM invoice WHERE invoice_no =".$_GET['invoice_no'];
 $result = mysqli_query($conn, $query);
 $records = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $count = 0;
+
+$sumQuery = "SELECT SUM(total) from invoice WHERE invoice_no =".$_GET['invoice_no'];
+$result = mysqli_query($conn, $sumQuery);
+$totalAmount = mysqli_fetch_array($result);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,9 +31,9 @@ $count = 0;
         </div><hr>
         <div class="invoice-info">
             <div class="customer-info">
-                <span class="date">Date: <?= $record['date']; ?></span> 
-                <span class="customer-name">Invoice No: <?= $record['invoice_no']; ?></span><br>
-                <span class="customer-name">Name: <?= $record['customer_name']; ?></span><br>
+                <span class="date">Date: <?= $records[0]['date']; ?></span> 
+                <span class="customer-name">Invoice No: <?= $records[0]['invoice_no']; ?></span><br>
+                <span class="customer-name">Name: <?= $records[0]['customer_name']; ?></span><br>
             </div><br>
             <div class="medicine-info">
                 <table class="bill-table">
@@ -40,16 +44,18 @@ $count = 0;
                         <th>Rate</th>
                         <th>Amount</th>
                     </tr>
-                    <tr>
-                        <td><?= $count+1; ?></td>
-                        <td><?= $record['medicine_name']; ?></td>
-                        <td><?= $record['quantity']; ?></td>
-                        <td><?= $record['rate']; ?></td>
-                        <td><?= $record['total']; ?></td>
-                    </tr>
+                    <?php foreach($records as $record): ?>
+                        <tr>                        
+                            <td><?= $count+1; ?></td>
+                            <td><?= $record['medicine_name']; ?></td>
+                            <td><?= $record['quantity']; ?></td>
+                            <td><?= $record['rate']; ?></td>
+                            <td><?= $record['total']; ?></td>
+                        </tr>
+                        <?php endforeach; ?>
                     <tr>
                         <td colspan="4">TOTAL</td>
-                        <td>Amount</td>
+                        <td><?= $totalAmount[0]; ?></td>
                     </tr>
                 </table>
             </div>
