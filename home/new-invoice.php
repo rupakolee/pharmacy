@@ -20,23 +20,25 @@ if(isset($_POST['add'])) {
 foreach ($medicines as $medicine) {
     if(str_contains($medicine['name'], $medicineName)) {
         if($medicine['quantity']>=$quantity) {
-            $sql = "insert into billing (customer_name, medicine_name, qty, rate, total) 
-            values (?,?,?,?,?)";
+            $category = $medicine['category'];
+            $expiry = $medicine['expiry'];
+            $date = $medicine['date'];
+            $sql = "insert into billing (id, customer_name, medicine_name, category, qty, rate, total, expiry, date) 
+            values (?,?,?,?,?,?,?,?,?)";
             $stmt = mysqli_prepare($conn, $sql);
-            mysqli_stmt_bind_param($stmt, 'sssss', $customerName, $medicineName, $quantity, $rate, $total);
+            mysqli_stmt_bind_param($stmt, 'sssssssss', $medicine['id'], $customerName, $medicineName, $category, $quantity, $rate, $total, $expiry, $date);
             mysqli_stmt_execute($stmt);
 
             $remQuan = $medicine['quantity']-$quantity;
             $sql = "update medicine set quantity = '$remQuan' where name = '$medicineName'";
             mysqli_query($conn, $sql);
 
-            if($medicine['quantity']==0) {
-                $sql = "delete from medicine where name = '$medicineName'";
-                mysqli_query($conn, $sql);
-            }
-        } 
+        }
+        if($medicine['quantity']==0) {
+            $sql = "DELETE FROM medicine where name = '$medicineName'";
+            mysqli_query($conn, $sql);
+        }
     }
-    
 }
 }
 
@@ -57,9 +59,20 @@ if(isset($_POST['submit'])) {
     header("Location: invoice.php");
 }
 
-if(isset($_POST['cancel']))
+if(isset($_POST['cancel'])){
+    $billedRecords = select($conn, 'billing');
+
+    foreach($billedRecords as $record) {
+        $reinsert = "INSERT INTO medicine (id, name, category, quantity, price, total, expiry, date) values (?,?,?,?,?,?,?,?)";
+        $stmt = mysqli_prepare($conn, $reinsert);
+        mysqli_stmt_bind_param($stmt, 'ssssssss', $record['id'], $record['medicine_name'], $record['category'], $record['qty'], $record['rate'], $record['total'], $record['expiry'], $record['date']);
+        mysqli_stmt_execute($stmt);
+    }
+    
+    $sql = "DELETE FROM billing";
+    mysqli_query($conn, $sql);
     header("Location: invoice.php");
-   
+}
 }
 
 
@@ -87,7 +100,7 @@ if(isset($_POST['cancel']))
                 <form action="" method="POST">
                         <div id="medicine-inputs">
                             <div class="inputs medicine-entries">
-                                <label for="medicine">Medicines:</label><br>
+                                <label for="medicine">Medicine:</label><br>
                                 <input type="text" name="medicine" id="medicine" required class="clear">
                             </div>
                             <div class="inputs medicine-entries">
