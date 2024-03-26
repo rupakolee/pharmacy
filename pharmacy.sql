@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2024 at 09:33 AM
+-- Generation Time: Mar 26, 2024 at 04:39 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -31,9 +31,12 @@ CREATE TABLE `billing` (
   `id` int(11) NOT NULL,
   `customer_name` varchar(52) NOT NULL,
   `medicine_name` varchar(50) NOT NULL,
+  `category` varchar(128) NOT NULL,
   `qty` int(11) NOT NULL,
   `rate` int(11) NOT NULL,
-  `total` int(11) NOT NULL
+  `total` int(11) NOT NULL,
+  `expiry` date DEFAULT NULL,
+  `date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -81,7 +84,15 @@ CREATE TABLE `invoice` (
 
 INSERT INTO `invoice` (`id`, `invoice_no`, `customer_name`, `medicine_name`, `quantity`, `rate`, `total`, `date`) VALUES
 (44, 191776, 'Rupak', 'vicks', 10, 20, 200, '2024-03-26'),
-(45, 191776, 'Rupak', 'paracetamol', 10, 10, 100, '2024-03-26');
+(45, 191776, 'Rupak', 'paracetamol', 10, 10, 100, '2024-03-26'),
+(46, 350688, 'Bipin', 'vicks', 10, 10, 100, '2024-03-26'),
+(47, 350688, 'Bipin', 'paracetamol', 30, 30, 900, '2024-03-26'),
+(48, 279424, 'Nishan', 'vicks', 10, 10, 100, '2024-03-26'),
+(49, 279424, 'Nishan', 'vicks', 40, 40, 1600, '2024-03-26'),
+(50, 176112, 'Pukar', 'vicks', 50, 10, 500, '2024-03-26'),
+(51, 176112, 'Pukar', 'vaporub', 40, 10, 400, '2024-03-26'),
+(52, 849194, 'Bipin', 'manforce', 20, 20, 400, '2024-03-26'),
+(53, 34653, 'Bipin', 'desire', 20, 10, 200, '2024-03-26');
 
 -- --------------------------------------------------------
 
@@ -105,9 +116,7 @@ CREATE TABLE `medicine` (
 --
 
 INSERT INTO `medicine` (`id`, `name`, `category`, `quantity`, `price`, `total`, `expiry`, `date`) VALUES
-(1, 'vicks', 'tablet', 50, 10, 1000, '2024-03-29', '2024-03-25'),
-(34, 'paracetamol', 'Tablet', 50, 10, 1000, '2024-03-30', '2024-03-25'),
-(35, 'cough syrup', 'Tablet', 100, 10, 1000, '2024-03-28', '2024-03-26');
+(41, 'panther', 'Tablet', 10, 10, 100, '2024-06-01', '2024-03-26');
 
 -- --------------------------------------------------------
 
@@ -207,7 +216,7 @@ ALTER TABLE `vendor`
 -- AUTO_INCREMENT for table `billing`
 --
 ALTER TABLE `billing`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -219,13 +228,13 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `medicine`
 --
 ALTER TABLE `medicine`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `register`
