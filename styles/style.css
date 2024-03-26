@@ -198,7 +198,7 @@ a {
     margin: 0;
 }
 
-input[type=submit] {
+input[type=submit], .btn {
     background-color: var(--primary-color);
     color:#fff;
     padding: 6px;
@@ -208,11 +208,22 @@ input[type=submit] {
     transition: 0.4s;
 }
 
-input[type=submit]:hover {
+input[type=submit]:hover, .btn:hover {
     background-color: #fff;
     color: var(--primary-color);
     outline: 1px solid var(--primary-color);
     transition: 0.5s;
+}
+
+.btn {
+    margin: 10px 0;
+    width: 150px;
+    padding: 10px;
+}
+
+#enter {
+    padding: 5px;
+    margin: 0;
 }
 
 .entries h2 {

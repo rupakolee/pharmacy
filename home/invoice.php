@@ -1,5 +1,8 @@
 <?php
 include "../includes/database.php";
+
+session_start();
+
 $error=0;
 if($_SERVER['REQUEST_METHOD']=="POST") {
     if(is_numeric($_POST['customer'])) {
@@ -8,11 +11,9 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
     }
     else {
         $customer = $_POST['customer'];
+        $_SESSION['customer-name'] = $customer;
     }
-    $medicineName = $_POST['medicine'];
-    $quantity = $_POST['quantity'];
-    $rate = $_POST['rate'];
-    $total = $quantity*$rate;
+
 
     // Insert the invoice only if the medicine is available in the medicine table 
     // check the quantity
@@ -25,31 +26,36 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
 
 $medicines = select($conn, 'medicine');
 
-if(isset($_POST['submit'])) {
-foreach ($medicines as $medicine) {
-    if(str_contains($medicine['name'], $medicineName)) {
-        if($medicine['quantity']>=$quantity) {
-            $sql = "insert into invoice (customer_name, medicine_name, quantity, rate, total, date) 
-            values (?,?,?,?,?,CURRENT_DATE())";
-            $stmt = mysqli_prepare($conn, $sql);
-            mysqli_stmt_bind_param($stmt, 'sssss', $customer, $medicineName, $quantity, $rate, $total);
-            mysqli_stmt_execute($stmt);
+// if(isset($_POST['submit'])) {
+// foreach ($medicines as $medicine) {
+//     if(str_contains($medicine['name'], $medicineName)) {
+//         if($medicine['quantity']>=$quantity) {
+//             $sql = "insert into invoice (customer_name, medicine_name, quantity, rate, total, date) 
+//             values (?,?,?,?,?,CURRENT_DATE())";
+//             $stmt = mysqli_prepare($conn, $sql);
+//             mysqli_stmt_bind_param($stmt, 'sssss', $customer, $medicineName, $quantity, $rate, $total);
+//             mysqli_stmt_execute($stmt);
 
-            $remQuan = $medicine['quantity']-$quantity;
-            $sql = "update medicine set quantity = '$remQuan' where name = '$medicineName'";
-            mysqli_query($conn, $sql);
+//             $remQuan = $medicine['quantity']-$quantity;
+//             $sql = "update medicine set quantity = '$remQuan' where name = '$medicineName'";
+//             mysqli_query($conn, $sql);
 
-            if($medicine['quantity']==0) {
-                $sql = "delete from medicine where name = '$medicineName'";
-                mysqli_query($conn, $sql);
-            }
-        }
-    }
-    else {
-        $message = "No medicine found";
-    }
+//             if($medicine['quantity']==0) {
+//                 $sql = "delete from medicine where name = '$medicineName'";
+//                 mysqli_query($conn, $sql);
+//             }
+//         }
+//     }
+//     else {
+//         $message = "No medicine found";
+//     }
+// }
+// }
+
+if(isset($_POST['enter'])) {
+    header("Location: new-invoice.php");
 }
-}
+
 }
 
 $records = descSelect($conn, 'invoice', 'customer_name');
@@ -74,38 +80,19 @@ $records = descSelect($conn, 'invoice', 'customer_name');
         <div class="content-wrapper">
             <div class="entries"> 
                 <h2>Invoice</h2>
-                <h3>Create new invoice:</h3>
-                <form action="" method="POST">
-                    <div class="input-fields">
-                        <div class="inputs">
+                <button class="btn" id="new-invoice-btn">Create new invoice + </button>
+                <form action="" method="post">
+                <div class="inputs" id="customer-field">
                             <label for="customer">Customer Name:</label><br>
                             <?php if($error==1) {
                                 echo "<span>{$errMsg}</span><br>";
                             }
                             ?>
                             <input type="text" name="customer" id="customer" required>
-                        </div>
-                        <div class="inputs">
-                            <label for="medicine">Medicines:</label><br>
-                            <input type="text" name="medicine" id="medicine" required>
-                        </div>
-                        <div class="inputs">
-                            <label for="quantity">Qty:</label><br>
-                            <input type="number" name="quantity" id="quantity" required>
-                        </div>
-                        <div class="inputs">
-                            <label for="rate">Rate:</label><br>
-                            <input type="number" name="rate" id="rate" required>
-                        </div>
-                        <div class="inputs">
-                            <label for="total">Total:</label><br>
-                            <input type="number" name="total" id="total" required>
-                        </div>
-                    </div>
-                    <input type="submit" name="submit" id="submit" value="Submit">        
+                            <input type="submit" value="Enter" name="enter" id="enter">
+                        </div><hr>
                 </form>
-            </div><hr>
-
+            </div>
     <div class="records">
         <h3>Invoice History</h3>
         <table class="table">
@@ -130,9 +117,16 @@ $records = descSelect($conn, 'invoice', 'customer_name');
         </div>
     </div>
     </div>
-<script src="../scripts/invoice.js"></script>
 <script src="../scripts/menu.js"></script>
+<script>
+    let btn = document.getElementById('new-invoice-btn');
+    let customerField = document.getElementById('customer-field');
+    customerField.style.display = 'none';
 
+    btn.addEventListener('click', () => {
+        customerField.style.display = 'block';  
+    })
+</script>
 </body>
 
 </html>

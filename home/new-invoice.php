@@ -1,14 +1,11 @@
 <?php
 include "../includes/database.php";
 $error=0;
+
+session_start();
+$customerName = $_SESSION['customer-name'];
+
 if($_SERVER['REQUEST_METHOD']=="POST") {
-    if(is_numeric($_POST['customer'])) {
-        $error = 1;
-        $errMsg = "Invalid Name";
-    }
-    else {
-        $customer = $_POST['customer'];
-    }
     $medicineName = $_POST['medicine'];
     $quantity = $_POST['quantity'];
     $rate = $_POST['rate'];
@@ -22,10 +19,10 @@ if(isset($_POST['add'])) {
 foreach ($medicines as $medicine) {
     if(str_contains($medicine['name'], $medicineName)) {
         if($medicine['quantity']>=$quantity) {
-            $sql = "insert into billing (name, qty, rate, total) 
-            values (?,?,?,?)";
+            $sql = "insert into billing (customer_name, medicine_name, qty, rate, total) 
+            values (?,?,?,?,?)";
             $stmt = mysqli_prepare($conn, $sql);
-            mysqli_stmt_bind_param($stmt, 'ssss', $medicineName, $quantity, $rate, $total);
+            mysqli_stmt_bind_param($stmt, 'sssss', $customerName, $medicineName, $quantity, $rate, $total);
             mysqli_stmt_execute($stmt);
 
             $remQuan = $medicine['quantity']-$quantity;
@@ -38,27 +35,26 @@ foreach ($medicines as $medicine) {
             }
         } 
     }
-    else {
-        echo "No medicines found!";
-    }
-}
-}
-
-if(isset($_POST['submit'])) {
-    $sql = "insert into invoice (customer_name, medicine_name, quantity, rate, total, date) 
-    values (?,?,?,?,?,CURRENT_DATE())";
-    $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, 'sssss', $customer, $medicineName, $quantity, $rate, $total);
-    mysqli_stmt_execute($stmt);
-
-    $delete = $sql = "delete from billing";
-    mysqli_query($conn, $delete);
-    $commit = "COMMIT";
-    mysqli_query($conn, $commit);
+    
 }
 }
 
 $records = descSelect($conn, 'billing', 'id');
+
+if(isset($_POST['submit'])) {
+    $records = select($conn, 'billing');
+    foreach ($records as $record) {
+        $invoiceNo = rand(100, 999999);
+        $sql = "INSERT INTO invoice (invoice_no, customer_name, medicine_name, quantity, rate, total, date) 
+        VALUES (?,?,?,?,?,?, CURRENT_DATE())";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "ssssss", $invoiceNo, $record['customer_name'], $record['medicine_name'], $record['qty'], $record['rate'], $record['total']);
+        mysqli_stmt_execute($stmt);
+    }
+}
+
+}
+
 
 ?>
 
@@ -80,17 +76,8 @@ $records = descSelect($conn, 'billing', 'id');
         <div class="content-wrapper">
             <div class="entries"> 
                 <h3>Create new invoice:</h3>
+                <hr>
                 <form action="" method="POST">
-                    <div class="invoice">
-                        <div class="inputs" id="customer-field">
-                            <label for="customer">Customer Name:</label><br>
-                            <?php if($error==1) {
-                                echo "<span>{$errMsg}</span><br>";
-                            }
-                            ?>
-                            <input type="text" name="customer" id="customer" required>
-                            <button id="enter">Enter</button>
-                        </div><br><br>
                         <div id="medicine-inputs">
                             <div class="inputs medicine-entries">
                                 <label for="medicine">Medicines:</label><br>
@@ -109,12 +96,13 @@ $records = descSelect($conn, 'billing', 'id');
                                 <input type="number" name="total" id="total" required class="clear">
                             </div>
                             <input type="submit" name="add" id="add" value="Add medicine"><br>   
-                            <input type="submit" name="submit" id="submit" value="Submit">        
-                            <input type="submit " value="cancel" name="cancel" id="cancel">  
                         </div>
-                    </div>      
-                </form>
-            </div><hr>
+                    </form>
+                    <form action="" method="post">
+                        <input type="submit" name="submit" id="submit" value="Submit">        
+                        <input type="submit" value="Cancel" name="cancel" id="cancel">  
+                    </form>
+                </div><hr>   
             <div class="records">
             <table class="table">
             <tr>
@@ -128,36 +116,23 @@ $records = descSelect($conn, 'billing', 'id');
                 <?php foreach($records as $key => $record): ?>
                     <tr>
                 <td><?= $key+1; ?></td>
-                <td><?= $record['name']; ?></td>
+                <td><?= $record['medicine_name']; ?></td>
                 <td><?= $record['qty']; ?></td>
                 <td><?= $record['rate']; ?></td>
                 <td><?= $record['total']; ?></td>
                     </tr>
                 <?php endforeach; ?>
                 <?php endif; ?>
-        </table>            </div>
+        </table>           
+     </div>
+     </div>
+
         </div>
     </div>
     </div>
 <script src="../scripts/invoice.js"></script>
 <script src="../scripts/menu.js"></script>
-<script>
-    let medInp = document.getElementById('medicine-inputs');
-    medInp.style.display = 'none';
-    console.log('vayo');
 
-    const cancel = document.getElementById('cancel');
-    cancel.addEventListener('click', function() {
-        <?php 
-        $result = mysqli_query($conn, $sql);
-        $delete = $sql = "delete from billing";
-        mysqli_query($conn, $delete);
-        ?>
-        window.location.href = "home.php";
-    }
-    );
-
-</script>
 </body>
 
 </html>
