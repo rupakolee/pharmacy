@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2024 at 05:24 AM
+-- Generation Time: Mar 26, 2024 at 09:33 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -29,7 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `billing` (
   `id` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
+  `customer_name` varchar(52) NOT NULL,
+  `medicine_name` varchar(50) NOT NULL,
   `qty` int(11) NOT NULL,
   `rate` int(11) NOT NULL,
   `total` int(11) NOT NULL
@@ -65,7 +66,7 @@ INSERT INTO `customer` (`id`, `dob`, `sex`, `name`, `address`, `contact`) VALUES
 
 CREATE TABLE `invoice` (
   `id` int(11) NOT NULL,
-  `invoice_no` varchar(8) NOT NULL,
+  `invoice_no` int(11) NOT NULL,
   `customer_name` varchar(128) NOT NULL,
   `medicine_name` varchar(128) NOT NULL,
   `quantity` int(11) NOT NULL,
@@ -79,10 +80,8 @@ CREATE TABLE `invoice` (
 --
 
 INSERT INTO `invoice` (`id`, `invoice_no`, `customer_name`, `medicine_name`, `quantity`, `rate`, `total`, `date`) VALUES
-(1, '123', 'Rupak', 'Paracetamol', 12, 100, 1200, '2024-02-16'),
-(33, '124', 'Bipin', 'Ascoril-D', 10, 120, 1200, '2024-02-19'),
-(35, '125', 'Nishan', 'Petanfast', 10, 10, 100, '2024-02-19'),
-(37, '126', 'Te', 'Telma H', 10, 10, 100, '2024-02-29');
+(44, 191776, 'Rupak', 'vicks', 10, 20, 200, '2024-03-26'),
+(45, 191776, 'Rupak', 'paracetamol', 10, 10, 100, '2024-03-26');
 
 -- --------------------------------------------------------
 
@@ -106,8 +105,9 @@ CREATE TABLE `medicine` (
 --
 
 INSERT INTO `medicine` (`id`, `name`, `category`, `quantity`, `price`, `total`, `expiry`, `date`) VALUES
-(1, 'vicks', 'tablet', 100, 10, 1000, '2024-03-29', '2024-03-25'),
-(34, 'paracetamol', 'Tablet', 100, 10, 1000, '2024-03-30', '2024-03-25');
+(1, 'vicks', 'tablet', 50, 10, 1000, '2024-03-29', '2024-03-25'),
+(34, 'paracetamol', 'Tablet', 50, 10, 1000, '2024-03-30', '2024-03-25'),
+(35, 'cough syrup', 'Tablet', 100, 10, 1000, '2024-03-28', '2024-03-26');
 
 -- --------------------------------------------------------
 
@@ -178,8 +178,7 @@ ALTER TABLE `customer`
 -- Indexes for table `invoice`
 --
 ALTER TABLE `invoice`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `invoice_no` (`invoice_no`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `medicine`
@@ -208,7 +207,7 @@ ALTER TABLE `vendor`
 -- AUTO_INCREMENT for table `billing`
 --
 ALTER TABLE `billing`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -220,13 +219,13 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `medicine`
 --
 ALTER TABLE `medicine`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `register`
