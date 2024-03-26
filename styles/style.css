@@ -258,3 +258,36 @@ input[type=submit]:hover {
 .action-btn {
     margin: 0 5px;
 }
+
+.invoice-container {
+    border: 1px solid black;
+    text-align: center;
+}
+
+.medicine-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bill-table {
+    border: 1px solid black;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.bill-table td, th {
+    border: 1px solid black;
+}
+
+.customer-name {
+    float: left;
+}
+
+.date {
+    float: right;
+}
+
+.medicine-entries {
+    display: inline-block;
+}

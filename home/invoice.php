@@ -52,7 +52,7 @@ foreach ($medicines as $medicine) {
 }
 }
 
-$records = descSelect($conn, 'invoice', 'date');
+$records = descSelect($conn, 'invoice', 'customer_name');
 
 ?>
 
@@ -86,7 +86,7 @@ $records = descSelect($conn, 'invoice', 'date');
                             <input type="text" name="customer" id="customer" required>
                         </div>
                         <div class="inputs">
-                            <label for="medicine">Medicine:</label><br>
+                            <label for="medicine">Medicines:</label><br>
                             <input type="text" name="medicine" id="medicine" required>
                         </div>
                         <div class="inputs">
@@ -112,22 +112,16 @@ $records = descSelect($conn, 'invoice', 'date');
             <tr>
                 <th>S.N.</th>
                 <th>Customer Name</th>
-                <th>Medicine</th>
-                <th>Quantity</th>
-                <th>Rate</th>
-                <th>Total</th>
                 <th>Date</th>
+                <th>Info</th>
             </tr>
             <?php if(!empty($records)): ?>
                 <?php foreach($records as $key => $record): ?>
                     <tr>
                 <td><?= $key+1; ?></td>
                 <td><?= $record['customer_name']; ?></td>
-                <td><?= $record['medicine_name']; ?></td>
-                <td><?= $record['quantity']; ?></td>
-                <td><?= $record['rate']; ?></td>
-                <td><?= $record['total']; ?></td>
                 <td><?= $record['date']; ?></td>
+                <td><a href="bill.php?id=<?= $record['id']; ?>"><img src="../images/info.png" alt="info" style="width: 24px; display: block; margin: auto;"></a></td>
                     </tr>
                 <?php endforeach; ?>
                 <?php endif; ?>

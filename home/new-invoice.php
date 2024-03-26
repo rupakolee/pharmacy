@@ -44,11 +44,6 @@ foreach ($medicines as $medicine) {
 }
 }
 
-if(isset($_POST['cancel'])) {
-    $sql = "ROLLBACK";
-    $result = mysqli_query($conn, $sql);
-}
-
 if(isset($_POST['submit'])) {
     $sql = "insert into invoice (customer_name, medicine_name, quantity, rate, total, date) 
     values (?,?,?,?,?,CURRENT_DATE())";
@@ -96,28 +91,27 @@ $records = descSelect($conn, 'billing', 'id');
                             <input type="text" name="customer" id="customer" required>
                             <button id="enter">Enter</button>
                         </div><br><br>
-                        <div class="inputs"></div>
-                        <div id="medicine-inputs" style="display: none;">
-                        <div class="inputs medicine-entries">
-                            <label for="medicine">Medicines:</label><br>
-                            <input type="text" name="medicine" id="medicine" required class="clear">
+                        <div id="medicine-inputs">
+                            <div class="inputs medicine-entries">
+                                <label for="medicine">Medicines:</label><br>
+                                <input type="text" name="medicine" id="medicine" required class="clear">
+                            </div>
+                            <div class="inputs medicine-entries">
+                                <label for="quantity">Qty:</label><br>
+                                <input type="number" name="quantity" id="quantity" required class="clear">
+                            </div>
+                            <div class="inputs medicine-entries">
+                                <label for="rate">Rate:</label><br>
+                                <input type="number" name="rate" id="rate" required class="clear">
+                            </div>
+                            <div class="inputs medicine-entries">
+                                <label for="total">Total:</label><br>
+                                <input type="number" name="total" id="total" required class="clear">
+                            </div>
+                            <input type="submit" name="add" id="add" value="Add medicine"><br>   
+                            <input type="submit" name="submit" id="submit" value="Submit">        
+                            <input type="submit " value="cancel" name="cancel" id="cancel">  
                         </div>
-                        <div class="inputs medicine-entries">
-                            <label for="quantity">Qty:</label><br>
-                            <input type="number" name="quantity" id="quantity" required class="clear">
-                        </div>
-                        <div class="inputs medicine-entries">
-                            <label for="rate">Rate:</label><br>
-                            <input type="number" name="rate" id="rate" required class="clear">
-                        </div>
-                        <div class="inputs medicine-entries">
-                            <label for="total">Total:</label><br>
-                            <input type="number" name="total" id="total" required class="clear">
-                        </div>
-                        <input type="submit" name="add" id="add" value="Add medicine"><br>   
-                        <input type="submit" name="submit" id="submit" value="Submit">        
-                        <input type="button" value="cancel" name="cancel" id="cancel">  
-                    </div>
                     </div>      
                 </form>
             </div><hr>
@@ -148,8 +142,12 @@ $records = descSelect($conn, 'billing', 'id');
 <script src="../scripts/invoice.js"></script>
 <script src="../scripts/menu.js"></script>
 <script>
+    let medInp = document.getElementById('medicine-inputs');
+    medInp.style.display = 'none';
+    console.log('vayo');
+
     const cancel = document.getElementById('cancel');
-    cancel.onclick = function() {
+    cancel.addEventListener('click', function() {
         <?php 
         $result = mysqli_query($conn, $sql);
         $delete = $sql = "delete from billing";
@@ -157,14 +155,7 @@ $records = descSelect($conn, 'billing', 'id');
         ?>
         window.location.href = "home.php";
     }
-
-    let medInp = document.getElementById('medicine-inputs');
-    let customerName = document.getElementById('customer');
-    let enter = document.getElementById('enter');
-
-    enter.addEventListener('click', () => {
-        medInp.style.display = "block";
-    })
+    );
 
 </script>
 </body>
