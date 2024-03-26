@@ -5,9 +5,9 @@ $pharmacyName = $_SESSION['pharmacyName'];
 $phone = $_SESSION['phone'];
 $address = $_SESSION['address'];
 
-$query = "SELECT * FROM invoice WHERE id =".$_GET['id'];
+$query = "SELECT * FROM invoice WHERE invoice_no =".$_GET['invoice_no'];
 $result = mysqli_query($conn, $query);
-$record = mysqli_fetch_array($result);
+$records = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $count = 0;
 ?>
 <!DOCTYPE html>

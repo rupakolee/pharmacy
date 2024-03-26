@@ -5,6 +5,8 @@ session_start();
 
 $error=0;
 if($_SERVER['REQUEST_METHOD']=="POST") {
+    $invoiceNo = rand(100, 999999);
+    $_SESSION['invoice-no'] = $invoiceNo;
     if(is_numeric($_POST['customer'])) {
         $error = 1;
         $errMsg = "Invalid Name";
@@ -58,7 +60,7 @@ if(isset($_POST['enter'])) {
 
 }
 
-$records = descSelect($conn, 'invoice', 'customer_name');
+$records = groupBy($conn, 'invoice', 'invoice_no');
 
 ?>
 
@@ -108,7 +110,7 @@ $records = descSelect($conn, 'invoice', 'customer_name');
                 <td><?= $key+1; ?></td>
                 <td><?= $record['customer_name']; ?></td>
                 <td><?= $record['date']; ?></td>
-                <td><a href="bill.php?id=<?= $record['id']; ?>"><img src="../images/info.png" alt="info" style="width: 24px; display: block; margin: auto;"></a></td>
+                <td><a href="bill.php?id=<?= $record['invoice_no']; ?>"><img src="../images/info.png" alt="info" style="width: 24px; display: block; margin: auto;"></a></td>
                     </tr>
                 <?php endforeach; ?>
                 <?php endif; ?>

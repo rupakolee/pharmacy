@@ -4,6 +4,7 @@ $error=0;
 
 session_start();
 $customerName = $_SESSION['customer-name'];
+$invoiceNo =  $_SESSION['invoice-no'];
 
 if($_SERVER['REQUEST_METHOD']=="POST") {
     $medicineName = $_POST['medicine'];
@@ -44,13 +45,16 @@ $records = descSelect($conn, 'billing', 'id');
 if(isset($_POST['submit'])) {
     $records = select($conn, 'billing');
     foreach ($records as $record) {
-        $invoiceNo = rand(100, 999999);
         $sql = "INSERT INTO invoice (invoice_no, customer_name, medicine_name, quantity, rate, total, date) 
         VALUES (?,?,?,?,?,?, CURRENT_DATE())";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, "ssssss", $invoiceNo, $record['customer_name'], $record['medicine_name'], $record['qty'], $record['rate'], $record['total']);
         mysqli_stmt_execute($stmt);
     }
+
+    $sql = "DELETE FROM billing";
+    mysqli_query($conn, $sql);
+    header("Location: invoice.php");
 }
 
 }
