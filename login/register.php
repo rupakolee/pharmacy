@@ -1,66 +1,73 @@
 <?php
+include 'mailer.php';
+
             $errors = '';
             $error = '';
             $success = '';
-        // if(isset($_POST['button'])) {
-        //     if(empty($_POST['name'])) {
-        //         $error = 1;
-        //         $errors = "Cannot be empty!";
-        //     }   
-        //     if(is_numeric($_POST['name'])) {
-        //         $error = 2;
-        //         $errors = "Name cannot contain numbers.";
-        //     }   
-        //     else if(empty($_POST['pharmacyName'])) {
-        //         $error = 3;
-        //         $errors = "Cannot be empty!";
-        //     }
-        //     else if(empty($_POST['passcode'])) {
-        //         $error = 4;
-        //         $errors = "Cannot be empty!";
-        //     }
-        //     else if($_POST['passcode'] != $_POST['retype']) {
-        //         $error = 5;
-        //         $errors = "Passwords donot match!";
-        //     }
-        //     else if(empty($_POST['email'])) {
-        //         $error = 6;
-        //         $errors = "Cannot be empty!";
-        //     }
-        //     else if(empty($_POST['phone'])) {
-        //         $error = 7;
-        //         $errors = "Cannot be empty!";
-        //     }
-        //     else if(empty($_POST['address'])) {
-        //         $error = 8;
-        //         $errors = "Cannot be empty!";
-        //     }
+        
+        if(isset($_POST['button'])) {
+            if(empty($_POST['name'])) {
+                $error = 1;
+                $errors = "Cannot be empty!";
+            }   
+            if(is_numeric($_POST['name'])) {
+                $error = 2;
+                $errors = "Name cannot contain numbers.";
+            }   
+            else if(empty($_POST['pharmacyName'])) {
+                $error = 3;
+                $errors = "Cannot be empty!";
+            }
+            else if(empty($_POST['passcode'])) {
+                $error = 4;
+                $errors = "Cannot be empty!";
+            }
+            else if($_POST['passcode'] != $_POST['retype']) {
+                $error = 5;
+                $errors = "Passwords donot match!";
+            }
+            else if(empty($_POST['email'])) {
+                $error = 6;
+                $errors = "Cannot be empty!";
+            }
+            else if(empty($_POST['phone'])) {
+                $error = 7;
+                $errors = "Cannot be empty!";
+            }
+            else if(empty($_POST['address'])) {
+                $error = 8;
+                $errors = "Cannot be empty!";
+            }
 
-        //     if(empty($errors)) {
-        //         $fullName = $_POST['name'];
-        //         $pharmacyName = $_POST['pharmacyName'];
-        //         $pass = $_POST['passcode'];
-        //         $email = $_POST['email'];
-        //         $phone = $_POST['phone'];
-        //         $city = $_POST['city'];
-        //         $address = $_POST['address'];
-        //         $fullAddress = $city.", ".$address;
+            if(empty($errors)) {
+                $otp = rand(100000, 999999);
+                $fullName = $_POST['name'];
+                $pharmacyName = $_POST['pharmacyName'];
+                $pass = $_POST['passcode'];
+                $email = $_POST['email'];
+                $phone = $_POST['phone'];
+                $city = $_POST['city'];
+                $address = $_POST['address'];
+                $fullAddress = $city.", ".$address;
                 
-        //         include "../includes/database.php";
-        //         $sql = "INSERT INTO register (fullName, pharmacyName, pass, email, phone, address) VALUES (?,?,?,?,?,?)";
-        //         $stmt = mysqli_prepare($conn, $sql);
-                
-        //         if($stmt==false) {
-        //             echo mysqli_error($conn);
-        //         }
-        //         else {
-        //             mysqli_stmt_bind_param($stmt, "sssss", $fullName, $pharmacyName, $pass, $email, $phone, $fullAddress);
-        //             if(mysqli_stmt_execute($stmt)){
-        //                 $success = "Contact added successfully!";
-        //             }
-        //         }
-        //     }
-        // }
+                include "../includes/database.php";
+                $sql = "INSERT INTO register (fullName, pharmacyName, pass, email, phone, address, date, verification_code) VALUES (?,?,?,?,?,?,CURRENT_DATE(),?)";
+                $stmt = mysqli_prepare($conn, $sql);
+                if($stmt==false) {
+                    echo mysqli_error($conn);
+                }
+                else {
+                    mysqli_stmt_bind_param($stmt, "sssssss", $fullName, $pharmacyName, $pass, $email, $phone, $fullAddress, $otp);
+                    if(mysqli_stmt_execute($stmt)){
+                        $success = "Contact added successfully!";
+                    }
+                    sendMail($email, $fullName, $otp);
+                    header("Location: verification.php?email='$email'");
+                }
+            }
+        }
+
+        // $sql = "SELECT FROM register";
     ?>
 
 <!DOCTYPE html>
@@ -112,7 +119,10 @@
             <?php if($error == 9): ?>
             <span style="color: red;"><?= $errors ?></span><br><?php endif; ?>
 
-            <button type="button" id="register-btn" name="button" onclick="window.location.href='subscription.php'">Next</button><br> 
+            <input type="submit" value="Next" name="button" id="register-btn">
+
+            <!-- <button type="button" id="register-btn" name="button" onclick="window.location.href='subscription.php'">Next</button><br>  -->
+            <!-- <button type="button" id="register-btn" name="button" onclick="window.location.href='verification.php?email=<?= $email; ?>'">Next</button><br>  -->
             <span><?php if(empty($errors)): ?><?= $success; ?><?php endif; ?></span>
             <span>Have an account? <a href="login.php">Login!</a></span><br>
         </form>
