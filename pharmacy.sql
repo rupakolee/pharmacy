@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2024 at 04:39 PM
+-- Generation Time: Mar 27, 2024 at 04:27 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -92,7 +92,8 @@ INSERT INTO `invoice` (`id`, `invoice_no`, `customer_name`, `medicine_name`, `qu
 (50, 176112, 'Pukar', 'vicks', 50, 10, 500, '2024-03-26'),
 (51, 176112, 'Pukar', 'vaporub', 40, 10, 400, '2024-03-26'),
 (52, 849194, 'Bipin', 'manforce', 20, 20, 400, '2024-03-26'),
-(53, 34653, 'Bipin', 'desire', 20, 10, 200, '2024-03-26');
+(55, 109582, 'Rock', 'Melmst sr', 10, 10, 100, '2024-03-27'),
+(56, 109582, 'Rock', 'vicks', 10, 10, 100, '2024-03-27');
 
 -- --------------------------------------------------------
 
@@ -111,13 +112,6 @@ CREATE TABLE `medicine` (
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `medicine`
---
-
-INSERT INTO `medicine` (`id`, `name`, `category`, `quantity`, `price`, `total`, `expiry`, `date`) VALUES
-(41, 'panther', 'Tablet', 10, 10, 100, '2024-06-01', '2024-03-26');
-
 -- --------------------------------------------------------
 
 --
@@ -133,8 +127,8 @@ CREATE TABLE `register` (
   `phone` varchar(128) NOT NULL,
   `address` varchar(52) NOT NULL,
   `date` date DEFAULT NULL,
-  `status` varchar(50) NOT NULL DEFAULT 'active',
-  `token` varchar(64) NOT NULL,
+  `status` int(11) DEFAULT 0,
+  `token` varchar(64) DEFAULT NULL,
   `token_expiry` datetime DEFAULT NULL,
   `verification_code` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -144,7 +138,8 @@ CREATE TABLE `register` (
 --
 
 INSERT INTO `register` (`id`, `fullName`, `pharmacyName`, `pass`, `email`, `phone`, `address`, `date`, `status`, `token`, `token_expiry`, `verification_code`) VALUES
-(3, 'Rupak Olee', 'Rupak\'s Pharmacy', '1111', 'rupak@gmail.com', '9878987678', 'Basundhara, Kathmandu', '2024-03-14', 'active', '5bdb13fa243f0d4362aeef9cb4f3b3a47efc5d032ff0e3afaa032ca0cb551da4', '2024-03-14 09:52:29', 0);
+(3, 'Rupak Olee', 'Rupak\'s Pharmacy', '1111', 'rupak@gmail.com', '9878987678', 'Basundhara, Kathmandu', '2024-03-14', 1, '5bdb13fa243f0d4362aeef9cb4f3b3a47efc5d032ff0e3afaa032ca0cb551da4', '2024-03-14 09:52:29', 0),
+(12, 'Rupak Olee', 'Rock', '1928', 'oleerupak11@gmail.com', '9869585858', 'Kathmandu, Basundhara', '2024-03-27', 1, NULL, NULL, 869860);
 
 -- --------------------------------------------------------
 
@@ -228,19 +223,19 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `medicine`
 --
 ALTER TABLE `medicine`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `register`
 --
 ALTER TABLE `register`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `vendor`
