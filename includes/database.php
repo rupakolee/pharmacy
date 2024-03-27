@@ -20,8 +20,8 @@
         return $records = mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
-    function groupBy($conn, $arg, $group) {
-        $sql = "select * from $arg group by $group";
+    function groupAndSort($conn, $arg, $group, $order) {
+        $sql = "select * from $arg group by $group order by $order DESC";
         $result = mysqli_query($conn, $sql);
         return $records = mysqli_fetch_all($result, MYSQLI_ASSOC);
     }

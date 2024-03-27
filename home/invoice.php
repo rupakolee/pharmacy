@@ -60,7 +60,7 @@ if(isset($_POST['enter'])) {
 
 }
 
-$records = groupBy($conn, 'invoice', 'invoice_no');
+$records = groupAndSort($conn, 'invoice', 'invoice_no', 'date');
 
 ?>
 
