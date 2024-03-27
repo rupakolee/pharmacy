@@ -33,10 +33,10 @@ foreach ($medicines as $medicine) {
             $sql = "update medicine set quantity = '$remQuan' where name = '$medicineName'";
             mysqli_query($conn, $sql);
 
-        }
-        if($medicine['quantity']==0) {
-            $sql = "DELETE FROM medicine where name = '$medicineName'";
-            mysqli_query($conn, $sql);
+            if($remQuan==0) {
+                $sql = "DELETE FROM medicine where name = '$medicineName'";
+                mysqli_query($conn, $sql);
+            }
         }
     }
 }

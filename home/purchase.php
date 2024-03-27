@@ -68,18 +68,18 @@
                         <input type="text" name="name" id="name" required><br>
                     </div>
                     <div class="inputs">
-                        <label for="rate">Rate:</label><br>
-                        <?php if($error == 3) {
-                            echo "<span>{$errMsg}</span><br>";
-                        } ?>
-                        <input type="number" name="price" id="rate" required><br>
-                    </div>
-                    <div class="inputs">
                         <label for="quantity">Quantity:</label><br>
                         <?php if($error == 4) {
                             echo "<span>{$errMsg}</span><br>";
                         } ?>
                         <input type="number" name="quantity" id="quantity" required><br>
+                    </div>
+                    <div class="inputs">
+                        <label for="rate">Rate:</label><br>
+                        <?php if($error == 3) {
+                            echo "<span>{$errMsg}</span><br>";
+                        } ?>
+                        <input type="number" name="price" id="rate" required><br>
                     </div>
                 </div>
                 <div class="input-fields">
