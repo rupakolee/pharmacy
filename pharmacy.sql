@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2024 at 04:27 PM
+-- Generation Time: Mar 28, 2024 at 02:21 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -128,8 +128,6 @@ CREATE TABLE `register` (
   `address` varchar(52) NOT NULL,
   `date` date DEFAULT NULL,
   `status` int(11) DEFAULT 0,
-  `token` varchar(64) DEFAULT NULL,
-  `token_expiry` datetime DEFAULT NULL,
   `verification_code` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -137,9 +135,9 @@ CREATE TABLE `register` (
 -- Dumping data for table `register`
 --
 
-INSERT INTO `register` (`id`, `fullName`, `pharmacyName`, `pass`, `email`, `phone`, `address`, `date`, `status`, `token`, `token_expiry`, `verification_code`) VALUES
-(3, 'Rupak Olee', 'Rupak\'s Pharmacy', '1111', 'rupak@gmail.com', '9878987678', 'Basundhara, Kathmandu', '2024-03-14', 1, '5bdb13fa243f0d4362aeef9cb4f3b3a47efc5d032ff0e3afaa032ca0cb551da4', '2024-03-14 09:52:29', 0),
-(12, 'Rupak Olee', 'Rock', '1928', 'oleerupak11@gmail.com', '9869585858', 'Kathmandu, Basundhara', '2024-03-27', 1, NULL, NULL, 869860);
+INSERT INTO `register` (`id`, `fullName`, `pharmacyName`, `pass`, `email`, `phone`, `address`, `date`, `status`, `verification_code`) VALUES
+(3, 'Rupak Olee', 'Rupak\'s Pharmacy', '1111', 'rupak@gmail.com', '9878987678', 'Basundhara, Kathmandu', '2024-03-14', 1, 0),
+(12, 'Rupak Olee', 'Rock', '2222', 'oleerupak11@gmail.com', '9869585858', 'Kathmandu, Basundhara', '2024-03-27', 1, 463119);
 
 -- --------------------------------------------------------
 
@@ -194,8 +192,7 @@ ALTER TABLE `medicine`
 -- Indexes for table `register`
 --
 ALTER TABLE `register`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `token` (`token`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `vendor`
