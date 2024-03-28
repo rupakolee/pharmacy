@@ -1,5 +1,6 @@
 <?php
 include "../includes/database.php";
+$records = select($conn, 'register');
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +22,11 @@ include "../includes/database.php";
             <button type="submit" id="change-btn" name="button">Send Code!</button><br>
             <?php 
                 if(isset($_POST['button'])) {
-                    header("Location: verification.php");
+                    foreach ($record as $record) {
+                        if($record['email']==$_POST['email']) {
+                            header("Location: verifyForgot.php?email={$record['email']}");
+                        }
+                    }
                 }
             ?>
             <span><a href="login.php">Back to Login!</a></span><br>
