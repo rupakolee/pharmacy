@@ -22,7 +22,7 @@ $records = select($conn, 'register');
             <button type="submit" id="change-btn" name="button">Send Code!</button><br>
             <?php 
                 if(isset($_POST['button'])) {
-                    foreach ($record as $record) {
+                    foreach ($records as $record) {
                         if($record['email']==$_POST['email']) {
                             header("Location: verifyForgot.php?email={$record['email']}");
                         }
