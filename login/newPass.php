@@ -1,8 +1,7 @@
 <?php
 include "../includes/database.php";
-include 'mailer.php';
 
-$sql = "SELECT verification_code from register where email =".$_GET['email'];
+$sql = "SELECT * from register where email =".$_GET['email'];
 $record = mysqli_fetch_array(mysqli_query($conn, $sql));
 ?>
 
@@ -28,7 +27,9 @@ $record = mysqli_fetch_array(mysqli_query($conn, $sql));
             <?php 
             if(isset($_POST['button'])) {
                 if($_POST['new-pass'] == $_POST['retype-pass']) {
-                   header("Location: login.php");
+                    $sql = "UPDATE register SET pass = {$_POST['new-pass']} WHERE email=".$_GET['email'];
+                    mysqli_query($conn, $sql);
+                    header("Location: login.php");
                 }
             }
             ?>

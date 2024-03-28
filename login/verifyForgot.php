@@ -2,8 +2,14 @@
 include "../includes/database.php";
 include 'mailer.php';
 
-$sql = "SELECT verification_code from register where email =".$_GET['email'];
+$otp = rand(100000, 999999);
+
+$sql = "SELECT * from register where email =".$_GET['email'];
 $record = mysqli_fetch_array(mysqli_query($conn, $sql));
+
+sendMail($record['email'], $record['fullName'], $otp);
+$sql = "UPDATE register SET verification_code = $otp WHERE email=".$_GET['email'];
+mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +33,7 @@ $record = mysqli_fetch_array(mysqli_query($conn, $sql));
             <?php 
             if(isset($_POST['button'])) {
                 if($record['verification_code'] == $_POST['code']) {
-                   header("Location: newPass.php");
+                   header("Location: newPass.php?email='{$_record['email']}'");
                 }
 
             }
