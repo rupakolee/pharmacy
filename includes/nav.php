@@ -9,7 +9,16 @@
                 <li><a href="../menu/myInfo.php">My information</a></li>
                 <li><a href="../menu/settings.php">Settings</a></li>
                 <li><a href="../menu/password.php">Change Password</a></li>
-                    <li>Log out<button id="logout-btn" onclick="window.location.href='../login/login.php'"><img src="../images/logout.png" alt="logout"></button></li>
+                    <li>Log out<form method="post">
+                        <button type="submit" name="log-out" id="logout-btn"><img src="../images/logout.png" alt="logout"></button>
+                    </form>    
+                    </li>
+                    <?php 
+                        if(isset($_POST['log-out'])) {
+                            session_destroy();
+                            header("Location: ../login/login.php");
+                        }
+                    ?>
                 </ul>
             </div>
         </nav>

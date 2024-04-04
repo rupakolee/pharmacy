@@ -13,6 +13,8 @@ session_start();
 $_SESSION['pharmacyName'] = $details['pharmacyName'];
 $_SESSION['phone'] = $details['phone'];
 $_SESSION['address'] = $details['address'];
+$email = $_SESSION['email'];
+$pass = $_SESSION['pass'];
 
 $count1 = "SELECT SUM(total) from medicine where date = CURRENT_DATE()";
 $count2 = "SELECT SUM(total) from invoice where date = CURRENT_DATE()";
@@ -58,10 +60,20 @@ $medCount = mysqli_fetch_array(mysqli_query($conn, $medCountQuery));
                 <span>Welcome, <span id="user" style="font-style: italic; font-weight: 700;"><?= $details['fullName']; ?></span></span>
                 <button id="user-btn"><img src="../images/user.png" alt=""></button>
                 <ul class="user-panel">
-                <li><a href="../menu/profile.php">My information</a></li>
-                <li><a href="../menu/settings.php">Settings</a></li>
+                <li><a href="../menu/myInfo.php">My information</a></li>
+                <!-- <li><a href="../menu/settings.php">Settings</a></li> -->
                 <li><a href="../menu/password.php">Change Password</a></li>
-                    <li>Log out<button id="logout-btn" onclick="window.location.href='../login/login.php'"><img src="../images/logout.png" alt="logout"></button></li>
+                    <li>Log out 
+                        <form method="post">
+                        <button type="submit" name="log-out" id="logout-btn"><img src="../images/logout.png" alt="logout"></button>
+                    </form>    
+                    </li>
+                    <?php 
+                        if(isset($_POST['log-out'])) {
+                            session_destroy();
+                            header("Location: ../login/login.php");
+                        }
+                    ?>
                 </ul>
             </div>
         </nav>
@@ -80,12 +92,12 @@ $medCount = mysqli_fetch_array(mysqli_query($conn, $medCountQuery));
                 <h2>Dashboard</h2>
                 <div class="grid">
                     <div class="linear-box">
+                        <div class="box">Sales Today<br><br><?= "NaN" ?></div>
                         <div class="box">Total Customer<br><br><?= $customerCount[0]; ?></div>
                         <div class="box">Medicines Expired<br><br><?= $expmedCount[0]; ?></div>
                         <div class="box">Total Invoice<br><br><?= $invoiceCount[0]; ?></div>
                         <div class="box">No. of Suppliers<br><br><?= $supplierCount[0]; ?></div>
                         <div class="box">Total medicine<br><br><?= $medCount[0]; ?></div>
-                        <div class="box">Out of stock<br><br><?= "NaN" ?></div>
                     </div>
                         <div class="sales-chart">
                             <h3>Today's Report</h3>

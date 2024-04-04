@@ -1,5 +1,6 @@
 <?php
 include "../includes/database.php";
+
 $sql = "SELECT * FROM register";
 $result = mysqli_query($conn, $sql);
 
@@ -7,7 +8,7 @@ if($result == false) {
     mysqli_connect_error();
 }
 else {
-    $details = mysqli_fetch_assoc($result);
+    $details = mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
 // validation included
@@ -30,11 +31,16 @@ if(isset($_POST['button'])) {
 
     if($error < 1) {
         $message = '';
-        if($_POST['userId'] == $details['email'] && $_POST['passcode'] == $details['pass']) {
-            header("Location: ../home/home.php");
-        }
-        else {
-            $message = "Invalid userID/passcode";
+        foreach ($details as $detail) {            
+            if($_POST['userId'] == $detail['email'] && $_POST['passcode'] == $detail['pass']) {
+                session_start();
+                $_SESSION['email'] = "{$detail['email']}";
+                $_SESSION['pass'] = "{$detail['pass']}";
+                header("Location: ../home/home.php");
+            }
+            else {
+                $message = "Invalid userID/passcode";
+            }
         }
     }
     }
@@ -70,7 +76,7 @@ if(isset($_POST['button'])) {
             <span><a href="forgot.php">Forgot your password?</a></span><br>
             <button type="submit" id="login-btn" name="button">Login</button>
             <span><a href="register.php">Register now!</a></span><br>
-            <a href="subscription.php"><h4>Renew your subscription!</h4></a>
+            <!-- <a href="subscription.php"><h4>Renew your subscription!</h4></a> -->
         </form>
         </div>
     </div>

@@ -7,7 +7,6 @@ $error = 0;
 $errMsg='';
 if($_SERVER['REQUEST_METHOD']=="POST") {
     $name = $_POST["name"];
-    $dob = $_POST["dob"];
     if(isset($_POST['sex'])) {
         $sex = $_POST["sex"];
     }
@@ -25,9 +24,9 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
    
     if(isset($_POST['submit'])) {
         if($error == 0) {
-            $sql = "insert into customer (name, dob, sex, address, contact) values (?,?,?,?,?)";
+            $sql = "insert into customer (name, sex, address, contact) values (?,?,?,?)";
             $stmt = mysqli_prepare($conn, $sql);
-            mysqli_stmt_bind_param($stmt, 'sssss', $name, $dob, $sex, $address, $contact);  
+            mysqli_stmt_bind_param($stmt, 'ssss', $name, $sex, $address, $contact);  
             mysqli_stmt_execute($stmt);
         }
     }
@@ -83,10 +82,6 @@ $records = select($conn, 'customer');
                 <input type="text" name="name" id="name" required>
             </div>
             <div class="inputs">
-                <label for="dob">Date of Birth</label><br>
-                <input type="date" name="dob" id="dob" required>
-            </div>
-            <div class="inputs">
                 <span>Sex:</span><br>
                 <input type="radio" name="sex" value="M" required>M
                 <input type="radio" name="sex" value="F" required>F
@@ -115,7 +110,6 @@ $records = select($conn, 'customer');
         <tr>
             <th>S.N.</th>
             <th>Name</th>
-            <th>DoB</th>
             <th>Sex</th>
             <th>Address</th>
             <th>Contact</th>
@@ -126,7 +120,6 @@ $records = select($conn, 'customer');
                 <tr>
                     <td><?= $key+1; ?></td>
                     <td><?= $record['name']; ?></td>
-                    <td><?= $record['dob']; ?></td>
                     <td><?= $record['sex']; ?></td>
                     <td><?= $record['address']; ?></td>
                     <td><?= $record['contact']; ?></td>
