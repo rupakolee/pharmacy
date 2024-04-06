@@ -4,6 +4,7 @@ include 'mailer.php';
 
 $sql = "SELECT verification_code from register where email =".$_GET['email'];
 $record = mysqli_fetch_array(mysqli_query($conn, $sql));
+
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +27,7 @@ $record = mysqli_fetch_array(mysqli_query($conn, $sql));
             <button type="submit" id="login-btn" name="button">Submit</button>
             <?php 
             if(isset($_POST['button'])) {
-                if($record['verification_code'] == $_POST['code']) {
+                if($_POST['code'] == $record['verification_code']) {
                     $sql = "UPDATE register set status = 1 where email =".$_GET['email'];
                     mysqli_query($conn, $sql);
                     header("Location: registrationSuccess.php");
