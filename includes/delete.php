@@ -4,22 +4,11 @@ session_start();
     if($_SERVER['REQUEST_METHOD']=="POST") {
         $yes = $_POST['yes'];
         $cancel = $_POST['cancel'];
-        
-        // $sql = "delete from medicine where id = ".$_GET['id'];
-        // if (isset($yes)) {
-        //     $result=mysqli_query($conn, $sql);
-        //     if ($result==false) {
-        //         echo mysqli_error($conn);
-        //     }
-        //     else{
-        //         header("Location: ../home/inventory.php");
-        //     }
-        // }
-
+       
         function deleteEntry($conn, $table, $location) {
             $yes = $_POST['yes'];
             $cancel = $_POST['cancel'];
-
+            
             $sql = "delete from $table where id = ".$_GET['id'];
             if (isset($yes)) {
                 $result = mysqli_query($conn, $sql);
@@ -30,11 +19,9 @@ session_start();
                     header("Location: ../home/{$location}.php");
                 }
             }
-           if(isset($cancel)) {
-                header("Location: ../home/{$location}.php");
-            }
-        }
-        deleteEntry($conn, $_SESSION['table'], $_SESSION['location']);
+          }
+
+        deleteEntry($conn, $_GET['table'], $_GET['location']);
     }
 
 ?>
@@ -53,7 +40,7 @@ session_start();
         <form action="" method="post">
             <h2>Are you sure?</h2>
             <input type="submit" name="yes" value="Yes" id="yes">
-            <input type="button" name="cancel" value="Cancel" id="no" onclick="window.location.href = '../home/inventory.php'">
+            <input type="button" name="cancel" value="Cancel" id="no" onclick="window.location.href = '../home/<?= $_GET['location']; ?>.php'">
         </form>
     </div>
 

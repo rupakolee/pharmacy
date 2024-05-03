@@ -1,12 +1,14 @@
 <?php
 include "../includes/database.php";
 session_start();
-$_SESSION['table'] = 'customer';
-$_SESSION['location'] = 'customers';
 $error = 0;
 $errMsg='';
 if($_SERVER['REQUEST_METHOD']=="POST") {
     $name = $_POST["name"];
+    $parts = explode(" ", $name);
+    $fName = $parts[0];
+    $lName = $parts[1];
+
     if(isset($_POST['sex'])) {
         $sex = $_POST["sex"];
     }
@@ -24,14 +26,16 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
    
     if(isset($_POST['submit'])) {
         if($error == 0) {
-            $sql = "insert into customer (name, sex, address, contact) values (?,?,?,?)";
+            $sql = "insert into customer (f_ame, l_name, sex, address, contact) values (?,?,?,?)";
             $stmt = mysqli_prepare($conn, $sql);
-            mysqli_stmt_bind_param($stmt, 'ssss', $name, $sex, $address, $contact);  
+            mysqli_stmt_bind_param($stmt, 'sssss', $fName, $lName, $sex, $address, $contact);  
             mysqli_stmt_execute($stmt);
         }
     }
 }
 $records = select($conn, 'customer');
+include '../includes/expired.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -119,11 +123,11 @@ $records = select($conn, 'customer');
             <?php foreach($records as $key => $record): ?>
                 <tr>
                     <td><?= $key+1; ?></td>
-                    <td><?= $record['name']; ?></td>
+                    <td><?= $record['f_name']." ".$record['l_name']; ?></td>
                     <td><?= $record['sex']; ?></td>
                     <td><?= $record['address']; ?></td>
                     <td><?= $record['contact']; ?></td>
-                    <td><a href="../includes/delete.php?id= <?= $record['id']; ?>"><img src="../images/delete-icon.png" alt="delete" style="width: 14px;" class="action-btn"></a></td>
+                    <td><a href="../includes/delete.php?id= <?= $record['customer_id']; ?>&table=customer&location=customers"><img src="../images/delete-icon.png" alt="delete" style="width: 14px;" class="action-btn"></a></td>
                 </tr>
                     <?php endforeach; ?>
                     <?php endif; ?>

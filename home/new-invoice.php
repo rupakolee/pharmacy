@@ -1,10 +1,17 @@
 <?php
 include "../includes/database.php";
+
 $error=0;
 
 session_start();
 $customerName = $_SESSION['customer-name'];
+$names = explode(" ", $customerName);
+$fName = $names[0];
+$lName = $names[1];
 $invoiceNo =  $_SESSION['invoice-no'];
+
+
+include '../includes/expired.php';
 
 if($_SERVER['REQUEST_METHOD']=="POST") {
     $medicineName = $_POST['medicine'];
@@ -14,68 +21,82 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
 
 // deleting medicine entry from the medicine table after issuing an invoice
 
-$medicines = select($conn, 'medicine');
+$medicines = ascSelect($conn, 'medicine', 'medicine_id');
+$sql = "set autocommit = off";
+mysqli_query($conn, $sql);
 
 if(isset($_POST['add'])) {
-foreach ($medicines as $medicine) {
-    if(str_contains($medicine['name'], $medicineName)) {
-        if($medicine['quantity']>=$quantity) {
-            $category = $medicine['category'];
-            $expiry = $medicine['expiry'];
-            $date = $medicine['date'];
-            $sql = "insert into billing (id, customer_name, medicine_name, category, qty, rate, total, expiry, date) 
-            values (?,?,?,?,?,?,?,?,?)";
-            $stmt = mysqli_prepare($conn, $sql);
-            mysqli_stmt_bind_param($stmt, 'sssssssss', $medicine['id'], $customerName, $medicineName, $category, $quantity, $rate, $total, $expiry, $date);
-            mysqli_stmt_execute($stmt);
+$sql = "SELECT * from medicine where name = '$medicineName'";
+$result = mysqli_query($conn, $sql);
+$medicine = mysqli_fetch_array($result);
+if($medicine){
+if($medicine['medicine_quantity']>=$quantity) {
+    $category = $medicine['category'];
+    $expiry = $medicine['expiry'];
+    $date = $medicine['purchase_date'];
+    $sql = "insert into billing (customer_name, medicine_name, category, qty, rate, total, expiry, date, medicine_id) 
+    values (?,?,?,?,?,?,?,?,?)";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, 'sssssssss', $customerName, $medicineName, $category, $quantity, $rate, $total, $expiry, $date, $medicine['medicine_id']);
+    mysqli_stmt_execute($stmt);
 
-            $remQuan = $medicine['quantity']-$quantity;
-            $sql = "update medicine set quantity = '$remQuan' where name = '$medicineName'";
-            mysqli_query($conn, $sql);
-
-            if($remQuan==0) {
-                $sql = "DELETE FROM medicine where name = '$medicineName'";
-                mysqli_query($conn, $sql);
-            }
-        }
-    }
-}
-}
-
-$records = descSelect($conn, 'billing', 'id');
-
-if(isset($_POST['submit'])) {
-    $records = select($conn, 'billing');
-    foreach ($records as $record) {
-        $sql = "INSERT INTO invoice (invoice_no, customer_name, medicine_name, quantity, rate, total, date) 
-        VALUES (?,?,?,?,?,?, CURRENT_DATE())";
-        $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "ssssss", $invoiceNo, $record['customer_name'], $record['medicine_name'], $record['qty'], $record['rate'], $record['total']);
-        mysqli_stmt_execute($stmt);
-    }
-
-    $sql = "DELETE FROM billing";
+    $remQuan = $medicine['medicine_quantity']-$quantity;
+    $sql = "update medicine set medicine_quantity = '$remQuan' where name = '$medicineName' && medicine_id = '{$medicine['medicine_id']}'";
     mysqli_query($conn, $sql);
-    header("Location: invoice.php");
+
+    if($remQuan==0) {
+        $alert = "Out of stock";
+    }
+}
+}
+else {
+    $msg = "No records found!";
+}
 }
 
 if(isset($_POST['cancel'])){
     $billedRecords = select($conn, 'billing');
 
-    foreach($billedRecords as $record) {
-        $reinsert = "INSERT INTO medicine (id, name, category, quantity, price, total, expiry, date) values (?,?,?,?,?,?,?,?)";
-        $stmt = mysqli_prepare($conn, $reinsert);
-        mysqli_stmt_bind_param($stmt, 'ssssssss', $record['id'], $record['medicine_name'], $record['category'], $record['qty'], $record['rate'], $record['total'], $record['expiry'], $record['date']);
-        mysqli_stmt_execute($stmt);
-    }
+        $sql = "rollback";
+        mysqli_query($conn, $sql);
     
     $sql = "DELETE FROM billing";
     mysqli_query($conn, $sql);
+
+    header("Location: invoice.php");
+}
+
+$records = descSelect($conn, 'billing', 'id');
+$customerRecords = select($conn, 'customer');
+
+if(isset($_POST['submit'])) {
+    $records = select($conn, 'billing');
+    foreach ($records as $record) {            
+        $sql = "INSERT INTO customer (f_name, l_name, medicine_id) values (?,?,?)";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 'sss', $fName, $lName, $record['medicine_id']);
+        mysqli_stmt_execute($stmt);
+
+        $sql = "SELECT * from customer where f_name = '$fName' && l_name = '$lName'";
+        $result = mysqli_query($conn, $sql);
+        $customer = mysqli_fetch_array($result);
+
+        $sql = "INSERT INTO invoice (invoice_no, selling_quantity, selling_rate, selling_total, selling_date, customer_id, medicine_id) 
+        VALUES (?,?,?,?, CURRENT_DATE(), ?,?)";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "ssssss", $invoiceNo, $record['qty'], $record['rate'], $record['total'], $customer['customer_id'], $record['medicine_id']);
+        mysqli_stmt_execute($stmt);
+    }
+
+    $sql = "DELETE FROM billing";
+    mysqli_query($conn, $sql);
+
+    $sql = "commit";
+    mysqli_query($conn, $sql);
+
     header("Location: invoice.php");
 }
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -143,7 +164,7 @@ if(isset($_POST['cancel'])){
                     </tr>
                 <?php endforeach; ?>
                 <?php endif; ?>
-        </table>           
+        </table>         
      </div>
      </div>
 

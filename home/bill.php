@@ -5,14 +5,16 @@ $pharmacyName = $_SESSION['pharmacyName'];
 $phone = $_SESSION['phone'];
 $address = $_SESSION['address'];
 
-$query = "SELECT * FROM invoice WHERE invoice_no =".$_GET['invoice_no'];
+$query = "SELECT * FROM invoice inner join customer on invoice.customer_id = customer.customer_id inner join medicine on invoice.medicine_id = medicine.medicine_id WHERE invoice_no =".$_GET['invoice_no'];
 $result = mysqli_query($conn, $query);
 $records = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $count = 0;
 
-$sumQuery = "SELECT SUM(total) from invoice WHERE invoice_no =".$_GET['invoice_no'];
+$sumQuery = "SELECT SUM(selling_total) from invoice WHERE invoice_no =".$_GET['invoice_no'];
 $result = mysqli_query($conn, $sumQuery);
 $totalAmount = mysqli_fetch_array($result);
+include '../includes/expired.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,9 +33,9 @@ $totalAmount = mysqli_fetch_array($result);
         </div><hr>
         <div class="invoice-info">
             <div class="customer-info">
-                <span class="date">Date: <?= $records[0]['date']; ?></span> 
+                <span class="date">Date: <?= $records[0]['selling_date']; ?></span> 
                 <span class="customer-name">Invoice No: <?= $records[0]['invoice_no']; ?></span><br>
-                <span class="customer-name">Name: <?= $records[0]['customer_name']; ?></span><br>
+                <span class="customer-name">Name: <?= $records[0]['f_name']." ".$records[0]['l_name']; ?></span><br>
             </div><br>
             <div class="medicine-info">
                 <table class="bill-table">
@@ -47,10 +49,10 @@ $totalAmount = mysqli_fetch_array($result);
                     <?php foreach($records as $record): ?>
                         <tr>                        
                             <td><?= $count+1; ?></td>
-                            <td><?= $record['medicine_name']; ?></td>
-                            <td><?= $record['quantity']; ?></td>
-                            <td><?= $record['rate']; ?></td>
-                            <td><?= $record['total']; ?></td>
+                            <td><?= $record['name']; ?></td>
+                            <td><?= $record['selling_quantity']; ?></td>
+                            <td><?= $record['selling_rate']; ?></td>
+                            <td><?= $record['selling_total']; ?></td>
                         </tr>
                         <?php endforeach; ?>
                     <tr>
@@ -58,8 +60,8 @@ $totalAmount = mysqli_fetch_array($result);
                         <td><?= $totalAmount[0]; ?></td>
                     </tr>
                 </table>
-            </div>
-        </div>
-    </div>
+                </div>
+                </div>
+                </div>
 </body>
 </html>

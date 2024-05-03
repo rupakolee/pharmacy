@@ -1,11 +1,12 @@
 <?php
 include '../includes/database.php';
+
 $records = select($conn, 'medicine');
 $status = '';
 
 session_start();
-$_SESSION['table'] = 'medicine';
-$_SESSION['location'] = 'inventory';
+
+include '../includes/expired.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,19 +43,21 @@ $_SESSION['location'] = 'inventory';
                                     <td><?= $key+1; ?></td>
                                     <td><?= $record['name']; ?></td>
                                     <td><?= $record['category']; ?></td>
-                                    <td><?= $record['quantity']; ?></td>
-                                    <td><?= $record['price']; ?></td>
-                                    <td><?= $record['date']; ?></td>
-                                    <?php if ($record['expiry'] < $record['date']) {
-                                        $status = "Expired";
-                                    } else {
+                                    <td><?= $record['medicine_quantity']; ?></td>
+                                    <td><?= $record['medicine_price']; ?></td>
+                                    <td><?= $record['purchase_date']; ?></td>
+                                    <?php if ($record['expiry']) {                                    
                                         $one = date_create($record['expiry']);
                                         $two = date_create(date("Y-m-d"));
                                         $diff = date_diff($one, $two);
                                         $status = $diff->format("%a days to go");
-                                    } ?>
+                                        $dateInt = (int)$diff->format("%R%a");
+                                        if($dateInt>=0) {
+                                            $status = "Expired!";
+                                        }
+                                      } ?>
                                     <td><?= $status; ?></td>
-                                    <td><a href="../includes/delete.php?id= <?= $record['id']; ?>"><img src="../images/delete-icon.png" alt="delete" style="width: 14px;" class="action-btn"></a></td>
+                                    <td><a href="../includes/delete.php?id=<?= $record['medicine_id']; ?>&location=inventory&table=medicine"><img src="../images/delete-icon.png" alt="delete" style="width: 14px;" class="action-btn"></a></td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php endif; ?>

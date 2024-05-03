@@ -1,6 +1,8 @@
 <?php
 include '../includes/database.php';
-$records = select($conn, 'register');
+$sql = "select * from register where email=".$_GET['email'];
+$result = mysqli_query($conn, $sql);
+$record = mysqli_fetch_array($result);
 ?>
 
 <!DOCTYPE html>
@@ -12,11 +14,9 @@ $records = select($conn, 'register');
 </head>
 <body>
     <h2>My Information</h2>
-    <?php foreach($records as $record): ?>
     <p>User Name: <?= $record['fullName']; ?></p>
     <p>Pharmacy's Name: <?= $record['pharmacyName']; ?></p>
     <p>Email: <?= $record['email']; ?></p>
     <p>Phone: <?= $record['phone']; ?></p>
-    <?php endforeach; ?>
 </body>
 </html>

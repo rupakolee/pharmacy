@@ -1,6 +1,5 @@
 <?php
 include "../includes/database.php";
-
 session_start();
 
 $error=0;
@@ -15,7 +14,6 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
         $customer = $_POST['customer'];
         $_SESSION['customer-name'] = $customer;
     }
-
 
     // Insert the invoice only if the medicine is available in the medicine table 
     // check the quantity
@@ -60,8 +58,13 @@ if(isset($_POST['enter'])) {
 
 }
 
-$records = groupAndSort($conn, 'invoice', 'invoice_no', 'date');
+// $records = groupAndSort($conn, 'invoice', 'invoice_no', 'date');
 
+$sql = "select * from invoice inner join customer on invoice.customer_id = customer.customer_id group by invoice_no order by selling_date DESC";
+$result = mysqli_query($conn, $sql);
+$records = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+include '../includes/expired.php';
 ?>
 
 <!DOCTYPE html>
@@ -108,8 +111,8 @@ $records = groupAndSort($conn, 'invoice', 'invoice_no', 'date');
                 <?php foreach($records as $key => $record): ?>
                     <tr>
                 <td><?= $key+1; ?></td>
-                <td><?= $record['customer_name']; ?></td>
-                <td><?= $record['date']; ?></td>
+                <td><?= $record['f_name']." ".$record['l_name']; ?></td>
+                <td><?= $record['selling_date']; ?></td>
                 <td><a href="bill.php?invoice_no=<?= $record['invoice_no']; ?>"><img src="../images/info.png" alt="info" style="width: 24px; display: block; margin: auto;"></a></td>
                     </tr>
                 <?php endforeach; ?>

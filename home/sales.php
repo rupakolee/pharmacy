@@ -1,9 +1,12 @@
 <?php
 include "../includes/database.php";
-$records = descSelect($conn, 'invoice', 'date');
-session_start();
-$_SESSION['table'] = 'invoice';
-$_SESSION['location'] = 'sales';
+
+$sql = "select * from invoice inner join medicine on invoice.medicine_id = medicine.medicine_id order by selling_date DESC";
+$result = mysqli_query($conn, $sql);
+$records = mysqli_fetch_all($result, MYSQLI_ASSOC);session_start();
+
+include '../includes/expired.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -37,12 +40,12 @@ $_SESSION['location'] = 'sales';
                 <?php foreach($records as $key => $record): ?>
                     <tr>
                         <td><?= $key+1; ?></td>
-                        <td><?= $record['medicine_name']; ?></td>
-                        <td><?= $record['quantity']; ?></td>
-                <td><?= $record['rate']; ?></td>
-                <td><?= $record['total']; ?></td>
-                <td><?= $record['date']; ?></td>
-                <td><a href="../includes/delete.php?id= <?= $record['id']; ?>"><img src="../images/delete-icon.png" alt="delete" style="width: 14px;" class="action-btn"></a></td>
+                        <td><?= $record['name']; ?></td>
+                        <td><?= $record['selling_quantity']; ?></td>
+                        <td><?= $record['selling_rate']; ?></td>
+                        <td><?= $record['selling_total']; ?></td>
+                        <td><?= $record['selling_date']; ?></td>
+                        <td><a href="../includes/delete.php?id=<?= $record['invoice_id']; ?>&location=sales&table=invoice"><img src="../images/delete-icon.png" alt="delete" style="width: 14px;" class="action-btn"></a></td>
                     </tr>
                 <?php endforeach; ?>
                 <?php endif; ?>

@@ -1,5 +1,6 @@
 <?php
     include '../includes/database.php';
+    session_start();
     
     $error = 0;
     $records = [];
@@ -29,17 +30,19 @@
             $errMsg = "Quantity must be greater than 0";
         }
         if(isset($_POST['submit'])) {
-            $sql = "INSERT INTO medicine (name, category, quantity, price, total, expiry, date) VALUES (?,?,?,?,?,?, CURRENT_DATE())";
+            $sql = "INSERT INTO medicine (name, category, medicine_quantity, medicine_price, medicine_total, expiry, purchase_date, vendor_id) VALUES (?,?,?,?,?,?, CURRENT_DATE(), ?)";
             $stmt = mysqli_prepare($conn, $sql); 
-            mysqli_stmt_bind_param($stmt, "ssssss", $name, $category, $quantity, $price, $total, $date);
+            mysqli_stmt_bind_param($stmt, "sssssss", $name, $category, $quantity, $price, $total, $date, $vendor);
             if(mysqli_stmt_execute($stmt)){
                 $message = "Entry added successfully!";
             }
         }
     }
 
-    $records = descSelect($conn, 'medicine', 'id');
+    $records = descSelect($conn, 'medicine', 'medicine_id');
     $suppliers = select($conn, "vendor");
+    include '../includes/expired.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -104,7 +107,7 @@
                             <option value=" "> </option>
                             <?php if(!empty($suppliers)): ?>
                                 <?php foreach($suppliers as $supplier): ?>
-                                    <option value="<?= $supplier['name']; ?>"><?= $supplier['name']; ?></option>
+                                    <option value="<?= $supplier['vendor_id']; ?>"><?= $supplier['name']; ?></option>
                                 <?php endforeach; ?>
                             <?php endif; ?>
                         </select><br>
@@ -135,8 +138,8 @@
                     <td><?= $key+1; ?></td>
                     <td><?= $record['name']; ?></td>
                     <td><?= $record['category']; ?></td>
-                    <td><?= $record['quantity']; ?></td>
-                    <td><?= $record['price']; ?></td>
+                    <td><?= $record['medicine_quantity']; ?></td>
+                    <td><?= $record['medicine_price']; ?></td>
                     <td><?= $record['expiry']; ?></td>
                 </tr>
                     <?php endforeach; ?>

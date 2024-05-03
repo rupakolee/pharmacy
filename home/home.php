@@ -13,30 +13,31 @@ session_start();
 $_SESSION['pharmacyName'] = $details['pharmacyName'];
 $_SESSION['phone'] = $details['phone'];
 $_SESSION['address'] = $details['address'];
-$email = $_SESSION['email'];
-$pass = $_SESSION['pass'];
 
-$count1 = "SELECT SUM(total) from medicine where date = CURRENT_DATE()";
-$count2 = "SELECT SUM(total) from invoice where date = CURRENT_DATE()";
+
+$count1 = "SELECT SUM(medicine_total) from medicine where purchase_date = CURRENT_DATE()";
+$count2 = "SELECT SUM(selling_total) from invoice where selling_date = CURRENT_DATE()";
      
 $purchaseCount = mysqli_fetch_array(mysqli_query($conn, $count1));
 $salesCount = mysqli_fetch_array(mysqli_query($conn, $count2));
 
-$customerCountQuery = "SELECT COUNT(id) from customer";
+$customerCountQuery = "SELECT COUNT(customer_id) from customer";
 $customerCount = mysqli_fetch_array(mysqli_query($conn, $customerCountQuery));
 
-$expmedCountQuery = "SELECT COUNT(id) from medicine where expiry < date";
+$expmedCountQuery = "SELECT COUNT(medicine_id) from medicine where expiry <= purchase_date";
 $expmedCount = mysqli_fetch_array(mysqli_query($conn, $expmedCountQuery));
 
-$invoiceCountQuery = "SELECT COUNT(id) from invoice";
+$invoiceCountQuery = "SELECT COUNT(invoice_id) from invoice";
 $invoiceCount = mysqli_fetch_array(mysqli_query($conn, $invoiceCountQuery));
 
-$supplierCountQuery = "SELECT COUNT(id) from vendor";
+$supplierCountQuery = "SELECT COUNT(vendor_id) from vendor";
 $supplierCount = mysqli_fetch_array(mysqli_query($conn, $supplierCountQuery));
 
-$medCountQuery = "SELECT COUNT(id) from medicine";
+$medCountQuery = "SELECT COUNT(medicine_id) from medicine";
 $medCount = mysqli_fetch_array(mysqli_query($conn, $medCountQuery));
 ?>
+
+<?php include "../includes/expired.php"; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -54,13 +55,13 @@ $medCount = mysqli_fetch_array(mysqli_query($conn, $medCountQuery));
   <!-- creating nav menu  -->
         
   <nav id="navbar">
-            <a href="home.php"><img src="../images/logo.png" alt="logo" style="width: 60px;"></a>
+            <a href="home.php?email='<?= $_SESSION['email']; ?>'&&password='<?= $_SESSION['pass']; ?>'"><img src="../images/logo.png" alt="logo" style="width: 60px;"></a>
 
             <div class="user-info">
                 <span>Welcome, <span id="user" style="font-style: italic; font-weight: 700;"><?= $details['fullName']; ?></span></span>
                 <button id="user-btn"><img src="../images/user.png" alt=""></button>
                 <ul class="user-panel">
-                <li><a href="../menu/myInfo.php">My information</a></li>
+                <li><a href="../menu/myInfo.php?email='<?= $_SESSION['email']; ?>'">My information</a></li>
                 <!-- <li><a href="../menu/settings.php">Settings</a></li> -->
                 <li><a href="../menu/password.php">Change Password</a></li>
                     <li>Log out 
