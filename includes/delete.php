@@ -9,7 +9,7 @@ session_start();
             $yes = $_POST['yes'];
             $cancel = $_POST['cancel'];
             
-            $sql = "delete from $table where id = ".$_GET['id'];
+            $sql = "delete from $table where {$table}_id = ".$_GET['id'];
             if (isset($yes)) {
                 $result = mysqli_query($conn, $sql);
                 if($result==false) {

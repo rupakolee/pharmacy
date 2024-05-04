@@ -7,18 +7,26 @@ session_start();
 $customerName = $_SESSION['customer-name'];
 $names = explode(" ", $customerName);
 $fName = $names[0];
-$lName = $names[1];
+if(isset($lName)) {
+    $lName = $names[1];
+}
 $invoiceNo =  $_SESSION['invoice-no'];
-
 
 include '../includes/expired.php';
 
 if($_SERVER['REQUEST_METHOD']=="POST") {
-    $medicineName = $_POST['medicine'];
-    $quantity = $_POST['quantity'];
-    $rate = $_POST['rate'];
-    $total = $quantity*$rate;
-
+    if(isset($medicineName) && isset($quantity) && isset($rate)) {
+        $medicineName = $_POST['medicine'];
+        $quantity = $_POST['quantity'];
+        $rate = $_POST['rate'];
+        $total = $quantity*$rate;
+    }
+    
+    if(empty($medicine) || empty($quantity) || empty($rate) || empty($total)) {
+        $error = 1;
+        $errMsg = "Cannot be empty";
+    }
+  
 // deleting medicine entry from the medicine table after issuing an invoice
 
 $medicines = ascSelect($conn, 'medicine', 'medicine_id');
@@ -70,6 +78,7 @@ $records = descSelect($conn, 'billing', 'id');
 $customerRecords = select($conn, 'customer');
 
 if(isset($_POST['submit'])) {
+    if($error==0) { 
     $records = select($conn, 'billing');
     foreach ($records as $record) {            
         $sql = "INSERT INTO customer (f_name, l_name, medicine_id) values (?,?,?)";
@@ -95,6 +104,7 @@ if(isset($_POST['submit'])) {
     mysqli_query($conn, $sql);
 
     header("Location: invoice.php");
+}
 }
 }
 ?>
