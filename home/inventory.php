@@ -78,8 +78,8 @@ include '../includes/expired.php';
                                 </tr>
                                 <?php endforeach; ?>
                                     <?php endif; ?>
-                                    <?php else: ?>
 
+                                    <?php else: ?>
 
                         <?php if (!empty($records)) : ?>
                             <?php foreach ($records as $key => $record) : ?>

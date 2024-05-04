@@ -7,20 +7,18 @@ session_start();
 $customerName = $_SESSION['customer-name'];
 $names = explode(" ", $customerName);
 $fName = $names[0];
-if(isset($lName)) {
-    $lName = $names[1];
-}
+$lName = $names[1];
+
 $invoiceNo =  $_SESSION['invoice-no'];
 
 include '../includes/expired.php';
 
 if($_SERVER['REQUEST_METHOD']=="POST") {
-    if(isset($medicineName) && isset($quantity) && isset($rate)) {
         $medicineName = $_POST['medicine'];
         $quantity = $_POST['quantity'];
         $rate = $_POST['rate'];
         $total = $quantity*$rate;
-    }
+    
     
     if(empty($medicine) || empty($quantity) || empty($rate) || empty($total)) {
         $error = 1;
@@ -30,8 +28,6 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
 // deleting medicine entry from the medicine table after issuing an invoice
 
 $medicines = ascSelect($conn, 'medicine', 'medicine_id');
-$sql = "set autocommit = off";
-mysqli_query($conn, $sql);
 
 if(isset($_POST['add'])) {
 $sql = "SELECT * from medicine where name = '$medicineName'";
@@ -65,8 +61,14 @@ else {
 if(isset($_POST['cancel'])){
     $billedRecords = select($conn, 'billing');
 
-        $sql = "rollback";
+    foreach($billedRecords as $billedRecord) {
+        $sql = "SELECT SUM(qty) from billing where medicine_id = {$billedRecord['medicine_id']}";
+        $result = mysqli_query($conn, $sql);
+        $record = mysqli_fetch_array($result);
+
+        $sql = "UPDATE medicine set medicine_quantity = {$record[0]} where medicine_id = {$billedRecord['medicine_id']}";
         mysqli_query($conn, $sql);
+    }
     
     $sql = "DELETE FROM billing";
     mysqli_query($conn, $sql);
@@ -78,7 +80,6 @@ $records = descSelect($conn, 'billing', 'id');
 $customerRecords = select($conn, 'customer');
 
 if(isset($_POST['submit'])) {
-    if($error==0) { 
     $records = select($conn, 'billing');
     foreach ($records as $record) {            
         $sql = "INSERT INTO customer (f_name, l_name, medicine_id) values (?,?,?)";
@@ -100,11 +101,7 @@ if(isset($_POST['submit'])) {
     $sql = "DELETE FROM billing";
     mysqli_query($conn, $sql);
 
-    $sql = "commit";
-    mysqli_query($conn, $sql);
-
     header("Location: invoice.php");
-}
 }
 }
 ?>

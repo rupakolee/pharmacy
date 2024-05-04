@@ -93,7 +93,7 @@ $medCount = mysqli_fetch_array(mysqli_query($conn, $medCountQuery));
                 <h2>Dashboard</h2>
                 <div class="grid">
                     <div class="linear-box">
-                        <div class="box">Sales Today<br><br><?= "NaN" ?></div>
+                        <div class="box">Sales Today<br><br><?= $salesCount[0]; ?></div>
                         <div class="box">Total Customer<br><br><?= $customerCount[0]; ?></div>
                         <div class="box">Medicines Expired<br><br><?= $expmedCount[0]; ?></div>
                         <div class="box">Total Invoice<br><br><?= $invoiceCount[0]; ?></div>
