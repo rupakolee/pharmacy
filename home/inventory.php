@@ -27,7 +27,7 @@ include '../includes/expired.php';
             <div class="records">
                     <h2>Inventory</h2>
                     <form action="" method="post" class="search">
-                        <input type="search" name="search">
+                        <input type="search" name="search" placeholder="Enter item to search">
                         <input type="submit" name="submit" value="Search">
                     </form>
                     <table class="table">

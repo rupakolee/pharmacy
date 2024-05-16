@@ -59,8 +59,8 @@ if(isset($_POST['button'])) {
 <body>
 
     <div class="login">
-        <h2>Change your password</h2>  
         <form action="#" method="post">
+            <h2>Change your password</h2>  
            
             <?php if($error == 2): ?>
             <span style="color: red;"><?= $errors ?></span><br><?php endif; ?>

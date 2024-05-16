@@ -17,9 +17,11 @@ $_SESSION['address'] = $details['address'];
 
 $count1 = "SELECT SUM(medicine_total) from medicine where purchase_date = CURRENT_DATE()";
 $count2 = "SELECT SUM(selling_total) from invoice where selling_date = CURRENT_DATE()";
+$count3 = "SELECT SUM(selling_quantity) from invoice where selling_date = CURRENT_DATE()";
      
 $purchaseCount = mysqli_fetch_array(mysqli_query($conn, $count1));
 $salesCount = mysqli_fetch_array(mysqli_query($conn, $count2));
+$salesTotal = mysqli_fetch_array(mysqli_query($conn, $count3));
 
 $customerCountQuery = "SELECT COUNT(customer_id) from customer";
 $customerCount = mysqli_fetch_array(mysqli_query($conn, $customerCountQuery));
@@ -63,7 +65,7 @@ $medCount = mysqli_fetch_array(mysqli_query($conn, $medCountQuery));
                 <ul class="user-panel">
                 <li><a href="../menu/myInfo.php?email='<?= $_SESSION['email']; ?>'">My information</a></li>
                 <!-- <li><a href="../menu/settings.php">Settings</a></li> -->
-                <li><a href="../menu/password.php">Change Password</a></li>
+                <li><a href="../menu/password.php?email='<?= $_SESSION['email']; ?>'">Change Password</a></li>
                     <li>Log out 
                         <form method="post">
                         <button type="submit" name="log-out" id="logout-btn"><img src="../images/logout.png" alt="logout"></button>
@@ -93,7 +95,7 @@ $medCount = mysqli_fetch_array(mysqli_query($conn, $medCountQuery));
                 <h2>Dashboard</h2>
                 <div class="grid">
                     <div class="linear-box">
-                        <div class="box">Sales Today<br><br><?= $salesCount[0]; ?></div>
+                        <div class="box">Sales Today<br><br><?php if(empty($salesTotal[0])) {echo 0;} else {echo $salesTotal[0];} ?></div>
                         <div class="box">Total Customer<br><br><?= $customerCount[0]; ?></div>
                         <div class="box">Medicines Expired<br><br><?= $expmedCount[0]; ?></div>
                         <div class="box">Total Invoice<br><br><?= $invoiceCount[0]; ?></div>

@@ -7,8 +7,8 @@
                 <button id="user-btn"><img src="../images/user.png" alt=""></button>
                 <ul class="user-panel">
                 <li><a href="../menu/myInfo.php?email='<?= $_SESSION['email']; ?>'">My information</a></li>
-                <li><a href="../menu/settings.php">Settings</a></li>
-                <li><a href="../menu/password.php">Change Password</a></li>
+                <li><a href="../menu/settings.php?email='<?= $_SESSION['email']; ?>'">Settings</a></li>
+                <li><a href="../menu/password.php?email='<?= $_SESSION['email']; ?>'">Change Password</a></li>
                     <li>Log out<form method="post">
                         <button type="submit" name="log-out" id="logout-btn"><img src="../images/logout.png" alt="logout"></button>
                     </form>    

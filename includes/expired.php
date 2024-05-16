@@ -1,12 +1,11 @@
 <?php 
-if(empty($_SESSION['email']) || empty($_SESSION['pass'])) {
+if(empty($_SESSION['email'])) {
     die("Session expired");
 }
 
 try {
-    if(!empty($_SESSION['email']) && !empty($_SESSION['pass'])) {
+    if(!empty($_SESSION['email'])) {
         $email = $_SESSION['email'];
-        $pass = $_SESSION['pass'];
         $errMsg = "No session started";
     }
 } catch(Exception $e) {
