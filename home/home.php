@@ -26,7 +26,7 @@ $salesTotal = mysqli_fetch_array(mysqli_query($conn, $count3));
 $customerCountQuery = "SELECT COUNT(customer_id) from customer";
 $customerCount = mysqli_fetch_array(mysqli_query($conn, $customerCountQuery));
 
-$expmedCountQuery = "SELECT COUNT(medicine_id) from medicine where expiry <= purchase_date";
+$expmedCountQuery = "SELECT COUNT(medicine_id) from medicine where expiry <= CURRENT_DATE()";
 $expmedCount = mysqli_fetch_array(mysqli_query($conn, $expmedCountQuery));
 
 $invoiceCountQuery = "SELECT COUNT(invoice_id) from invoice";
