@@ -10,6 +10,10 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
         $error = 1;
         $errMsg = "Invalid Name";
     }
+    if(empty($_POST['customer'])) {
+        $error = 2;
+        $errMsg = "Please enter a full name";
+    }
     else {
         $customer = $_POST['customer'];
         $_SESSION['customer-name'] = $customer;
@@ -89,7 +93,7 @@ include '../includes/expired.php';
                 <form action="" method="post">
                 <div class="inputs" id="customer-field">
                             <label for="customer">Customer Name:</label><br>
-                            <?php if($error==1) {
+                            <?php if($error==1 || $error==2) {
                                 echo "<span>{$errMsg}</span><br>";
                             }
                             ?>

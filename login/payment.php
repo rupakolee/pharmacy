@@ -9,8 +9,9 @@
     <?php
         $uid = strval(rand(100000, 999999));
         $total_amt = '300';
+        $message = "total_amount={$total_amt},transaction_uuid={$uid},product_code=EPAYTEST";
 
-        $s = hash_hmac('sha256', `total_amount={$total_amt},transaction_uuid={$uid},product_code=EPAYTEST`, '8gBm/:&EnhH.1/q', true);
+        $s = hash_hmac('sha256', $message, '8gBm/:&EnhH.1/q', true);
         echo base64_encode($s);
     ?>
      <form action="https://rc-epay.esewa.com.np/api/epay/main/v2/form" method="POST">

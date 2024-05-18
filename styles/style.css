@@ -92,6 +92,8 @@ a {
 .main {
     background: #fff;
     display: flex;
+    height: 100vh;
+    overflow: scroll;
 }
 
 .dashboard {
@@ -172,6 +174,10 @@ a {
 
 .entries form {
     margin: 10px 5px;
+}
+
+.entries form label {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .input-fields {
@@ -311,6 +317,5 @@ input[type=submit]:hover, .btn:hover {
 
 .entries form input[type=text], input[type=select], input[type=date] {
     border: 1px solid gray;
-    border-radius: 6px;
     padding: 4px;
 }

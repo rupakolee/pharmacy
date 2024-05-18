@@ -20,7 +20,7 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
         $total = $quantity*$rate;
     
     
-    if(empty($medicine) || empty($quantity) || empty($rate) || empty($total)) {
+    if(empty($medicineName) || empty($quantity) || empty($rate) || empty($total)) {
         $error = 1;
         $errMsg = "Cannot be empty";
     }
@@ -98,6 +98,9 @@ if(isset($_POST['submit'])) {
         mysqli_stmt_execute($stmt);
     }
 
+    $sql = "DELETE FROM medicine where medicine_quantity = 0";
+    mysqli_query($conn, $sql);
+
     $sql = "DELETE FROM billing";
     mysqli_query($conn, $sql);
 
@@ -144,6 +147,10 @@ if(isset($_POST['submit'])) {
                                 <input type="number" name="total" id="total" required class="clear">
                             </div>
                             <input type="submit" name="add" id="add" value="Add medicine"><br>   
+                            <?php if($error==1) {
+                                echo $errmsg;
+                            }
+                            ?>
                         </div>
                     </form>
                     <form action="" method="post">
