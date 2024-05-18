@@ -36,7 +36,7 @@ if(isset($_POST['button'])) {
                 session_start();
                 $_SESSION['email'] = "{$detail['email']}";
                 $_SESSION['pass'] = "{$detail['pass']}";
-                header("Location: ../home/home.php?email='{$_SESSION['email']}");
+                header("Location: ../home/home.php");
             }
             else {
                 $message = "Invalid userID/passcode";

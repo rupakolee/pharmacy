@@ -1,6 +1,6 @@
 <?php
-include "../includes/database.php";
 session_start();
+include "../includes/database.php";
 $error = 0;
 $errMsg='';
 if($_SERVER['REQUEST_METHOD']=="POST") {
@@ -33,7 +33,9 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
         }
     }
 }
-$records = select($conn, 'customer');
+$sql = "select * from customer group by f_name";
+$result = mysqli_query($conn, $sql);
+$records = mysqli_fetch_all($result, MYSQLI_ASSOC);
 include '../includes/expired.php';
 
 ?>
@@ -109,7 +111,7 @@ include '../includes/expired.php';
 
     <!-- customers list -->
     <div class="records">
-        <h3>Customers list:</h3>
+        <h3>Recent Customers list:</h3>
     <table class="table">
         <tr>
             <th>S.N.</th>

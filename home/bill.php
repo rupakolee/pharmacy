@@ -1,6 +1,6 @@
 <?php
-include '../includes/database.php';
 session_start();
+include '../includes/database.php';
 $pharmacyName = $_SESSION['pharmacyName'];
 $phone = $_SESSION['phone'];
 $address = $_SESSION['address'];

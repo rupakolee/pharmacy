@@ -10,7 +10,7 @@
 }
 
 body {
-    overflow: hidden;
+    overflow: scroll;
 }
 
 .container {
@@ -236,6 +236,7 @@ input[type=submit]:hover, .btn:hover {
 .records {
     width: 100%;
     color: #000;
+    overflow: scroll;
 }
 
 .records h2 {
@@ -248,6 +249,7 @@ input[type=submit]:hover, .btn:hover {
 .table {
     width: 100%;
     border-collapse: collapse;
+    overflow: scroll;
 }
 
 .table tr {
@@ -305,4 +307,10 @@ input[type=submit]:hover, .btn:hover {
 
 .search {
     float: right;
+}
+
+.entries form input[type=text], input[type=select], input[type=date] {
+    border: 1px solid gray;
+    border-radius: 6px;
+    padding: 4px;
 }

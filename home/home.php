@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "../includes/database.php";
 $sql = "SELECT * FROM register";
 $result = mysqli_query($conn, $sql);
@@ -9,7 +10,6 @@ if ($result == false) {
     $details = mysqli_fetch_assoc($result);
 }
 
-session_start();
 $_SESSION['pharmacyName'] = $details['pharmacyName'];
 $_SESSION['phone'] = $details['phone'];
 $_SESSION['address'] = $details['address'];

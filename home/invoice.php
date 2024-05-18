@@ -93,7 +93,7 @@ include '../includes/expired.php';
                                 echo "<span>{$errMsg}</span><br>";
                             }
                             ?>
-                            <input type="text" name="customer" id="customer" required>
+                            <input type="text" name="customer" id="customer" placeholder="Enter your full name" required>
                             <input type="submit" value="Enter" name="enter" id="enter">
                         </div><hr>
                 </form>

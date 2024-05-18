@@ -1,10 +1,10 @@
 <?php
+session_start();
 include '../includes/database.php';
 
 $records = select($conn, 'medicine');
 $status = '';
 
-session_start();
 
 include '../includes/expired.php';
 ?>

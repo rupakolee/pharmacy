@@ -1,11 +1,11 @@
         <div class="menu">
                 <ul id="menu-list">
-                <a href="home.php?email='<?= $_SESSION['email']; ?>'&&password='<?= $_SESSION['pass']; ?>'"><li>Dashboard</li></a>
-                <a href="purchase.php?email='<?= $_SESSION['email']; ?>'&&password='<?= $_SESSION['pass']; ?>'"><li>Purchase</li></a>
-                <a href="invoice.php?email='<?= $_SESSION['email']; ?>'&&password='<?= $_SESSION['pass']; ?>'"><li>Invoice</li></a>
-                <a href="sales.php?email='<?= $_SESSION['email']; ?>'&&password='<?= $_SESSION['pass']; ?>'"><li>Sales</li></a>
-                <a href="inventory.php?email='<?= $_SESSION['email']; ?>'&&password='<?= $_SESSION['pass']; ?>'"><li>Medicines</li></a>
-                <a href="customers.php?email='<?= $_SESSION['email']; ?>'&&password='<?= $_SESSION['pass']; ?>'"><li>Customers</li></a>
-                <a href="supplier.php?email='<?= $_SESSION['email']; ?>'&&password='<?= $_SESSION['pass']; ?>'"><li>Suppliers</li></a>
+                <a href="home.php"><li>Dashboard</li></a>
+                <a href="purchase.php"><li>Purchase</li></a>
+                <a href="invoice.php"><li>Invoice</li></a>
+                <a href="sales.php"><li>Sales</li></a>
+                <a href="inventory.php"><li>Medicines</li></a>
+                <a href="customers.php"><li>Customers</li></a>
+                <a href="supplier.php"><li>Suppliers</li></a>
                 </ul>
             </div>
