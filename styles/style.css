@@ -315,7 +315,7 @@ input[type=submit]:hover, .btn:hover {
     float: right;
 }
 
-.entries form input[type=text], input[type=select], input[type=date] {
+.entries form input[type=text], select, input[type=date], input[type=number] {
     border: 1px solid gray;
     padding: 4px;
 }
